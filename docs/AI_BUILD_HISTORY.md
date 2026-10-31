@@ -80,3 +80,32 @@
   - `docs/EMAIL_SUBMISSION.md`: Ready-to-send template for `assessment@enam.com`.
   - `docs/ARCHITECTURE.md`: Deep technical design document.
   - `README.md`: Setup instructions, screenshots layout, and evaluation mapping.
+
+---
+
+## 6. Iteration 5: Groww App Overhaul & Advanced AI Gemini Features
+
+### User Feedback:
+- "bhai ye cards wala format use mt kr see these for references"
+- "grow app ka ui dek for reference"
+- "change the font yrr its too classy"
+- "too simple bhai add more features maybe ai tools too if the ps permits use gemini api"
+
+### Prompt & Execution:
+1. **Groww Design System & Typography**:
+   - Replaced classy serif font with **Plus Jakarta Sans** (clean, crisp, modern fintech standard).
+   - Removed awkward colored box outlines on tags (`credit rating`, `capex`), replacing them with subtle clean text and metadata dots (`Credit rating • 30 Oct, 9:45 PM • BSE`).
+   - Clean white canvas (`#FFFFFF` / `#F5F6F8`), Groww Green `#00D09C` / `#00875A` and Groww Red `#EB5B3C`.
+   - Hairline dividers (`divide-y divide-[#F5F6F8]`), eliminating heavy boxy card borders.
+2. **AI Tool 1: 60-Second AI Morning Audio Briefing**:
+   - Synthesizes today's Tier-1 filings and volume breakouts into a 60-second executive audio script before market open.
+   - Built interactive audio player with waveform animation and Web Speech API audio playback (`window.speechSynthesis`).
+3. **AI Tool 2: FINN Interactive Copilot**:
+   - Dedicated AI navigation tab for interactive concall/filing Q&A.
+   - Grounded strictly in primary disclosures (Zero Hallucination).
+   - 1-click forensic query pills: `🎯 Audit Management Guidance`, `⚠️ Scan Red Flags`, `💰 CFO vs PAT Cash Conversion`, `🏭 Capex Timelines`, `👔 Leadership Pedigree`.
+4. **AI Tool 3: Statutory Footnote & Governance Auditor**:
+   - Added forensic module to Research Pull auditing Note 34 (Related Party Transactions), Contingent Liabilities / Net Worth ratio, and Statutory Auditor Qualifications.
+5. **Figma Code Layer Synchronization**:
+   - Updated Figma Code Layer (`nodeId: 3:3`) at `https://www.figma.com/design/jygIJOszMFKW9UZqHhDHrk?node-id=3-3&autoplay-code-preview=3-3`.
+

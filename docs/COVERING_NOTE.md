@@ -30,9 +30,15 @@ We built **FINN**, a mobile-first intelligent companion engineered specifically 
      4. *Balance Sheet & Leverage*: Debt/Equity, working-capital cycle days, and funding structure.
      5. *Cash Quality*: Cash conversion ratio ($\text{CFO} / \text{PAT}$) and Free Cash Flow generation.
      6. **The Flagship "Narrative vs. Numbers" Diff**: Compares management forward guidance against actual delivered reality across 4 consecutive quarters, scoring alignment and highlighting divergence.
-     7. *Forward Guidance Targets*: Explicit stated targets on sales growth, margins, and capex.
-     8. *Bull vs. Bear Thesis*: Tight, high-conviction cases for both sides.
+     7. **Forensic & Footnote Auditor**: Statutory audit of Note 34 (Related Party Transactions), Auditor qualification check, and Working Capital elongation.
+     8. *Forward Guidance Targets*: Explicit stated targets on sales growth, margins, and capex.
+     9. *Bull vs. Bear Thesis*: Tight, high-conviction cases for both sides.
    - **Universal Generalization**: Operates dynamically on any NSE/BSE ticker, not just the demo portfolio.
+
+3. **Autonomous AI Features (Gemini 2.0 & Primary LLM Router)**:
+   - **60-Second AI Morning Briefing Player**: Live speech-synthesized audio player (using native Web Speech API + waveform animation) delivering an executive 60-second morning audio wrap of Tier-1 disclosures and market breakouts before the bell.
+   - **FINN Interactive Primary Copilot**: Interactive dialogue interface dedicated to concalls and filings with 1-click forensic query pills (Guidance Audit, Note 34 Footnote scan, Cash Conversion CFO/PAT check, Capex timelines).
+   - **Groww-Style Modern Fintech UI**: Mobile-first design inspired by Groww (clean white `#FFFFFF` canvas, Groww Green `#00D09C` / `#00875A`, Plus Jakarta Sans typography, hairline dividers, zero boxy card clutter).
 
 ---
 

@@ -6,6 +6,7 @@ import { Navigation, TabType } from './components/Navigation';
 import { FeedPush } from './components/FeedPush';
 import { PortfolioView } from './components/PortfolioView';
 import { ResearchPull } from './components/ResearchPull';
+import { CopilotView } from './components/CopilotView';
 import { AlertSettingsModal } from './components/AlertSettingsModal';
 import { Bell, AlertTriangle, ArrowUpRight } from 'lucide-react';
 
@@ -183,6 +184,10 @@ export function App() {
               loading={loadingPortfolio}
               onSelectTicker={handleSelectTickerForResearch}
             />
+          )}
+
+          {activeTab === 'copilot' && (
+            <CopilotView />
           )}
 
           {activeTab === 'pull' && (

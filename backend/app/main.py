@@ -156,6 +156,48 @@ def update_settings(payload: SettingsUpdate):
         "llm_router": llm_router.get_status()
     }
 
+class CopilotQuery(BaseModel):
+    symbol: str
+    query: str
+
+@app.post("/api/ai/copilot")
+def ask_copilot(req: CopilotQuery):
+    """
+    Interactive Primary Analyst Copilot grounded in concalls & annual reports.
+    """
+    try:
+        primary_data = fetch_primary_research_for_ticker(req.symbol)
+        result = llm_router.query_primary_copilot(
+            symbol=req.symbol,
+            company_name=primary_data.company_name,
+            query=req.query,
+            context=primary_data.model_dump()
+        )
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/ai/briefing")
+def get_morning_briefing():
+    """
+    Synthesizes an executive 60-second audio morning brief across the portfolio.
+    """
+    announcements = get_announcements_digest(window_hours=24)
+    ann_dicts = [a.model_dump() for a in announcements]
+    briefing = llm_router.generate_morning_briefing(ann_dicts)
+    return briefing
+
+@app.get("/api/ai/redflags/{symbol}")
+def get_forensic_red_flags(symbol: str):
+    """
+    Forensic audit checking Auditor qualifications, RPTs, and cash quality.
+    """
+    try:
+        data = fetch_primary_research_for_ticker(symbol)
+        return llm_router.scan_forensic_red_flags(symbol, data.model_dump())
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 @app.post("/api/classify")
 def classify_announcement(req: ClassifyRequest):
     """

@@ -1,4 +1,13 @@
-import { Announcement, StockEOD, TriggeredAlert, ResearchPullResponse, UserSettings } from '../types';
+import { 
+  Announcement, 
+  StockEOD, 
+  TriggeredAlert, 
+  ResearchPullResponse, 
+  UserSettings,
+  BriefingResponse,
+  ForensicReport,
+  CopilotResponse 
+} from '../types';
 
 const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000/api';
 
@@ -66,6 +75,28 @@ export const api = {
       body: JSON.stringify({ title, content }),
     });
     if (!res.ok) throw new Error('Failed to classify text');
+    return res.json();
+  },
+
+  async getBriefing(): Promise<BriefingResponse> {
+    const res = await fetch(`${API_BASE}/ai/briefing`);
+    if (!res.ok) throw new Error('Failed to fetch AI briefing');
+    return res.json();
+  },
+
+  async askCopilot(symbol: string, query: string): Promise<CopilotResponse> {
+    const res = await fetch(`${API_BASE}/ai/copilot`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ symbol, query }),
+    });
+    if (!res.ok) throw new Error('Failed to query Copilot');
+    return res.json();
+  },
+
+  async getForensicRedFlags(symbol: string): Promise<ForensicReport> {
+    const res = await fetch(`${API_BASE}/ai/redflags/${encodeURIComponent(symbol)}`);
+    if (!res.ok) throw new Error(`Failed to fetch red flags for ${symbol}`);
     return res.json();
   }
 };

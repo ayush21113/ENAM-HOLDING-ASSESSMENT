@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ResearchPullResponse } from '../types';
 import { api } from '../services/api';
-import { Search, FileCheck, ArrowUpRight, BookOpen, AlertCircle, Sparkles } from 'lucide-react';
+import { ForensicAuditModule } from './ForensicAuditModule';
+import { Search, FileCheck, ArrowUpRight, BookOpen, AlertCircle, Sparkles, ShieldCheck } from 'lucide-react';
 
 interface ResearchPullProps {
   initialSymbol?: string;
@@ -46,6 +47,7 @@ export const ResearchPull: React.FC<ResearchPullProps> = ({
 
   const modules = [
     { id: 'narrative', label: 'Narrative vs Numbers', highlight: true },
+    { id: 'forensic', label: 'Forensic & Red Flags', highlight: true },
     { id: 'business', label: 'Business' },
     { id: 'financials', label: 'Financials' },
     { id: 'trajectory', label: 'Trajectory' },
@@ -239,6 +241,13 @@ export const ResearchPull: React.FC<ResearchPullProps> = ({
                   </div>
                 ))}
               </div>
+            </div>
+          )}
+
+          {/* MODULE: FORENSIC & RED FLAGS AUDIT */}
+          {activeModule === 'forensic' && (
+            <div className="bg-white border border-[#ebecef] rounded-2xl p-4 shadow-xs space-y-3">
+              <ForensicAuditModule symbol={activeTicker} />
             </div>
           )}
 

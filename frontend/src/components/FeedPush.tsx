@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Announcement } from '../types';
+import { MorningBriefingCard } from './MorningBriefingCard';
 import { 
   TrendingUp, ArrowUpRight, UserCheck, FileText, 
   ExternalLink, Sparkles, ChevronDown, ChevronUp,
@@ -66,6 +67,9 @@ export const FeedPush: React.FC<FeedPushProps> = ({
 
   return (
     <div className="space-y-3 pb-24">
+      {/* 0. 60-SECOND AI MORNING BRIEFING PLAYER */}
+      <MorningBriefingCard />
+
       {/* 1. GROWW-STYLE SUMMARY BAR */}
       <div className="bg-white rounded-2xl p-4 border border-[#ebecef] shadow-xs space-y-3">
         <div className="flex items-center justify-between">

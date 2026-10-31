@@ -142,3 +142,35 @@ export interface UserSettings {
   groq_api_key?: string;
   openai_api_key?: string;
 }
+
+export interface BriefingResponse {
+  script: string;
+  catalysts_count: number;
+  tier1_count: number;
+  timestamp: string;
+}
+
+export interface ForensicFlag {
+  type: string;
+  severity: 'clean' | 'monitor' | 'warning' | 'alert';
+  title: string;
+  detail: string;
+}
+
+export interface ForensicReport {
+  symbol: string;
+  overall_health: string;
+  flags: ForensicFlag[];
+}
+
+export interface CopilotResponse {
+  answer: string;
+  model: string;
+  grounded: boolean;
+  sources: Array<{
+    title: string;
+    type: string;
+    date: string;
+    url: string;
+  }>;
+}
