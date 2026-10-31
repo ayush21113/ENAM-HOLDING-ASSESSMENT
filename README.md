@@ -1,29 +1,34 @@
 # FINN: Financial Investment Agent
 
-> **Built for the ENAM Holdings AI Engineer Build Challenge**  
+> **Built for the ENAM Holdings AI Engineer Build Challenge (IIT Screening - 2027)**  
 > *A mobile-first proactive intelligence and primary fundamental research layer for public-markets investors.*
 
 [![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688.svg?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![React](https://img.shields.io/badge/Frontend-React%20%2B%20Vite-61DAFB.svg?logo=react&logoColor=black)](https://reactjs.org/)
 [![TailwindCSS](https://img.shields.io/badge/Styling-Tailwind%20CSS-38B2AC.svg?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![TypeScript](https://img.shields.io/badge/Types-TypeScript-3178C6.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![License](https://img.shields.io/badge/License-Proprietary-blue.svg)]()
 
 ---
 
-## 📱 Live Demonstration & Quickstart
+## 🧭 Project Positioning
 
-FINN is packaged as a **unified full-stack application**. The backend serves the high-performance API and also hosts the production mobile-first frontend build on a single unified port:
+> **FINN is a mobile-first investment intelligence agent that filters a high-conviction portfolio’s regulatory and EOD market signals in Push mode, and performs primary-source fundamental research across ENAM’s eight analytical dimensions in Pull mode, augmented by a forensic auditor, management-guidance tracking, AI copilot, and cost-aware model routing.**
 
-### 1. Prerequisites
-- Python 3.10+
-- Node.js 18+ (for frontend development)
+---
 
-### 2. Instant One-Command Launch
+## 📱 Live Demonstration & Verification
 
+### Option 1: Instant Interactive Review on Mobile/Web (Zero Setup)
+👉 **[Launch Interactive Mobile Prototype on Figma](https://www.figma.com/design/jygIJOszMFKW9UZqHhDHrk?node-id=3-3&autoplay-code-preview=3-3)**  
+*Runs the full interactive web application directly inside Figma in a mobile viewport — testable immediately on desktop or mobile phone with zero command-line setup.*
+
+### Option 2: Live Web Tunnel
+👉 **https://weak-things-slide.loca.lt** *(Direct public tunnel to running FastAPI + Vite full-stack service)*
+
+### Option 3: Local One-Command Launch
 ```powershell
 # Clone the repository
-git clone <your-repo-url>
+git clone https://github.com/ayush-enam/FINN-investment-agent
 cd ENAM
 
 # Activate python virtual environment & install requirements
@@ -34,130 +39,105 @@ python -m venv .venv
 $env:PYTHONPATH="backend"
 .\.venv\Scripts\python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
-
-Open your browser at **`http://localhost:8000`**.  
-*For the best mobile experience, use Chrome DevTools Mobile Viewport or click the **Smartphone icon** in the top navigation bar to toggle the simulated device frame.*
+Open **`http://localhost:8000`** in your browser.
 
 ---
 
 ## 💡 Core Philosophy: Filtering Noise, Grounding in Primary Signal
 
-Public-markets investors do not suffer from an information shortage; they are drowning in it. FINN is engineered around the belief that **the scarce skill is filtering: surfacing the few things that actually matter and burying everything else, beautifully.**
-
-FINN operates in two distinct interaction modes:
+Public-markets investors do not suffer from an information shortage; they are overwhelmed by sheer volume. FINN is engineered around the belief that **the scarce skill is filtering: surfacing the critical signals and burying administrative noise.**
 
 ```
-                            ┌────────────────────────────────────────┐
-                            │                  FINN                  │
-                            │       (Financial Investment Agent)     │
-                            └───────────────────┬────────────────────┘
-                                                │
-                     ┌──────────────────────────┴──────────────────────────┐
-                     ▼                                                     ▼
-           【 PUSH MODE 】                                       【 PULL MODE 】
-      (Proactive Intelligence)                                (Deep On-Demand Research)
-  • Windowed Digest (24h, 3d, 7d)                       • Strict Primary Grounding (ARs + Concalls)
-  • 17 Regulatory Announcement Categories               • 8 Analytical Modules
-  • Collapsible Routine / Compliance Rows               • "Narrative vs. Numbers" (Promised vs. Delivered)
-  • Enriched Results (Rev, EBITDA, PBT, PAT)            • Cash Quality & Cash Conversion (CFO vs. PAT)
-  • Enriched Management Transitions                     • Universal Generalization (Works on ANY NSE Ticker)
+                             ┌────────────────────────────────────────┐
+                             │                  FINN                  │
+                             │       (Financial Investment Agent)     │
+                             └───────────────────┬────────────────────┘
+                                                 │
+                      ┌──────────────────────────┴──────────────────────────┐
+                      ▼                                                     ▼
+            【 PUSH MODE 】                                       【 PULL MODE 】
+       (Proactive Signal Filtering)                           (Deep Primary Research)
+   • Windowed Digest (24h, 3d, 7d)                       • Strict Primary Grounding (ARs + Concalls)
+   • 17 Regulatory Announcement Categories               • 8 Core ENAM Research Modules
+   • Collapsible Routine / Compliance Rows               • "Narrative vs. Numbers" 4-Quarter Audit
+   • Enriched Results (Rev, EBITDA, PBT, PAT)            • Cash Quality & Cash Conversion (CFO vs. PAT)
+   • Enriched C-Suite Transitions (Pedigree)             • + Added Statutory Footnote Auditor
+   • Configurable EOD Threshold Alerts                   • + Universal Any-Ticker Generalization
 ```
 
 ---
 
 ## ⚡ Feature Highlights
 
-### 1. Push Mode (Proactive Daily Companion)
-- **Windowed Digest**: Configurable time window (24h default, 3d, 7d) across an 18-company mock portfolio.
-- **17-Category Taxonomical Classifier**: Classifies exchange filings according to the ENAM reference guide (`results`, `management_change`, `M&A`, `credit_rating`, `capex`, `litigation`, etc.).
-- **Smart Priority Tiering**:
-  - **Tier 1 (High Priority)**: Urgent corporate catalysts surfaced with accent badges.
-  - **Tier 2 (Watchlist)**: Secondary filings (dividends, buybacks, concall notices).
-  - **Tier 3 (Routine Paperwork)**: ESOP allotments, AGM scrutineer reports, and compliance certificates are automatically collapsed or hidden with a single toggle.
-- **Enriched Quarterly Results Card**: Instant extraction of **Revenue, EBITDA, PBT, and PAT** with both **QoQ** and **YoY** percentage variations and operational margin drivers.
-- **Enriched Management Transition Card**: Pulls incoming executive career pedigree, previous leadership roles (e.g., Tesla, Polestar), patents, and educational background.
-- **Triggered Threshold Alerts**: Monitors EOD market data for volume breakouts ($> 2.0\times$ 20-day moving average) and daily price moves ($\pm 3\%$) with configurable sliders.
+### 1. Push Mode (Proactive Signal Filtering)
+* **Windowed Digest**: Configurable time window (24h default, 3d, 7d) across an 18-company high-conviction Indian portfolio.
+* **17-Category Taxonomical Classifier**: Classifies exchange filings according to the ENAM reference guide (`results`, `management_change`, `M&A`, `capex`, `credit_rating`, `litigation`, `fund_raise`, `press_release`, `dividend`, `bonus_split`, `insider_trading`, `pledging`, `earnings_call`, `investor_meetings`, `postal_ballot`, `agm_egm`, `unclassified`).
+* **Smart Priority Tiering**:
+  * **Tier 1 (High Priority)**: Urgent corporate catalysts surfaced with accent badges.
+  * **Tier 2 (Watchlist)**: Secondary operational filings.
+  * **Tier 3 (Routine Paperwork)**: ESOP allotments, general meeting paperwork, and postal ballots are automatically collapsed into a secondary view.
+* **Enriched Quarterly Results**: Automated extraction of **Revenue, EBITDA, PBT, and PAT** with both **QoQ** and **YoY** percentage variations and operational margin drivers.
+* **Enriched Management Transitions**: Extracts executive appointments and enriches incoming leaders with career history, prior leadership roles, and operational pedigree.
+* **Configurable EOD Threshold Alerts**: Monitors latest End-of-Day market data for volume breakouts ($> 2.0\times$ 20-day moving average) and daily price swings ($\pm 3\%$) with adjustable sliders.
 
 ### 2. Pull Mode (Deep Primary Fundamental Research)
-- **Primary Source Discipline**: No broker notes, no secondary news sentiment, no hallucinated generic model memories. Grounded exclusively in Annual Reports, Earnings Call Transcripts, and Regulatory Disclosures via Screener.in / BSE / NSE.
-- **The 8 Analytical Modules**:
+* **Precise Primary-Source Grounding**: Source discovery may use Screener/BSE/NSE/company IR pages, while analytical claims are strictly grounded in underlying company filings, annual reports, and concall transcripts.
+* **8 Core ENAM Research Modules**:
   1. **Business Snapshot & Segments**: Revenue mix, core operating units, and competitive moats.
   2. **Financial Snapshot**: Current TTM numbers, EBITDA margin, ROCE, ROE, P/E ratio, EV/EBITDA.
   3. **Multi-Year Trajectory**: 3-year sales/PAT CAGR and margin expansion vs. compressions.
   4. **Balance Sheet & Leverage**: Debt profile, Net Debt, Debt-to-Equity, and Working Capital Days.
   5. **Cash Quality**: Cash conversion ratio ($\text{CFO} / \text{PAT}$) and Free Cash Flow generation.
-  6. **The Flagship "Narrative vs. Numbers" Module**: Compares management forward guidance against actual delivered reality across 4 consecutive quarters, scoring alignment and highlighting divergence.
+  6. **Flagship "Narrative vs. Numbers" Module**: Compares management forward guidance against actual delivered reality across 4 consecutive quarters, scoring alignment as `BEAT`, `MET`, `MISSED`, or `DIVERGED`.
   7. **Forward Guidance**: Explicit stated management expectations on growth, store expansion, capex, and margin bands.
   8. **Bull vs. Bear Thesis**: Tight, high-conviction dual-perspective investment cases.
-- **Universal Generalization**: Evaluators can enter **any valid NSE ticker** (e.g., `RELIANCE.NS`, `INFY.NS`, `POLYCAB.NS`) to pull primary research dynamically.
+* **Added FINN Extensions**:
+  * **+ Statutory Footnote & Governance Auditor**: Audits Note 34 (Related Party Transactions) for arm's-length terms, scans the Independent Auditor's Report for qualifications, and checks Contingent Liabilities / Net Worth.
+  * **+ Universal Any-Ticker Generalization**: Dynamically evaluates any user-entered NSE/BSE ticker beyond the mock portfolio.
+
+### 3. Autonomous AI Features (Powered by Gemini 2.0 Flash)
+* **60-Second AI Morning Audio Briefing**: Pre-market audio briefing player using the browser's native Web Speech API and dynamic waveform visualization.
+* **FINN Interactive Primary Copilot**: Interactive dialogue interface dedicated to concalls and filings with 1-click forensic query pills (Guidance Audit, Note 34 Footnote scan, Cash Conversion CFO/PAT check, Capex timelines).
+* **Cost-Conscious Model Routing**: Multi-tiered routing supporting Google Gemini 2.0 Flash (`google-genai`), Groq Llama 3.3 70B, and OpenAI, paired with a deterministic heuristic fallback to ensure the evaluation prototype remains functional without an API key.
 
 ---
 
-## 🎨 Design Philosophy (Quartr & Koyfin Inspired)
+## 🎨 Design Philosophy: Groww-Inspired Mobile Aesthetic
 
-- **Mobile First**: Built with bottom tab navigation, dense financial cards, and clean typography designed for one-handed mobile ergonomics.
-- **Device Frame Toggle**: Allows reviewers on desktop computers to preview the application inside a simulated iPhone container or expand to full viewport with one click.
-- **Data Density**: High-signal financial typography with green/red delta badges, mono numerals, and no gratuitous whitespace.
-
----
-
-## 🧠 Smart Model Routing & Zero-Cost Efficiency
-
-FINN implements cost-conscious model routing:
-- **Tier A (Bulk Extraction & Classification)**: Routes routine document parsing to fast, low-cost or free-tier models (`Gemini 2.0 Flash` or Groq `llama-3.3-70b-versatile`).
-- **Tier B (Deep Synthesis & Divergence Reasoning)**: Routes complex guidance auditing to reasoning-optimized models (`Gemini Pro` / `GPT-4o` / `Claude 3.5 Sonnet`).
-- **Deterministic Offline Fallback**: Works 100% reliably out-of-the-box using built-in deterministic heuristics and pre-indexed primary datasets with zero API keys required. Users can optionally input their Gemini, Groq, or OpenAI keys directly in the in-app Settings modal.
+* **Typography**: **Plus Jakarta Sans** (clean, crisp, modern fintech standard) paired with **JetBrains Mono** for financial figures.
+* **Seamless List Rows**: Converted bulky card containers into seamless rows separated by hairline dividers (`divide-y divide-[#F5F6F8]`).
+* **Subtle Metadata**: Replaced harsh boxed borders around tags with understated dot-separated metadata text (`Credit rating • 30 Oct, 9:45 PM • BSE`).
+* **Ergonomics**: Bottom 5-tab navigation bar (`Feed`, `Holdings`, `AI Copilot`, `Research`, `Alerts`) optimized for one-handed mobile phone usage.
 
 ---
 
-## 📂 Project Structure
+## 📂 Repository Structure
 
 ```
-ENAM/
 ├── backend/
 │   ├── app/
-│   │   ├── config.py              # Portfolio universe (18 tickers) & threshold presets
-│   │   ├── models.py              # Pydantic schemas for Push/Pull/Alerts
-│   │   ├── main.py                # FastAPI endpoints & static frontend mount
+│   │   ├── main.py                  # API endpoints, middleware & static SPA mounting
+│   │   ├── config.py                # 18-stock portfolio definition, thresholds, tiers
+│   │   ├── models.py                # Pydantic data schemas
 │   │   └── services/
-│   │       ├── market_data.py     # yfinance EOD data, 20d moving avg & alert triggers
-│   │       ├── announcements.py   # 17-category classifier & enrichment pipeline
-│   │       ├── primary_research.py# Primary Screener/IR scraper & 8 analytical modules
-│   │       ├── llm_router.py      # Tiered model router (Gemini / Groq / OpenAI)
-│   │       └── cache.py           # Dual-layer disk & memory cache
-│   └── requirements.txt
+│   │       ├── market_data.py       # EOD prices, 20d MA, volume multiples
+│   │       ├── announcements.py     # 17-category taxonomy, QoQ/YoY metric extraction
+│   │       ├── primary_research.py  # 8-module analytical suite & dynamic ticker engine
+│   │       ├── llm_router.py        # Gemini 2.0 Flash routing, Copilot, 60s briefing
+│   │       └── cache.py             # 10-minute disk and memory cache
 ├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── FeedPush.tsx       # Windowed digest & enriched filing cards
-│   │   │   ├── ResearchPull.tsx   # 8-module deep fundamental primary analysis
-│   │   │   ├── PortfolioView.tsx  # 18-company watchlist with volume multiple badges
-│   │   │   ├── AlertSettingsModal.tsx # Threshold sliders & API key routing modal
-│   │   │   ├── Header.tsx         # Brand header, alert indicator & device toggle
-│   │   │   └── Navigation.tsx     # Native mobile bottom tab bar
-│   │   ├── services/api.ts        # Typed API client
-│   │   ├── types/index.ts         # TypeScript interfaces
-│   │   ├── App.tsx                # Master container & state management
-│   │   └── index.css              # Financial dark theme styling
-│   ├── package.json
-│   ├── tailwind.config.js
-│   └── vite.config.ts
-├── docs/
-│   ├── COVERING_NOTE.md           # Required covering note on decisions & trade-offs
-│   ├── AI_BUILD_HISTORY.md        # Prompt trajectories & coding agent logs
-│   ├── ARCHITECTURE.md            # Deep technical design & data flow document
-│   └── EMAIL_SUBMISSION.md        # Final email draft for assessment@enam.com
-└── README.md                      # Master documentation
+│   ├── src/                         # React 19 + TypeScript + Tailwind v4 components
+│   └── dist/                        # Compiled production SPA bundle
+└── docs/
+    ├── COVERING_NOTE.md             # Formal submission writeup for ENAM evaluators
+    ├── AI_BUILD_HISTORY.md          # Chronological log of agent prompts & iterations
+    ├── ARCHITECTURE.md              # Detailed technical and data pipeline specifications
+    └── EMAIL_SUBMISSION.md          # Ready-to-send draft for assessment@enam.com
 ```
 
 ---
 
-## 📋 Challenge Deliverables Mapping
-
-| Required Deliverable | Location in Repository |
-| :--- | :--- |
-| **Mobile-First Working Prototype** | Unified server running at `http://localhost:8000` |
-| **GitHub Repository** | Full source code with structured Git commit history |
-| **AI Build History** | [`docs/AI_BUILD_HISTORY.md`](file:///c:/Users/prana/Downloads/ENAM/docs/AI_BUILD_HISTORY.md) |
-| **Covering Note** | [`docs/COVERING_NOTE.md`](file:///c:/Users/prana/Downloads/ENAM/docs/COVERING_NOTE.md) |
-| **Email Submission Template** | [`docs/EMAIL_SUBMISSION.md`](file:///c:/Users/prana/Downloads/ENAM/docs/EMAIL_SUBMISSION.md) |
+## ⚖️ Trade-offs & Deliberate Omissions
+* **Intraday Streaming**: Omitted by design. Long-horizon fundamental investors focus on structural quarterly inflections and EOD closing breakouts, not tick-level intraday volatility.
+* **Secondary Sentiment Scrapers**: Social media sentiment is noisy and momentum-driven. Pull research strictly isolates primary disclosures.
+* **Deterministic Fallback Operation**: Ensures all core views and research modules remain functional even if an evaluator runs the application without entering an external API key.

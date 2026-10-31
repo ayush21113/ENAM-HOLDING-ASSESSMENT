@@ -102,10 +102,42 @@
    - Built interactive audio player with waveform animation and Web Speech API audio playback (`window.speechSynthesis`).
 3. **AI Tool 2: FINN Interactive Copilot**:
    - Dedicated AI navigation tab for interactive concall/filing Q&A.
-   - Grounded strictly in primary disclosures (Zero Hallucination).
+   - Grounded strictly in primary disclosures with verified citations.
    - 1-click forensic query pills: `🎯 Audit Management Guidance`, `⚠️ Scan Red Flags`, `💰 CFO vs PAT Cash Conversion`, `🏭 Capex Timelines`, `👔 Leadership Pedigree`.
 4. **AI Tool 3: Statutory Footnote & Governance Auditor**:
    - Added forensic module to Research Pull auditing Note 34 (Related Party Transactions), Contingent Liabilities / Net Worth ratio, and Statutory Auditor Qualifications.
 5. **Figma Code Layer Synchronization**:
    - Updated Figma Code Layer (`nodeId: 3:3`) at `https://www.figma.com/design/jygIJOszMFKW9UZqHhDHrk?node-id=3-3&autoplay-code-preview=3-3`.
+
+---
+
+## 7. Complete Chronological Prompt Trajectory & Agent Session Log
+
+Below is the verbatim chronological log of every user instruction across the entire build lifecycle:
+
+| Step # | Timestamp (IST) | User Prompt / Trigger | Primary Agent Actions & Deliverables |
+| :--- | :--- | :--- | :--- |
+| **0** | `2026-10-31 12:48` | *"ANALYSE THE PS IN THE GIVEN PDF"* | Extracted and deconstructed `1. ENAM_AI_Engineer_Build_Challenge_Main.pdf` & `2. Reference.pdf`. Established Push/Pull architecture and evaluation mapping. |
+| **10** | `2026-10-31 12:53` | *"OK START WORKING ON IT AND MAKE SURE ALL DELIVERABLES ARE COMPLETED MAKE SURE TO BE TOP IN TERMS OF QUALITY AS HERE PRECISION MATTERS . ALSO FOR DESIGN GO TRHOUGH THE WEBSITES USED FOR SIMILAR PLATFORMS FOR FRONTEND AND KEEP IT SIMPLE"* | Researched Quartr, Koyfin, Screener. Implemented FastAPI backend, 18-stock portfolio, 17-category taxonomy, 8 core research modules, and React/Tailwind frontend. |
+| **185** | `2026-10-31 13:14` | *"bhai use the skill.md file for frontend design thisz design si absolute shit try to come up with white or light bakkcground"* | User uploaded screenshot rejecting dark boxy cards. Pivoted to crisp white/light aesthetic per `SKILL.md`. |
+| **200** | `2026-10-31 13:15` | *"'C:\Users\prana\Downloads\ENAM\SKILL.md' this skill file bro"* | Read and applied the dedicated frontend design skill: Plus Jakarta Sans, high data density, hairline borders. |
+| **228** | `2026-10-31 15:42` | *"check if its running now"* | Verified FastAPI + Vite production build running synchronously on `http://localhost:8000`. |
+| **235** | `2026-10-31 15:45` | *"bhai ye cards wala format use mt kr see these for references"* | User uploaded 3 reference screenshots of mobile fintech screens. Removed heavy card containers; implemented continuous list rows with subtle dividers. |
+| **267** | `2026-10-31 15:47` | *"grow app ka ui dek for reference"* | User uploaded 2 screenshots highlighting ugly boxed borders on tags (`credit rating`, `capex`). Swapped to clean unboxed metadata text (`Credit rating • 30 Oct, 9:45 PM • BSE`). |
+| **275** | `2026-10-31 15:58` | *"use figma plugin bro"* | Activated Figma MCP tool integration for visual asset synchronization and Code Layer deployment. |
+| **278** | `2026-10-31 15:59` | *"lovable i mean"* | Clarified Lovable/Figma workflow for rapid interactive UI deployment. |
+| **280** | `2026-10-31 15:59` | *"/plugin lovable"* | Searched marketplace and confirmed Figma plugin was signed in and active. |
+| **285** | `2026-10-31 16:03` | *"now fogma is connected"* | Confirmed Figma user `ayush2111319@gmail.com` on team plan `team::1698307352614353793`. |
+| **287** | `2026-10-31 16:05` | *"i want u to make it more better using figma also change the font yrr its too classy"* | Created Figma file `jygIJOszMFKW9UZqHhDHrk`, uploaded code bundle, and swapped font to **Plus Jakarta Sans**. |
+| **328** | `2026-10-31 16:34` | *"too simple bhai add more features maybe ai tools too if the ps permits use gemini api"* | Implemented 3 AI features: 60-Sec AI Morning Audio Briefing (SpeechSynthesis + waveform), Interactive Primary Copilot (with 1-click forensic query pills), and Statutory Footnote & Governance Auditor. |
+| **496** | `2026-10-31 17:18` | *"ok give a brief summary about what we have done include everything make it as sdetailed as possible we will get it reviewed by an exopert"* | Prepared comprehensive technical summary covering architecture, data pipelines, model routing, and trade-offs. |
+| **505** | `2026-10-31 17:24` | *Expert Review Feedback Integration* | Cleaned taxonomy (`press_release`), strictly isolated 8 ENAM modules from extensions, reframed to latest EOD data, refined primary grounding definition, removed absolute claims, and enabled public tunnel deployment for phone testing. |
+
+---
+
+## 8. Raw Transcript & Audit Verification
+In accordance with ENAM's submission requirements, the raw JSONL conversation transcripts containing full model thoughts, tool inputs, and outputs are maintained directly on disk at:
+* Compact: `.system_generated/logs/transcript.jsonl`
+* Full: `.system_generated/logs/transcript_full.jsonl`
+
 
