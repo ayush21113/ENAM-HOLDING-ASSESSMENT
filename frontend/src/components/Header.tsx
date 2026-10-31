@@ -1,5 +1,5 @@
 import React from 'react';
-import { Smartphone, Monitor, ShieldCheck, Zap, Sliders, Bell } from 'lucide-react';
+import { Smartphone, Monitor, Sliders, Bell } from 'lucide-react';
 
 interface HeaderProps {
   isMobileFrame: boolean;
@@ -19,47 +19,46 @@ export const Header: React.FC<HeaderProps> = ({
   llmMode,
 }) => {
   return (
-    <header className="sticky top-0 z-30 bg-[#0c0e15]/90 backdrop-blur-md border-b border-surfaceBorder px-4 py-3 flex items-center justify-between">
+    <header className="sticky top-0 z-30 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
       <div className="flex items-center space-x-3">
-        <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-bold text-white shadow-lg shadow-blue-500/20">
+        <div className="w-8 h-8 rounded-lg bg-blue-900 flex items-center justify-center font-semibold text-white text-sm shadow-subtle">
           F
         </div>
         <div>
           <div className="flex items-center space-x-2">
-            <h1 className="font-bold text-base tracking-tight text-white flex items-center">
+            <span className="font-bold text-base tracking-tight text-gray-900">
               FINN
-              <span className="ml-1.5 px-1.5 py-0.5 text-[10px] font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded">
-                ENAM
-              </span>
-            </h1>
+            </span>
+            <span className="text-xs font-medium text-gray-600 bg-gray-100 border border-gray-200 px-2 py-0.5 rounded">
+              ENAM Holdings
+            </span>
           </div>
-          <p className="text-[11px] text-slate-400 flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            Primary Intelligence Layer
+          <p className="text-xs text-gray-500 font-medium">
+            Primary Investment Intelligence
           </p>
         </div>
       </div>
 
       <div className="flex items-center space-x-2">
-        {/* Router Mode Pill */}
-        <div 
+        {/* Router Status Badge */}
+        <button 
           onClick={openSettings}
-          title="Click to configure AI routing & thresholds"
-          className="cursor-pointer hidden sm:flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-[11px] bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 border border-slate-700 transition"
+          title="Configure thresholds & model routing"
+          className="hidden sm:flex items-center space-x-1.5 px-2.5 py-1 rounded-md text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-200 transition font-medium"
         >
-          <Zap className="w-3 h-3 text-amber-400" />
-          <span className="truncate max-w-[140px]">{llmMode.includes('Multi-Model') ? 'AI Router' : 'Heuristic Tier'}</span>
-        </div>
+          <span className="w-1.5 h-1.5 rounded-full bg-blue-700"></span>
+          <span className="truncate max-w-[140px]">{llmMode.includes('Multi-Model') ? 'AI Router' : 'Heuristic Mode'}</span>
+        </button>
 
-        {/* Triggered Alerts Bell */}
+        {/* Alerts Bell */}
         <button
           onClick={openAlerts}
-          className="relative p-2 rounded-lg bg-slate-800/60 hover:bg-slate-700 text-slate-300 transition"
+          className="relative p-2 rounded-lg bg-gray-50 hover:bg-gray-100 border border-gray-200 text-gray-700 transition"
           aria-label="Alerts"
         >
           <Bell className="w-4 h-4" />
           {alertsCount > 0 && (
-            <span className="absolute -top-1 -right-1 w-4 h-4 bg-rose-500 text-white rounded-full text-[10px] font-bold flex items-center justify-center shadow-lg animate-bounce">
+            <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-600 text-white rounded-full text-xs font-bold flex items-center justify-center">
               {alertsCount}
             </span>
           )}
@@ -68,19 +67,19 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Settings Button */}
         <button
           onClick={openSettings}
-          className="p-2 rounded-lg bg-slate-800/60 hover:bg-slate-700 text-slate-300 transition"
+          className="p-2 rounded-lg bg-gray-50 hover:bg-gray-100 border border-gray-200 text-gray-700 transition"
           aria-label="Settings"
         >
           <Sliders className="w-4 h-4" />
         </button>
 
-        {/* Desktop Frame Switcher */}
+        {/* Device Viewport Switcher */}
         <button
           onClick={() => setIsMobileFrame(!isMobileFrame)}
-          title={isMobileFrame ? "Expand to Full View" : "Simulate Mobile Frame"}
-          className="hidden md:flex p-2 rounded-lg bg-slate-800/60 hover:bg-slate-700 text-slate-400 hover:text-white transition"
+          title={isMobileFrame ? "Expand to Full Page" : "Simulate Mobile Screen"}
+          className="hidden md:flex p-2 rounded-lg bg-gray-50 hover:bg-gray-100 border border-gray-200 text-gray-600 transition"
         >
-          {isMobileFrame ? <Monitor className="w-4 h-4 text-blue-400" /> : <Smartphone className="w-4 h-4" />}
+          {isMobileFrame ? <Monitor className="w-4 h-4 text-blue-800" /> : <Smartphone className="w-4 h-4" />}
         </button>
       </div>
     </header>
