@@ -34,7 +34,7 @@ export function App() {
     price_threshold_pct: 3.0,
     volume_multiplier: 2.0,
   });
-  const [llmMode, setLlmMode] = useState('Deterministic Heuristic Mode');
+  const [llmMode, setLlmMode] = useState('Heuristic Mode');
 
   // Initial load
   useEffect(() => {
@@ -123,16 +123,16 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900 flex flex-col items-center justify-start antialiased selection:bg-blue-100">
+    <div className="min-h-screen bg-[#f5f6f8] text-[#1e222b] flex flex-col items-center justify-start antialiased">
       {/* Outer Shell: Simulated Mobile Frame or Full View */}
       <div
-        className={`w-full min-h-screen transition-all duration-200 flex flex-col bg-white shadow-subtle ${
+        className={`w-full min-h-screen transition-all duration-200 flex flex-col bg-white ${
           isMobileFrame
-            ? 'max-w-[430px] my-6 rounded-[36px] border-[8px] border-gray-300 shadow-2xl overflow-hidden'
-            : 'max-w-2xl border-x border-gray-200'
+            ? 'max-w-[430px] my-6 rounded-[36px] border-[8px] border-[#ebecef] shadow-2xl overflow-hidden'
+            : 'max-w-2xl border-x border-[#ebecef]'
         }`}
       >
-        {/* Header */}
+        {/* Header (Groww style) */}
         <Header
           isMobileFrame={isMobileFrame}
           setIsMobileFrame={setIsMobileFrame}
@@ -140,28 +140,29 @@ export function App() {
           openAlerts={() => setActiveTab('alerts')}
           alertsCount={alerts.length}
           llmMode={llmMode}
+          onSearchClick={() => setActiveTab('pull')}
         />
 
         {/* Global Active Alert Banner if triggered */}
         {alerts.length > 0 && activeTab !== 'alerts' && (
           <div 
             onClick={() => setActiveTab('alerts')}
-            className="cursor-pointer bg-amber-50 border-b border-amber-200 px-4 py-2.5 flex items-center justify-between text-xs transition hover:bg-amber-100/70"
+            className="cursor-pointer bg-[#fff9f6] border-b border-[#fde8e1] px-4 py-2 flex items-center justify-between text-xs transition hover:bg-[#fdf1ee]"
           >
-            <div className="flex items-center space-x-2 text-amber-900 font-medium truncate">
-              <AlertTriangle className="w-4 h-4 shrink-0 text-amber-700" />
+            <div className="flex items-center space-x-2 text-[#eb5b3c] font-medium truncate">
+              <AlertTriangle className="w-3.5 h-3.5 shrink-0 text-[#eb5b3c]" />
               <span className="truncate">
-                {alerts.length} active alerts: {alerts[0].symbol} ({alerts[0].alert_type.replace('_', ' ')})
+                {alerts.length} Triggered Alerts: {alerts[0].symbol} ({alerts[0].alert_type.replace('_', ' ')})
               </span>
             </div>
-            <span className="text-xs font-semibold text-amber-800 shrink-0 ml-2 flex items-center">
-              Review <ArrowUpRight className="w-3.5 h-3.5 ml-0.5" />
+            <span className="text-xs font-bold text-[#eb5b3c] shrink-0 ml-2 flex items-center">
+              View <ArrowUpRight className="w-3 h-3 ml-0.5" />
             </span>
           </div>
         )}
 
         {/* Tab Content */}
-        <main className="flex-1 px-4 pt-4 bg-[#f8f9fa]">
+        <main className="flex-1 px-4 pt-3 bg-[#f5f6f8]">
           {activeTab === 'push' && (
             <FeedPush
               announcements={announcements}
@@ -192,59 +193,59 @@ export function App() {
           )}
 
           {activeTab === 'alerts' && (
-            <div className="space-y-4 pb-20">
-              <div className="bg-white border border-gray-200 rounded-xl p-4 flex items-center justify-between shadow-card">
+            <div className="space-y-3 pb-24">
+              <div className="bg-white border border-[#ebecef] rounded-2xl p-4 flex items-center justify-between shadow-xs">
                 <div>
-                  <h2 className="text-base font-bold text-gray-900 tracking-tight">Active alerts</h2>
-                  <p className="text-xs text-gray-500">
-                    Thresholds: Price &gt; ±{settings.price_threshold_pct}% | Volume &gt; {settings.volume_multiplier}x
+                  <h2 className="text-base font-bold text-[#1e222b] tracking-tight">Active Threshold Alerts</h2>
+                  <p className="text-xs text-[#7c7e8c]">
+                    Trigger: Price &gt; ±{settings.price_threshold_pct}% • Volume &gt; {settings.volume_multiplier}x
                   </p>
                 </div>
                 <button
                   onClick={() => setIsSettingsOpen(true)}
-                  className="px-2.5 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded text-xs font-medium border border-gray-200 transition"
+                  className="px-3 py-1 bg-[#f5f6f8] hover:bg-[#ebecef] text-[#1e222b] rounded-lg text-xs font-semibold transition"
                 >
                   Adjust
                 </button>
               </div>
 
               {alerts.length === 0 ? (
-                <div className="bg-white border border-gray-200 rounded-xl p-8 text-center space-y-2 shadow-card">
-                  <Bell className="w-8 h-8 text-gray-400 mx-auto" />
-                  <h3 className="text-sm font-semibold text-gray-900">No active alerts</h3>
-                  <p className="text-xs text-gray-500">
-                    All portfolio holdings are trading within normal price and volume boundaries.
+                <div className="bg-white border border-[#ebecef] rounded-2xl p-8 text-center space-y-2 shadow-xs">
+                  <Bell className="w-8 h-8 text-[#7c7e8c] mx-auto opacity-50" />
+                  <h3 className="text-sm font-semibold text-[#1e222b]">No active alerts</h3>
+                  <p className="text-xs text-[#7c7e8c]">
+                    All portfolio stocks are trading within normal volatility and volume bands.
                   </p>
                 </div>
               ) : (
-                <div className="space-y-2.5">
+                <div className="bg-white rounded-2xl border border-[#ebecef] shadow-xs overflow-hidden divide-y divide-[#f5f6f8]">
                   {alerts.map((al) => (
                     <div
                       key={al.id}
                       onClick={() => handleSelectTickerForResearch(al.symbol)}
-                      className="bg-white border border-gray-200 hover:border-gray-300 rounded-xl p-4 cursor-pointer transition space-y-2 shadow-card"
+                      className="p-4 cursor-pointer hover:bg-[#fcfdfd] transition space-y-1.5"
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2">
-                          <span className="font-bold text-xs text-gray-900 font-mono bg-gray-100 px-2 py-0.5 rounded border border-gray-200">
+                          <span className="font-bold text-xs text-[#1e222b] font-mono bg-[#f5f6f8] px-2 py-0.5 rounded">
                             {al.symbol}
                           </span>
-                          <span className="text-xs font-semibold text-gray-800">
+                          <span className="text-xs font-semibold text-[#1e222b]">
                             {al.company_name}
                           </span>
                         </div>
-                        <span className="text-xs text-amber-800 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded font-medium">
+                        <span className="text-[11px] text-[#EB5B3C] bg-[#fdf1ee] px-2 py-0.5 rounded font-bold">
                           {al.alert_type.replace('_', ' ')}
                         </span>
                       </div>
 
-                      <h4 className="text-xs font-semibold text-gray-900">{al.title}</h4>
-                      <p className="text-xs text-gray-600 leading-relaxed">{al.description}</p>
+                      <h4 className="text-xs font-semibold text-[#1e222b]">{al.title}</h4>
+                      <p className="text-xs text-[#7c7e8c] leading-relaxed">{al.description}</p>
 
-                      <div className="pt-2 border-t border-gray-100 flex items-center justify-between text-xs">
-                        <span className="text-gray-400">{al.timestamp}</span>
-                        <span className="text-blue-900 font-semibold flex items-center gap-0.5">
-                          Pull research <ArrowUpRight className="w-3 h-3" />
+                      <div className="pt-1 flex items-center justify-between text-[11px]">
+                        <span className="text-[#7c7e8c]">{al.timestamp}</span>
+                        <span className="text-[#00875A] font-bold flex items-center gap-0.5">
+                          Deep Research <ArrowUpRight className="w-3 h-3" />
                         </span>
                       </div>
                     </div>
@@ -255,14 +256,14 @@ export function App() {
           )}
         </main>
 
-        {/* Bottom Navigation */}
+        {/* Bottom Navigation (Groww Style) */}
         <Navigation
           activeTab={activeTab}
           setActiveTab={setActiveTab}
           alertsCount={alerts.length}
         />
 
-        {/* Settings & Controls Modal */}
+        {/* Settings Modal */}
         <AlertSettingsModal
           isOpen={isSettingsOpen}
           onClose={() => setIsSettingsOpen(false)}

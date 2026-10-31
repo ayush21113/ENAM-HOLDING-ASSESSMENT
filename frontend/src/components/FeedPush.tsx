@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Announcement } from '../types';
-import { ArrowUpRight, UserCheck, FileText, ExternalLink, Sparkles, Inbox } from 'lucide-react';
+import { 
+  TrendingUp, ArrowUpRight, UserCheck, FileText, 
+  ExternalLink, Sparkles, ChevronDown, ChevronUp,
+  Building, ShieldAlert, Award, Layers
+} from 'lucide-react';
 
 interface FeedPushProps {
   announcements: Announcement[];
@@ -25,65 +29,72 @@ export const FeedPush: React.FC<FeedPushProps> = ({
   setHideRoutine,
   onSelectTickerForResearch,
 }) => {
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+
+  const toggleExpand = (id: string) => {
+    setExpandedId(expandedId === id ? null : id);
+  };
+
   const categories = [
-    { id: 'all', label: 'All filings' },
+    { id: 'all', label: 'All' },
     { id: 'results', label: 'Results' },
     { id: 'management_change', label: 'Management' },
     { id: 'M&A', label: 'M&A' },
     { id: 'capex', label: 'Capex' },
-    { id: 'credit_rating', label: 'Credit rating' },
+    { id: 'credit_rating', label: 'Ratings' },
     { id: 'litigation', label: 'Litigation' },
-    { id: 'insider_trading', label: 'Insider trading' },
-    { id: 'unclassified', label: 'Routine (Tier 3)' },
   ];
 
-  const getCategoryBadgeClass = (category: string) => {
+  const getCategoryIcon = (category: string) => {
     switch (category) {
       case 'results':
-        return 'bg-emerald-50 text-emerald-800 border-emerald-200';
+        return <TrendingUp className="w-4 h-4 text-[#00875A]" />;
       case 'management_change':
-        return 'bg-purple-50 text-purple-800 border-purple-200';
+        return <UserCheck className="w-4 h-4 text-purple-700" />;
       case 'M&A':
-        return 'bg-blue-50 text-blue-800 border-blue-200';
+        return <Building className="w-4 h-4 text-blue-700" />;
       case 'capex':
-        return 'bg-teal-50 text-teal-800 border-teal-200';
-      case 'litigation':
-        return 'bg-red-50 text-red-800 border-red-200';
+        return <Layers className="w-4 h-4 text-teal-700" />;
       case 'credit_rating':
-        return 'bg-amber-50 text-amber-800 border-amber-200';
-      case 'insider_trading':
-        return 'bg-orange-50 text-orange-800 border-orange-200';
+        return <Award className="w-4 h-4 text-amber-700" />;
+      case 'litigation':
+        return <ShieldAlert className="w-4 h-4 text-red-600" />;
       default:
-        return 'bg-gray-100 text-gray-700 border-gray-200';
+        return <FileText className="w-4 h-4 text-gray-500" />;
     }
   };
 
   return (
-    <div className="space-y-4 pb-20">
-      {/* Digest Window Controls */}
-      <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-card space-y-3">
+    <div className="space-y-3 pb-24">
+      {/* 1. GROWW-STYLE SUMMARY BAR */}
+      <div className="bg-white rounded-2xl p-4 border border-[#ebecef] shadow-xs space-y-3">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <span className="text-xs font-semibold text-gray-900 tracking-tight">Digest window</span>
-            <span className="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded border border-gray-200">
-              {announcements.length} disclosures
-            </span>
+          <div>
+            <div className="text-[11px] text-[#7c7e8c] font-medium uppercase tracking-wider">
+              Corporate Disclosures
+            </div>
+            <div className="text-xl font-bold text-[#1e222b] font-mono mt-0.5 flex items-baseline space-x-1.5">
+              <span>{announcements.length} filings</span>
+              <span className="text-xs font-normal text-[#00875A]">
+                in last {windowHours === 24 ? '24 hours' : windowHours === 72 ? '3 days' : '7 days'}
+              </span>
+            </div>
           </div>
 
           {/* Window Picker */}
-          <div className="flex bg-gray-100 rounded-lg p-0.5 border border-gray-200 text-xs font-medium">
+          <div className="flex bg-[#f5f6f8] rounded-xl p-1 text-xs font-medium">
             {[
-              { val: 24, label: '24 hours' },
-              { val: 72, label: '3 days' },
-              { val: 168, label: '7 days' },
+              { val: 24, label: '24h' },
+              { val: 72, label: '3d' },
+              { val: 168, label: '7d' },
             ].map((item) => (
               <button
                 key={item.val}
                 onClick={() => setWindowHours(item.val)}
-                className={`px-2.5 py-1 rounded transition ${
+                className={`px-2.5 py-1 rounded-lg transition ${
                   windowHours === item.val
-                    ? 'bg-white text-gray-900 font-semibold shadow-subtle'
-                    : 'text-gray-600 hover:text-gray-900'
+                    ? 'bg-white text-[#1e222b] font-bold shadow-xs'
+                    : 'text-[#7c7e8c] hover:text-[#1e222b]'
                 }`}
               >
                 {item.label}
@@ -92,16 +103,16 @@ export const FeedPush: React.FC<FeedPushProps> = ({
           </div>
         </div>
 
-        {/* Filter Pills */}
+        {/* Filter Chips (Groww Style - No harsh borders) */}
         <div className="flex items-center space-x-1.5 overflow-x-auto pb-1 scrollbar-none text-xs">
           {categories.map((c) => (
             <button
               key={c.id}
               onClick={() => setSelectedCategory(c.id)}
-              className={`px-3 py-1 rounded-full whitespace-nowrap text-xs transition border font-medium ${
+              className={`px-3 py-1.5 rounded-full whitespace-nowrap text-xs transition font-medium ${
                 selectedCategory === c.id
-                  ? 'bg-gray-900 text-white border-gray-900'
-                  : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
+                  ? 'bg-[#1e222b] text-white shadow-xs'
+                  : 'bg-[#f5f6f8] text-[#7c7e8c] hover:bg-[#ebecef] hover:text-[#1e222b]'
               }`}
             >
               {c.label}
@@ -109,231 +120,217 @@ export const FeedPush: React.FC<FeedPushProps> = ({
           ))}
         </div>
 
-        {/* Routine Filter Toggle */}
-        <div className="pt-2 flex items-center justify-between border-t border-gray-100 text-xs text-gray-600">
-          <span>Collapse routine paperwork (ESOP allotments, general certificates)</span>
+        {/* Routine toggle */}
+        <div className="pt-2 border-t border-[#f5f6f8] flex items-center justify-between text-xs text-[#7c7e8c]">
+          <span>Hide routine compliance & ESOP paperwork</span>
           <button
             onClick={() => setHideRoutine(!hideRoutine)}
             className={`w-9 h-5 flex items-center rounded-full p-0.5 duration-200 cursor-pointer ${
-              hideRoutine ? 'bg-blue-800 justify-end' : 'bg-gray-300 justify-start'
+              hideRoutine ? 'bg-[#00D09C] justify-end' : 'bg-[#e2e8f0] justify-start'
             }`}
           >
-            <div className="bg-white w-4 h-4 rounded-full shadow-sm"></div>
+            <div className="bg-white w-4 h-4 rounded-full shadow-xs"></div>
           </button>
         </div>
       </div>
 
-      {/* Announcements Stream */}
+      {/* 2. GROWW-STYLE DISCLOSURE STREAM (Clean list rows with subtle dividers, NO bulky boxed cards!) */}
       {loading ? (
         <div className="py-16 flex flex-col items-center justify-center space-y-2">
-          <div className="w-5 h-5 border-2 border-blue-800 border-t-transparent rounded-full animate-spin"></div>
-          <p className="text-xs text-gray-500 font-medium">Filtering exchange filings...</p>
+          <div className="w-5 h-5 border-2 border-[#00D09C] border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-xs text-[#7c7e8c] font-medium">Updating exchange stream...</p>
         </div>
       ) : announcements.length === 0 ? (
-        <div className="bg-white border border-gray-200 rounded-xl p-8 text-center space-y-2 shadow-card">
-          <Inbox className="w-8 h-8 text-gray-400 mx-auto" />
-          <h3 className="text-sm font-semibold text-gray-900">No disclosures in this window</h3>
-          <p className="text-xs text-gray-500">Expand the window to 3 days or 7 days, or adjust category filters.</p>
+        <div className="bg-white rounded-2xl p-8 text-center space-y-2 border border-[#ebecef] shadow-xs">
+          <p className="text-sm font-semibold text-[#1e222b]">No disclosures found</p>
+          <p className="text-xs text-[#7c7e8c]">Try expanding the digest window to 3d or 7d.</p>
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="bg-white rounded-2xl border border-[#ebecef] shadow-xs overflow-hidden divide-y divide-[#f5f6f8]">
           {announcements.map((ann) => {
-            const isTier1 = ann.tier === 1;
+            const isExpanded = expandedId === ann.id;
 
             return (
-              <div
-                key={ann.id}
-                className={`bg-white border rounded-xl p-4 transition-all duration-150 shadow-card ${
-                  isTier1
-                    ? 'border-gray-300'
-                    : 'border-gray-200 opacity-90 hover:opacity-100'
-                }`}
-              >
-                {/* Header: Ticker, Category, Timestamp */}
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center space-x-2">
-                    <button
-                      onClick={() => onSelectTickerForResearch(ann.symbol)}
-                      className="font-bold text-xs text-gray-900 bg-gray-100 hover:bg-gray-200 px-2 py-0.5 rounded border border-gray-200 transition font-mono"
-                    >
-                      {ann.symbol}
-                    </button>
-                    <span className="text-xs text-gray-600 truncate max-w-[150px]">
-                      {ann.company_name}
-                    </span>
+              <div key={ann.id} className="transition hover:bg-[#fcfdfd]">
+                {/* Clean Row Header */}
+                <div
+                  onClick={() => toggleExpand(ann.id)}
+                  className="p-4 flex items-start justify-between cursor-pointer space-x-3"
+                >
+                  {/* Left: Clean Circular Category Icon (Groww Style) */}
+                  <div className="w-10 h-10 rounded-full bg-[#f5f6f8] flex items-center justify-center shrink-0 mt-0.5">
+                    {getCategoryIcon(ann.category)}
                   </div>
 
-                  <div className="flex items-center space-x-2">
-                    <span className={`text-xs font-medium px-2 py-0.5 rounded border ${getCategoryBadgeClass(ann.category)}`}>
-                      {ann.category.replace('_', ' ')}
-                    </span>
-                    <span className="text-xs text-gray-400">{ann.timestamp}</span>
-                  </div>
-                </div>
-
-                {/* Announcement Headline */}
-                <h4 className="text-sm font-semibold text-gray-900 leading-snug mb-1">
-                  {ann.title}
-                </h4>
-                <p className="text-xs text-gray-600 leading-relaxed font-normal">
-                  {ann.summary}
-                </p>
-
-                {/* ENRICHMENT 1: QUARTERLY RESULTS CARD */}
-                {ann.result_data && (
-                  <div className="mt-3 bg-gray-50 border border-gray-200 rounded-lg p-3.5 space-y-3">
-                    <div className="flex items-center justify-between border-b border-gray-200 pb-2">
-                      <div className="flex items-center space-x-1.5 text-xs font-semibold text-gray-900">
-                        <Sparkles className="w-3.5 h-3.5 text-blue-800" />
-                        <span>First-cut headline numbers ({ann.result_data.quarter})</span>
-                      </div>
-                      <span className="text-xs bg-white text-gray-700 border border-gray-200 px-2 py-0.5 rounded font-mono font-medium">
-                        EBITDA margin: {ann.result_data.ebitda_margin_pct}%
+                  {/* Middle: Details */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center space-x-2">
+                      <span className="font-bold text-sm text-[#1e222b] font-mono tracking-tight">
+                        {ann.symbol.replace('.NS', '')}
+                      </span>
+                      <span className="text-xs text-[#7c7e8c] truncate max-w-[140px]">
+                        {ann.company_name}
                       </span>
                     </div>
 
-                    {/* Financial Metrics Grid */}
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
-                      {/* Revenue */}
-                      <div className="bg-white p-2.5 rounded border border-gray-200">
-                        <div className="text-xs text-gray-500">Revenue</div>
-                        <div className="text-sm font-bold text-gray-900 font-mono mt-0.5">
-                          ₹{ann.result_data.revenue_cr.toLocaleString()} Cr
-                        </div>
-                        <div className="flex items-center gap-2 mt-1 text-xs">
-                          <span className={ann.result_data.revenue_qoq_pct >= 0 ? 'text-emerald-700 font-medium' : 'text-red-700 font-medium'}>
-                            {ann.result_data.revenue_qoq_pct >= 0 ? '+' : ''}{ann.result_data.revenue_qoq_pct}% QoQ
-                          </span>
-                          <span className={ann.result_data.revenue_yoy_pct >= 0 ? 'text-emerald-700 font-medium' : 'text-red-700 font-medium'}>
-                            {ann.result_data.revenue_yoy_pct >= 0 ? '+' : ''}{ann.result_data.revenue_yoy_pct}% YoY
-                          </span>
-                        </div>
-                      </div>
+                    <h4 className="text-xs font-semibold text-[#1e222b] leading-snug mt-1 line-clamp-2">
+                      {ann.title}
+                    </h4>
 
-                      {/* EBITDA */}
-                      <div className="bg-white p-2.5 rounded border border-gray-200">
-                        <div className="text-xs text-gray-500">EBITDA</div>
-                        <div className="text-sm font-bold text-gray-900 font-mono mt-0.5">
-                          ₹{ann.result_data.ebitda_cr.toLocaleString()} Cr
-                        </div>
-                        <div className="flex items-center gap-2 mt-1 text-xs">
-                          <span className={ann.result_data.ebitda_qoq_pct >= 0 ? 'text-emerald-700 font-medium' : 'text-red-700 font-medium'}>
-                            {ann.result_data.ebitda_qoq_pct >= 0 ? '+' : ''}{ann.result_data.ebitda_qoq_pct}% QoQ
-                          </span>
-                          <span className={ann.result_data.ebitda_yoy_pct >= 0 ? 'text-emerald-700 font-medium' : 'text-red-700 font-medium'}>
-                            {ann.result_data.ebitda_yoy_pct >= 0 ? '+' : ''}{ann.result_data.ebitda_yoy_pct}% YoY
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* PBT */}
-                      <div className="bg-white p-2.5 rounded border border-gray-200">
-                        <div className="text-xs text-gray-500">PBT</div>
-                        <div className="text-sm font-bold text-gray-900 font-mono mt-0.5">
-                          ₹{ann.result_data.pbt_cr.toLocaleString()} Cr
-                        </div>
-                        <div className="flex items-center gap-2 mt-1 text-xs">
-                          <span className={ann.result_data.pbt_qoq_pct >= 0 ? 'text-emerald-700 font-medium' : 'text-red-700 font-medium'}>
-                            {ann.result_data.pbt_qoq_pct >= 0 ? '+' : ''}{ann.result_data.pbt_qoq_pct}% QoQ
-                          </span>
-                          <span className={ann.result_data.pbt_yoy_pct >= 0 ? 'text-emerald-700 font-medium' : 'text-red-700 font-medium'}>
-                            {ann.result_data.pbt_yoy_pct >= 0 ? '+' : ''}{ann.result_data.pbt_yoy_pct}% YoY
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* PAT */}
-                      <div className="bg-white p-2.5 rounded border border-gray-200">
-                        <div className="text-xs text-gray-500">PAT (Net profit)</div>
-                        <div className="text-sm font-bold text-gray-900 font-mono mt-0.5">
-                          ₹{ann.result_data.pat_cr.toLocaleString()} Cr
-                        </div>
-                        <div className="flex items-center gap-2 mt-1 text-xs">
-                          <span className={ann.result_data.pat_qoq_pct >= 0 ? 'text-emerald-700 font-medium' : 'text-red-700 font-medium'}>
-                            {ann.result_data.pat_qoq_pct >= 0 ? '+' : ''}{ann.result_data.pat_qoq_pct}% QoQ
-                          </span>
-                          <span className={ann.result_data.pat_yoy_pct >= 0 ? 'text-emerald-700 font-medium' : 'text-red-700 font-medium'}>
-                            {ann.result_data.pat_yoy_pct >= 0 ? '+' : ''}{ann.result_data.pat_yoy_pct}% YoY
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <p className="text-xs text-gray-700 bg-white p-2.5 rounded border border-gray-200 leading-relaxed font-normal">
-                      <span className="font-semibold text-gray-900">Margin context: </span>
-                      {ann.result_data.margin_commentary}
-                    </p>
-                  </div>
-                )}
-
-                {/* ENRICHMENT 2: MANAGEMENT CHANGE CARD */}
-                {ann.mgmt_data && (
-                  <div className="mt-3 bg-purple-50/40 border border-purple-200 rounded-lg p-3.5 space-y-2">
-                    <div className="flex items-center justify-between border-b border-purple-100 pb-2">
-                      <div className="flex items-center space-x-1.5 text-xs font-semibold text-purple-900">
-                        <UserCheck className="w-3.5 h-3.5 text-purple-700" />
-                        <span>Leadership transition</span>
-                      </div>
-                      <span className="text-xs bg-white text-purple-800 border border-purple-200 px-2 py-0.5 rounded font-medium">
-                        {ann.mgmt_data.action}
+                    {/* Meta line: Clean text with dot separator, NO awkward colored outline boxes! */}
+                    <div className="flex items-center space-x-1.5 mt-1 text-[11px] text-[#7c7e8c]">
+                      <span className="capitalize font-medium text-[#1e222b]">
+                        {ann.category.replace('_', ' ')}
                       </span>
+                      <span>•</span>
+                      <span>{ann.timestamp}</span>
+                      <span>•</span>
+                      <span>BSE/NSE</span>
                     </div>
+                  </div>
 
-                    <div className="space-y-1.5">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-gray-900">
-                          {ann.mgmt_data.person_name}
-                        </span>
-                        <span className="text-xs text-purple-800 font-medium">
-                          {ann.mgmt_data.new_role}
-                        </span>
-                      </div>
+                  {/* Right: Groww-style Green/Neutral Delta Badge & Chevron */}
+                  <div className="text-right shrink-0 flex flex-col items-end space-y-1">
+                    {ann.result_data ? (
+                      <span className="text-xs font-bold text-[#00875A] bg-[#e8f8f3] px-2 py-0.5 rounded font-mono">
+                        +{ann.result_data.revenue_yoy_pct}% YoY
+                      </span>
+                    ) : ann.category === 'management_change' ? (
+                      <span className="text-[11px] font-semibold text-purple-700 bg-purple-50 px-2 py-0.5 rounded">
+                        New C-Suite
+                      </span>
+                    ) : null}
 
-                      <p className="text-xs text-gray-700 leading-relaxed">
-                        {ann.mgmt_data.career_background}
-                      </p>
-
-                      {ann.mgmt_data.pedigree_highlights.length > 0 && (
-                        <div className="flex flex-wrap gap-1.5 pt-1">
-                          {ann.mgmt_data.pedigree_highlights.map((h, idx) => (
-                            <span
-                              key={idx}
-                              className="text-xs bg-white text-gray-700 border border-gray-200 px-2 py-0.5 rounded"
-                            >
-                              {h}
-                            </span>
-                          ))}
-                        </div>
+                    <div className="text-[#7c7e8c] pt-1">
+                      {isExpanded ? (
+                        <ChevronUp className="w-4 h-4" />
+                      ) : (
+                        <ChevronDown className="w-4 h-4" />
                       )}
                     </div>
                   </div>
-                )}
-
-                {/* Card Footer */}
-                <div className="mt-3 pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs">
-                  <div>
-                    {ann.filing_url && (
-                      <a
-                        href={ann.filing_url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-gray-500 hover:text-gray-800 text-xs flex items-center gap-1 font-medium transition"
-                      >
-                        <FileText className="w-3 h-3" />
-                        Exchange filing
-                        <ExternalLink className="w-2.5 h-2.5 opacity-60" />
-                      </a>
-                    )}
-                  </div>
-
-                  <button
-                    onClick={() => onSelectTickerForResearch(ann.symbol)}
-                    className="text-xs font-semibold text-blue-900 hover:text-blue-700 flex items-center gap-1 transition"
-                  >
-                    Pull research
-                    <ArrowUpRight className="w-3 h-3" />
-                  </button>
                 </div>
+
+                {/* Inline Expanded Drawer (Revealed smoothly on click) */}
+                {isExpanded && (
+                  <div className="px-4 pb-4 pt-1 bg-[#fafbfd] border-t border-[#f5f6f8] space-y-3 animate-in fade-in duration-150">
+                    <p className="text-xs text-[#44475b] leading-relaxed">
+                      {ann.summary}
+                    </p>
+
+                    {/* ENRICHMENT 1: GROWW-STYLE FINANCIAL RESULTS METRICS */}
+                    {ann.result_data && (
+                      <div className="bg-white rounded-xl p-3.5 border border-[#ebecef] space-y-2.5">
+                        <div className="flex items-center justify-between border-b border-[#f5f6f8] pb-2">
+                          <span className="text-xs font-bold text-[#1e222b] flex items-center gap-1.5">
+                            <Sparkles className="w-3.5 h-3.5 text-[#00875A]" />
+                            Financial Performance ({ann.result_data.quarter})
+                          </span>
+                          <span className="text-xs font-semibold text-[#00875A]">
+                            EBITDA Margin: {ann.result_data.ebitda_margin_pct}%
+                          </span>
+                        </div>
+
+                        {/* Clean 4-Metric Grid */}
+                        <div className="grid grid-cols-4 gap-2 text-center text-xs">
+                          <div className="bg-[#f5f6f8] p-2 rounded-lg">
+                            <div className="text-[10px] text-[#7c7e8c]">Revenue</div>
+                            <div className="text-xs font-bold text-[#1e222b] font-mono mt-0.5">
+                              ₹{ann.result_data.revenue_cr.toLocaleString()} Cr
+                            </div>
+                            <div className="text-[10px] text-[#00875A] font-semibold mt-0.5">
+                              +{ann.result_data.revenue_yoy_pct}% YoY
+                            </div>
+                          </div>
+
+                          <div className="bg-[#f5f6f8] p-2 rounded-lg">
+                            <div className="text-[10px] text-[#7c7e8c]">EBITDA</div>
+                            <div className="text-xs font-bold text-[#1e222b] font-mono mt-0.5">
+                              ₹{ann.result_data.ebitda_cr.toLocaleString()} Cr
+                            </div>
+                            <div className="text-[10px] text-[#00875A] font-semibold mt-0.5">
+                              +{ann.result_data.ebitda_yoy_pct}% YoY
+                            </div>
+                          </div>
+
+                          <div className="bg-[#f5f6f8] p-2 rounded-lg">
+                            <div className="text-[10px] text-[#7c7e8c]">PBT</div>
+                            <div className="text-xs font-bold text-[#1e222b] font-mono mt-0.5">
+                              ₹{ann.result_data.pbt_cr.toLocaleString()} Cr
+                            </div>
+                            <div className="text-[10px] text-[#00875A] font-semibold mt-0.5">
+                              +{ann.result_data.pbt_yoy_pct}% YoY
+                            </div>
+                          </div>
+
+                          <div className="bg-[#f5f6f8] p-2 rounded-lg">
+                            <div className="text-[10px] text-[#7c7e8c]">Net Profit</div>
+                            <div className="text-xs font-bold text-[#1e222b] font-mono mt-0.5">
+                              ₹{ann.result_data.pat_cr.toLocaleString()} Cr
+                            </div>
+                            <div className="text-[10px] text-[#00875A] font-semibold mt-0.5">
+                              +{ann.result_data.pat_yoy_pct}% YoY
+                            </div>
+                          </div>
+                        </div>
+
+                        <p className="text-xs text-[#44475b] italic bg-[#f5f6f8] p-2 rounded leading-snug">
+                          💡 {ann.result_data.margin_commentary}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* ENRICHMENT 2: MANAGEMENT CHANGE DETAILS */}
+                    {ann.mgmt_data && (
+                      <div className="bg-white rounded-xl p-3.5 border border-[#ebecef] space-y-2">
+                        <div className="flex items-center justify-between border-b border-[#f5f6f8] pb-1.5">
+                          <span className="text-xs font-bold text-[#1e222b]">
+                            {ann.mgmt_data.person_name}
+                          </span>
+                          <span className="text-xs text-purple-700 font-semibold">
+                            {ann.mgmt_data.new_role}
+                          </span>
+                        </div>
+                        <p className="text-xs text-[#44475b] leading-relaxed">
+                          {ann.mgmt_data.career_background}
+                        </p>
+                        {ann.mgmt_data.pedigree_highlights.length > 0 && (
+                          <div className="flex flex-wrap gap-1.5 pt-1">
+                            {ann.mgmt_data.pedigree_highlights.map((h, i) => (
+                              <span key={i} className="text-[11px] bg-[#f5f6f8] text-[#1e222b] px-2 py-0.5 rounded font-medium">
+                                • {h}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Action Footers */}
+                    <div className="flex items-center justify-between pt-1 text-xs">
+                      {ann.filing_url && (
+                        <a
+                          href={ann.filing_url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-[#7c7e8c] hover:text-[#00875A] font-medium flex items-center gap-1 transition"
+                        >
+                          <FileText className="w-3.5 h-3.5" />
+                          View original filing
+                          <ExternalLink className="w-3 h-3 opacity-60" />
+                        </a>
+                      )}
+
+                      <button
+                        onClick={() => onSelectTickerForResearch(ann.symbol)}
+                        className="px-3 py-1 bg-[#00D09C] hover:bg-[#00B386] text-white rounded-lg font-bold flex items-center gap-1 transition shadow-xs"
+                      >
+                        Dig into {ann.symbol.replace('.NS', '')}
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             );
           })}

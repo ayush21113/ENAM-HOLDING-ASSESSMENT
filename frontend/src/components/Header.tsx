@@ -1,5 +1,5 @@
 import React from 'react';
-import { Smartphone, Monitor, Sliders, Bell } from 'lucide-react';
+import { Smartphone, Monitor, Sliders, Bell, Search } from 'lucide-react';
 
 interface HeaderProps {
   isMobileFrame: boolean;
@@ -8,6 +8,7 @@ interface HeaderProps {
   openAlerts: () => void;
   alertsCount: number;
   llmMode: string;
+  onSearchClick?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -17,70 +18,69 @@ export const Header: React.FC<HeaderProps> = ({
   openAlerts,
   alertsCount,
   llmMode,
+  onSearchClick,
 }) => {
   return (
-    <header className="sticky top-0 z-30 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
-      <div className="flex items-center space-x-3">
-        <div className="w-8 h-8 rounded-lg bg-blue-900 flex items-center justify-center font-semibold text-white text-sm shadow-subtle">
-          F
-        </div>
-        <div>
-          <div className="flex items-center space-x-2">
-            <span className="font-bold text-base tracking-tight text-gray-900">
-              FINN
-            </span>
-            <span className="text-xs font-medium text-gray-600 bg-gray-100 border border-gray-200 px-2 py-0.5 rounded">
-              ENAM Holdings
-            </span>
+    <header className="sticky top-0 z-30 bg-white border-b border-[#ebecef] px-4 py-2.5">
+      <div className="flex items-center justify-between">
+        {/* Left: Groww-style Logo & Subtitle */}
+        <div className="flex items-center space-x-2.5">
+          <div className="w-8 h-8 rounded-full bg-[#00D09C] flex items-center justify-center font-black text-white text-sm shadow-xs tracking-tighter">
+            F
           </div>
-          <p className="text-xs text-gray-500 font-medium">
-            Primary Investment Intelligence
-          </p>
+          <div>
+            <div className="flex items-center space-x-1.5">
+              <span className="font-extrabold text-base tracking-tight text-[#1e222b]">
+                FINN
+              </span>
+              <span className="text-[10px] font-bold text-[#00875A] bg-[#e8f8f3] px-1.5 py-0.2 rounded">
+                ENAM
+              </span>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div className="flex items-center space-x-2">
-        {/* Router Status Badge */}
-        <button 
-          onClick={openSettings}
-          title="Configure thresholds & model routing"
-          className="hidden sm:flex items-center space-x-1.5 px-2.5 py-1 rounded-md text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-200 transition font-medium"
+        {/* Center/Search Quick trigger */}
+        <div 
+          onClick={onSearchClick}
+          className="cursor-pointer flex-1 mx-3 bg-[#f5f6f8] hover:bg-[#ebecef] text-[#7c7e8c] rounded-full px-3 py-1.5 text-xs flex items-center space-x-2 transition"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-blue-700"></span>
-          <span className="truncate max-w-[140px]">{llmMode.includes('Multi-Model') ? 'AI Router' : 'Heuristic Mode'}</span>
-        </button>
+          <Search className="w-3.5 h-3.5 text-[#7c7e8c]" />
+          <span className="truncate">Search stocks, filings...</span>
+        </div>
 
-        {/* Alerts Bell */}
-        <button
-          onClick={openAlerts}
-          className="relative p-2 rounded-lg bg-gray-50 hover:bg-gray-100 border border-gray-200 text-gray-700 transition"
-          aria-label="Alerts"
-        >
-          <Bell className="w-4 h-4" />
-          {alertsCount > 0 && (
-            <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-600 text-white rounded-full text-xs font-bold flex items-center justify-center">
-              {alertsCount}
-            </span>
-          )}
-        </button>
+        {/* Right Action Icons */}
+        <div className="flex items-center space-x-1">
+          {/* Alerts Bell */}
+          <button
+            onClick={openAlerts}
+            className="relative p-2 rounded-full hover:bg-[#f5f6f8] text-[#1e222b] transition"
+            aria-label="Alerts"
+          >
+            <Bell className="w-4 h-4 text-[#1e222b]" />
+            {alertsCount > 0 && (
+              <span className="absolute 1 top-1 right-1 w-2 h-2 bg-[#EB5B3C] rounded-full"></span>
+            )}
+          </button>
 
-        {/* Settings Button */}
-        <button
-          onClick={openSettings}
-          className="p-2 rounded-lg bg-gray-50 hover:bg-gray-100 border border-gray-200 text-gray-700 transition"
-          aria-label="Settings"
-        >
-          <Sliders className="w-4 h-4" />
-        </button>
+          {/* Settings */}
+          <button
+            onClick={openSettings}
+            className="p-2 rounded-full hover:bg-[#f5f6f8] text-[#1e222b] transition"
+            aria-label="Settings"
+          >
+            <Sliders className="w-4 h-4 text-[#1e222b]" />
+          </button>
 
-        {/* Device Viewport Switcher */}
-        <button
-          onClick={() => setIsMobileFrame(!isMobileFrame)}
-          title={isMobileFrame ? "Expand to Full Page" : "Simulate Mobile Screen"}
-          className="hidden md:flex p-2 rounded-lg bg-gray-50 hover:bg-gray-100 border border-gray-200 text-gray-600 transition"
-        >
-          {isMobileFrame ? <Monitor className="w-4 h-4 text-blue-800" /> : <Smartphone className="w-4 h-4" />}
-        </button>
+          {/* Device Frame Switcher */}
+          <button
+            onClick={() => setIsMobileFrame(!isMobileFrame)}
+            title={isMobileFrame ? "Expand View" : "Simulate Phone View"}
+            className="hidden md:flex p-2 rounded-full hover:bg-[#f5f6f8] text-[#7c7e8c] transition"
+          >
+            {isMobileFrame ? <Monitor className="w-4 h-4 text-[#00875A]" /> : <Smartphone className="w-4 h-4" />}
+          </button>
+        </div>
       </div>
     </header>
   );
