@@ -1,0 +1,16 @@
+# Environments & Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.cache/
+
+# Node / Frontend
+frontend/node_modules/
+frontend/.tmp/
+.DS_Store
+
+# Logs & temp
+*.log
+.env
