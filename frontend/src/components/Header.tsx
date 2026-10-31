@@ -1,5 +1,6 @@
 import React from 'react';
 import { Smartphone, Monitor, Sliders, Bell, Search } from 'lucide-react';
+import { FinnLogo } from './FinnLogo';
 
 interface HeaderProps {
   isMobileFrame: boolean;
@@ -25,9 +26,7 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="flex items-center justify-between">
         {/* Left: Groww-style Logo & Subtitle */}
         <div className="flex items-center space-x-2.5">
-          <div className="w-8 h-8 rounded-full bg-[#00D09C] flex items-center justify-center font-black text-white text-sm shadow-xs tracking-tighter">
-            F
-          </div>
+          <FinnLogo size={34} />
           <div>
             <div className="flex items-center space-x-1.5">
               <span className="font-extrabold text-base tracking-tight text-[#1e222b]">

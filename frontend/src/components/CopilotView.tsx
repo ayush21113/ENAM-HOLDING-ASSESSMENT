@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { api } from '../services/api';
 import { CopilotResponse } from '../types';
+import { FinnLogo } from './FinnLogo';
 import { 
   Sparkles, Send, Bot, User, ExternalLink, 
   ShieldCheck, ArrowRight, CornerDownRight, CheckCircle2 
@@ -94,9 +95,7 @@ export const CopilotView: React.FC = () => {
       <div className="bg-white rounded-2xl p-4 border border-[#ebecef] shadow-xs space-y-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2.5">
-            <div className="w-9 h-9 rounded-full bg-[#00D09C] flex items-center justify-center text-white shadow-xs">
-              <Sparkles className="w-4 h-4" />
-            </div>
+            <FinnLogo size={38} />
             <div>
               <div className="flex items-center space-x-1.5">
                 <h3 className="font-bold text-sm text-[#1e222b]">FINN Primary Copilot</h3>
