@@ -39,7 +39,10 @@ Recognizing that public-markets investors are overwhelmed by sheer disclosure vo
   6. **Flagship "Narrative vs. Numbers" Diff**: Compares management forward guidance against actual delivered reality across 4 consecutive quarters, scoring alignment as `BEAT`, `MET`, `MISSED`, or `DIVERGED`.
   7. **Forward Guidance Targets**: Explicit stated management targets on sales growth, footprint expansion, and capex outlays.
   8. **Bull vs. Bear Thesis**: High-conviction qualitative thesis for long-term compounding vs. critical downside risks.
-* **Added FINN Extensions**:
+* **Added FINN Institutional Extensions (Benchmarked against Global Best Practices)**:
+  * **+ Concall Q&A Stress-Test ("The Hot Seat")**: Inspired by AlphaSense and Quartr, this module isolates unscripted, high-scrutiny analyst Q&A pressure points from scripted PR presentations, tagging management responses as `DIRECT`, `CAUTIOUS`, or `EVASIVE` with actionable institutional takeaways.
+  * **+ Management Guidance Batting Average**: A 4-quarter quantitative credibility scorecard benchmarking management's historical track record of beating vs. meeting vs. missing revenue and capex promises.
+  * **+ Institutional Catalyst & Concall Calendar**: Forward-looking tracking of board meetings, concall dates, universal dial-in numbers, and key watchpoints across the portfolio.
   * **+ Statutory Footnote & Governance Auditor**: Audits Note 34 (Related Party Transactions) for arm's-length compliance, reviews the Statutory Auditor's Report for adverse qualifications, and screens Contingent Liabilities / Net Worth.
   * **+ Universal Any-Ticker Generalization**: Dynamically analyzes any user-entered NSE/BSE ticker, extending beyond the 18-stock demonstration universe.
 

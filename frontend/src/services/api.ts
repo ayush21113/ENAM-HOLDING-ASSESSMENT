@@ -6,7 +6,8 @@ import {
   UserSettings,
   BriefingResponse,
   ForensicReport,
-  CopilotResponse 
+  CopilotResponse,
+  CatalystCalendarEvent 
 } from '../types';
 
 const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000/api';
@@ -97,6 +98,12 @@ export const api = {
   async getForensicRedFlags(symbol: string): Promise<ForensicReport> {
     const res = await fetch(`${API_BASE}/ai/redflags/${encodeURIComponent(symbol)}`);
     if (!res.ok) throw new Error(`Failed to fetch red flags for ${symbol}`);
+    return res.json();
+  },
+
+  async getCalendar(): Promise<{ count: number; events: CatalystCalendarEvent[] }> {
+    const res = await fetch(`${API_BASE}/catalysts/calendar`);
+    if (!res.ok) throw new Error('Failed to fetch catalyst calendar');
     return res.json();
   }
 };

@@ -19,11 +19,11 @@
 ## 📱 Live Demonstration & Verification
 
 ### Option 1: Instant Interactive Review on Mobile/Web (Zero Setup)
-👉 **[Launch Interactive Mobile Prototype on Figma](https://www.figma.com/design/jygIJOszMFKW9UZqHhDHrk?node-id=3-3&autoplay-code-preview=3-3)**  
+👉 **[Launch Interactive Mobile Prototype on Figma](https://www.figma.com/design/jygIJOszMFKW9UZqHhDHrk?node-id=12-3&autoplay-code-preview=12-3)**  
 *Runs the full interactive web application directly inside Figma in a mobile viewport — testable immediately on desktop or mobile phone with zero command-line setup.*
 
 ### Option 2: Live Public Web App (Phone Accessible)
-👉 **https://10cc298db0f8b0.lhr.life** *(Direct public HTTPS tunnel to running FastAPI + Vite full-stack service)*
+👉 **https://ffc8efd34165e8.lhr.life** *(Direct public HTTPS tunnel to running FastAPI + Vite full-stack service)*
 
 ### Option 3: Local One-Command Launch
 ```powershell
@@ -61,8 +61,10 @@ Public-markets investors do not suffer from an information shortage; they are ov
    • 17 Regulatory Announcement Categories               • 8 Core ENAM Research Modules
    • Collapsible Routine / Compliance Rows               • "Narrative vs. Numbers" 4-Quarter Audit
    • Enriched Results (Rev, EBITDA, PBT, PAT)            • Cash Quality & Cash Conversion (CFO vs. PAT)
-   • Enriched C-Suite Transitions (Pedigree)             • + Added Statutory Footnote Auditor
-   • Configurable EOD Threshold Alerts                   • + Universal Any-Ticker Generalization
+   • Enriched C-Suite Transitions (Pedigree)             • + Concall Q&A Hot Seat (AlphaSense standard)
+   • Institutional Catalyst Calendar (Dial-ins)          • + Management Guidance Batting Average
+   • Configurable EOD Threshold Alerts                   • + Added Statutory Footnote Auditor
+                                                         • + Universal Any-Ticker Generalization
 ```
 
 ---

@@ -13,7 +13,7 @@ from app.models import (
     ResearchPullResponse, SettingsUpdate
 )
 from app.services.market_data import fetch_portfolio_market_data, fetch_single_ticker_eod
-from app.services.announcements import get_announcements_digest, classify_announcement_text
+from app.services.announcements import get_announcements_digest, classify_announcement_text, get_catalysts_calendar
 from app.services.primary_research import fetch_primary_research_for_ticker
 from app.services.llm_router import llm_router
 from pydantic import BaseModel
@@ -88,6 +88,17 @@ def get_feed(
         "count": len(announcements),
         "announcements": announcements,
         "categories_breakdown": {cat: len([a for a in announcements if a.category == cat]) for cat in CATEGORY_TIERS.keys()}
+    }
+
+@app.get("/api/catalysts/calendar")
+def get_calendar() -> Dict[str, Any]:
+    """
+    Returns upcoming institutional catalysts, earnings dates, and concalls (Quartr / AlphaSense standard).
+    """
+    events = get_catalysts_calendar()
+    return {
+        "count": len(events),
+        "events": events
     }
 
 @app.get("/api/alerts")

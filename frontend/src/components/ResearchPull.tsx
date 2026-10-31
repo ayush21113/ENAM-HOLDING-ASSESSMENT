@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { ResearchPullResponse } from '../types';
 import { api } from '../services/api';
 import { ForensicAuditModule } from './ForensicAuditModule';
-import { Search, FileCheck, ArrowUpRight, BookOpen, AlertCircle, Sparkles, ShieldCheck } from 'lucide-react';
+import { ConcallStressTestModule } from './ConcallStressTestModule';
+import { Search, FileCheck, ArrowUpRight, BookOpen, AlertCircle, Sparkles, ShieldCheck, Target, Award, MessageSquare } from 'lucide-react';
 
 interface ResearchPullProps {
   initialSymbol?: string;
@@ -47,6 +48,7 @@ export const ResearchPull: React.FC<ResearchPullProps> = ({
 
   const modules = [
     { id: 'narrative', label: 'Narrative vs Numbers', highlight: true },
+    { id: 'concall_qa', label: 'Concall Hot Seat (Q&A)', highlight: true },
     { id: 'forensic', label: 'Forensic & Red Flags', highlight: true },
     { id: 'business', label: 'Business' },
     { id: 'financials', label: 'Financials' },
@@ -199,6 +201,35 @@ export const ResearchPull: React.FC<ResearchPullProps> = ({
                 </p>
               </div>
 
+              {/* GLOBAL BENCHMARK: MANAGEMENT GUIDANCE CREDIBILITY SCORECARD */}
+              {data.credibility_scorecard && (
+                <div className="bg-[#f5f6f8] rounded-xl p-3.5 space-y-2 border border-[#ebecef]">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="text-[10px] text-[#7c7e8c] font-bold uppercase tracking-wider">
+                        Management Guidance Batting Average
+                      </div>
+                      <div className="text-sm font-bold text-[#1e222b] mt-0.5 flex items-baseline gap-2">
+                        <span className="font-mono text-base text-[#00875A] font-extrabold">
+                          {data.credibility_scorecard.batting_average_pct}% Beat/Meet Rate
+                        </span>
+                        <span className="text-[10px] font-bold text-[#00875A] bg-[#e8f8f3] px-1.5 py-0.2 rounded">
+                          {data.credibility_scorecard.verdict}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="text-right text-xs">
+                      <span className="font-mono font-bold text-[#1e222b]">
+                        {data.credibility_scorecard.beats} Beats • {data.credibility_scorecard.meets} Meets • {data.credibility_scorecard.misses} Misses
+                      </span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-[#44475b] leading-relaxed">
+                    {data.credibility_scorecard.summary}
+                  </p>
+                </div>
+              )}
+
               <div className="space-y-3">
                 {data.narrative_vs_numbers.map((q, idx) => (
                   <div
@@ -241,6 +272,13 @@ export const ResearchPull: React.FC<ResearchPullProps> = ({
                   </div>
                 ))}
               </div>
+            </div>
+          )}
+
+          {/* EXTENSION: CONCALL Q&A STRESS-TEST ("THE HOT SEAT") */}
+          {activeModule === 'concall_qa' && (
+            <div className="bg-white border border-[#ebecef] rounded-2xl p-4 shadow-xs space-y-3">
+              <ConcallStressTestModule symbol={activeTicker} items={data.concall_qa} />
             </div>
           )}
 

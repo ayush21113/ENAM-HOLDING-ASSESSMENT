@@ -17,10 +17,10 @@ Please find my submission for the **ENAM AI Engineer Build Challenge — FINN: F
 
 ### Key Review Links:
 1. **Live Mobile Prototype (Figma Runnable Layer)**:  
-   👉 **[Launch Interactive Mobile Prototype on Figma](https://www.figma.com/design/jygIJOszMFKW9UZqHhDHrk?node-id=3-3&autoplay-code-preview=3-3)**  
+   👉 **[Launch Interactive Mobile Prototype on Figma](https://www.figma.com/design/jygIJOszMFKW9UZqHhDHrk?node-id=12-3&autoplay-code-preview=12-3)**  
    *(Runs the full interactive web application directly inside Figma in a mobile viewport with zero setup required — testable immediately on desktop or mobile).*
 2. **Live Public Web App (Phone Accessible)**:  
-   👉 **https://10cc298db0f8b0.lhr.life**  
+   👉 **https://ffc8efd34165e8.lhr.life**  
    *(Direct public HTTPS URL to the running FastAPI + React application, testable on any mobile phone or incognito browser).*
 3. **GitHub Repository**:  
    👉 `https://github.com/ayush-enam/FINN-investment-agent` *(or attach local repo bundle)*
@@ -50,8 +50,12 @@ Please find my submission for the **ENAM AI Engineer Build Challenge — FINN: F
     6. **Flagship "Narrative vs. Numbers" Diff** (audits management forward guidance across 4 consecutive quarters against actual delivered reality with divergence scoring)
     7. Forward Guidance Targets (sales growth, capex, and margin targets)
     8. Bull vs. Bear Thesis (conviction drivers vs. downside risks)
-  * **+ Added FINN Forensic Auditor**: Scans Note 34 (Related Party Transactions) for arm's-length compliance, audits Statutory Auditor qualifications, and monitors Contingent Liabilities.
-  * **+ Universal Any-Ticker Generalization**: Dynamically analyzes any user-entered NSE/BSE ticker beyond the mock portfolio.
+  * **+ Added FINN Institutional Extensions (Benchmarked against Global Best Practices)**:
+    * **Concall Q&A Stress-Test ("The Hot Seat")**: Isolates unscripted analyst Q&A pressure points from scripted PR, categorizing tone (`DIRECT`, `CAUTIOUS`, `EVASIVE`) with institutional takeaways (AlphaSense/Quartr standard).
+    * **Management Guidance Batting Average**: 4-quarter quantitative credibility scorecard benchmarking historical guidance delivery.
+    * **Institutional Catalyst Calendar**: Upcoming concall schedules, dial-in numbers, and watchpoints.
+    * **Forensic Auditor**: Note 34 (Related Party Transactions) scan, Statutory Auditor qualifications, and Contingent Liabilities monitor.
+    * **Universal Any-Ticker Generalization**: Dynamically analyzes any user-entered NSE/BSE ticker beyond the mock portfolio.
 
 * **Autonomous AI Intelligence & Interaction Design**:
   * **60-Second AI Morning Audio Briefing**: Executive pre-market audio briefing player using the browser's native Web Speech API and dynamic waveform visualization.

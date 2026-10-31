@@ -133,6 +133,40 @@ export interface ResearchPullResponse {
     bull_case: string;
     bear_case: string;
   };
+  concall_qa?: ConcallQAItem[];
+  credibility_scorecard?: GuidanceCredibilityScorecard;
+}
+
+export interface ConcallQAItem {
+  analyst_name: string;
+  brokerage_firm: string;
+  topic: string;
+  question_summary: string;
+  management_response: string;
+  tone_verdict: 'DIRECT' | 'CAUTIOUS' | 'EVASIVE';
+  pressure_level: 'HIGH' | 'MEDIUM' | 'LOW';
+  institutional_takeaway: string;
+}
+
+export interface GuidanceCredibilityScorecard {
+  batting_average_pct: number;
+  verdict: string;
+  summary: string;
+  quarters_reviewed: number;
+  beats: number;
+  meets: number;
+  misses: number;
+}
+
+export interface CatalystCalendarEvent {
+  symbol: string;
+  company_name: string;
+  event_type: 'CONCALL' | 'BOARD_MEETING' | 'ANALYST_MEET';
+  date: string;
+  time: string;
+  status: 'CONFIRMED' | 'SCHEDULED' | 'TENTATIVE';
+  details: string;
+  key_watchpoints: string;
 }
 
 export interface UserSettings {

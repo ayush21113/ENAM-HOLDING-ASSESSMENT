@@ -82,6 +82,25 @@ class NarrativeQuarter(BaseModel):
     divergence_score: int  # 1 (low divergence) to 5 (severe divergence)
     analyst_takeaway: str
 
+class ConcallQAItem(BaseModel):
+    analyst_name: str
+    brokerage_firm: str
+    topic: str
+    question_summary: str
+    management_response: str
+    tone_verdict: str  # "DIRECT", "CAUTIOUS", "EVASIVE"
+    pressure_level: str  # "HIGH", "MEDIUM", "LOW"
+    institutional_takeaway: str
+
+class GuidanceCredibilityScorecard(BaseModel):
+    batting_average_pct: int
+    verdict: str
+    summary: str
+    quarters_reviewed: int
+    beats: int
+    meets: int
+    misses: int
+
 class ResearchPullResponse(BaseModel):
     symbol: str
     company_name: str
@@ -97,6 +116,10 @@ class ResearchPullResponse(BaseModel):
     narrative_vs_numbers: List[NarrativeQuarter]
     guidance: Dict[str, Any]
     bull_vs_bear: Dict[str, Any]
+
+    # Advanced Global Research Extensions (AlphaSense & Quartr benchmarks)
+    concall_qa: Optional[List[ConcallQAItem]] = None
+    credibility_scorecard: Optional[GuidanceCredibilityScorecard] = None
 
 class SettingsUpdate(BaseModel):
     price_threshold_pct: float = 3.0

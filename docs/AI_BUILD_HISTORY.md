@@ -132,10 +132,28 @@ Below is the verbatim chronological log of every user instruction across the ent
 | **328** | `2026-10-31 16:34` | *"too simple bhai add more features maybe ai tools too if the ps permits use gemini api"* | Implemented 3 AI features: 60-Sec AI Morning Audio Briefing (SpeechSynthesis + waveform), Interactive Primary Copilot (with 1-click forensic query pills), and Statutory Footnote & Governance Auditor. |
 | **496** | `2026-10-31 17:18` | *"ok give a brief summary about what we have done include everything make it as sdetailed as possible we will get it reviewed by an exopert"* | Prepared comprehensive technical summary covering architecture, data pipelines, model routing, and trade-offs. |
 | **505** | `2026-10-31 17:24` | *Expert Review Feedback Integration* | Cleaned taxonomy (`press_release`), strictly isolated 8 ENAM modules from extensions, reframed to latest EOD data, refined primary grounding definition, removed absolute claims, and enabled public tunnel deployment for phone testing. |
+| **575** | `2026-10-31 17:35` | *"bhai figma se logo shi se design kr"* | Generated custom FINN logo branding assets in Figma. |
+| **580** | `2026-10-31 17:45` | *"bhai logo to nhi h 8000 pe"* | Diagnosed 0-byte image file error. Implemented pure inline vector SVG component (`FinnLogo.tsx`) with zero latency, crisp geometric nodes, and zero 404 possibility. |
+| **590** | `2026-10-31 17:50` | *"yrr ye aur researcfh kr iss ps ke accoprding aur kya kya add kr skte h and what is being done in the world on this then iplement it"* | Conducted global research on AlphaSense, Quartr, Tegus, and FinChat. Implemented Concall Q&A Stress-Test ("Hot Seat"), Management Guidance Batting Average, and Institutional Catalyst & Concall Calendar. Updated Figma Code Layer (`nodeId: 12:3`) and public tunnel. |
 
 ---
 
-## 8. Raw Transcript & Audit Verification
+## 8. Global State-of-the-Art Research & Institutional Additions
+
+Benchmarking FINN against global tier-1 institutional platforms:
+1. **AlphaSense & Tegus**:
+   - *Core Insight*: Scripted management presentations are heavily sanitized by investor relations teams. Alpha-generating institutional intelligence lives in the **unscripted analyst Q&A session** where analysts aggressively probe margin compression, order cancellations, and guidance cut risks.
+   - *FINN Implementation*: **Concall Q&A Stress-Test ("The Hot Seat")** module under Research Pull. Extracts analyst name/firm (Kotak, Morgan Stanley, Goldman Sachs), the exact scrutiny question, verbatim management answer, and classifies tone as `DIRECT`, `CAUTIOUS`, or `EVASIVE` with an institutional takeaway.
+2. **Quartr**:
+   - *Core Insight*: Institutional investors track upcoming earnings dates, universal concall dial-in coordinates, and key quarterly watchpoints in a unified pre-market workflow.
+   - *FINN Implementation*: **Institutional Catalyst & Concall Calendar** integrated at the top of the Push stream, complete with universal dial-in numbers and watchpoint triggers.
+3. **Institutional Guidance Track Record ("Batting Average")**:
+   - *Core Insight*: Investors don't just want to know what management guided for next year; they want to know management's 4-quarter "Batting Average" — what percentage of times have they actually delivered on their guidance?
+   - *FINN Implementation*: **Management Guidance Batting Average & Credibility Scorecard** integrated into the Narrative vs. Numbers module.
+
+---
+
+## 9. Raw Transcript & Audit Verification
 In accordance with ENAM's submission requirements, the raw JSONL conversation transcripts containing full model thoughts, tool inputs, and outputs are maintained directly on disk at:
 * Compact: `.system_generated/logs/transcript.jsonl`
 * Full: `.system_generated/logs/transcript_full.jsonl`

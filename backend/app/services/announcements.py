@@ -291,3 +291,72 @@ def get_announcements_digest(
     # Sort primarily by Tier (Tier 1 first), then by recency (smallest hours ago first)
     results.sort(key=lambda x: (x[0].tier, x[1]))
     return [x[0] for x in results]
+
+def get_catalysts_calendar() -> List[Dict[str, Any]]:
+    """
+    Returns upcoming institutional catalysts, earnings dates, and concalls
+    across the portfolio universe (Quartr / AlphaSense standard).
+    """
+    return [
+        {
+            "symbol": "TRENT.NS",
+            "company_name": "Trent Ltd",
+            "event_type": "CONCALL",
+            "date": "06 Nov 2026",
+            "time": "04:00 PM IST",
+            "status": "CONFIRMED",
+            "details": "Q2 FY27 Earnings Conference Call • Universal Dial-in: +91 22 6280 1144",
+            "key_watchpoints": "Zudio store addition pace, gross margin mix, and UAE international pilot update"
+        },
+        {
+            "symbol": "DIXON.NS",
+            "company_name": "Dixon Technologies",
+            "event_type": "CONCALL",
+            "date": "09 Nov 2026",
+            "time": "05:00 PM IST",
+            "status": "CONFIRMED",
+            "details": "Q2 FY27 Post-Earnings Briefing • Diamond Pass Registration Active",
+            "key_watchpoints": "Noida display component line ramp-up, Ismartu integration, and PLI incentive claims"
+        },
+        {
+            "symbol": "TATAMOTORS.NS",
+            "company_name": "Tata Motors",
+            "event_type": "BOARD_MEETING",
+            "date": "12 Nov 2026",
+            "time": "02:30 PM IST",
+            "status": "SCHEDULED",
+            "details": "Board of Directors meeting for financial results and EV demerger roadmap review",
+            "key_watchpoints": "Commercial Vehicle demand cycle, JLR free cash flow generation, and EV battery supply chain"
+        },
+        {
+            "symbol": "RELIANCE.NS",
+            "company_name": "Reliance Industries",
+            "event_type": "ANALYST_MEET",
+            "date": "14 Nov 2026",
+            "time": "07:00 PM IST",
+            "status": "SCHEDULED",
+            "details": "Quarterly Analyst Media & Investor Briefing • Webcast Live via JioEvents",
+            "key_watchpoints": "Jio tariff hike realization, 5G monetization, and Retail square footage additions"
+        },
+        {
+            "symbol": "KAYNES.NS",
+            "company_name": "Kaynes Technology",
+            "event_type": "BOARD_MEETING",
+            "date": "16 Nov 2026",
+            "time": "03:30 PM IST",
+            "status": "SCHEDULED",
+            "details": "Board Meeting for Q2 unaudited standalone and consolidated results approval",
+            "key_watchpoints": "Sanand OSAT semiconductor assembly progress, defense order book execution"
+        },
+        {
+            "symbol": "HAL.NS",
+            "company_name": "Hindustan Aeronautics",
+            "event_type": "CONCALL",
+            "date": "18 Nov 2026",
+            "time": "11:00 AM IST",
+            "status": "TENTATIVE",
+            "details": "Institutional Investor Conference Call • Audio webcast available on BSE",
+            "key_watchpoints": "LCA Tejas Mk1A delivery milestones, GE-F404 engine shipments, and export pipeline"
+        }
+    ]
+

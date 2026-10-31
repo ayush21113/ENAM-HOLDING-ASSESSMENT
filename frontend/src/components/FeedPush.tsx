@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Announcement } from '../types';
 import { MorningBriefingCard } from './MorningBriefingCard';
+import { CatalystCalendarWidget } from './CatalystCalendarWidget';
 import { 
   TrendingUp, ArrowUpRight, UserCheck, FileText, 
   ExternalLink, Sparkles, ChevronDown, ChevronUp,
@@ -137,6 +138,9 @@ export const FeedPush: React.FC<FeedPushProps> = ({
           </button>
         </div>
       </div>
+
+      {/* 1.5 INSTITUTIONAL CATALYST & CONCALL CALENDAR (Quartr / AlphaSense standard) */}
+      <CatalystCalendarWidget onSelectTicker={onSelectTickerForResearch} />
 
       {/* 2. GROWW-STYLE DISCLOSURE STREAM (Clean list rows with subtle dividers, NO bulky boxed cards!) */}
       {loading ? (
