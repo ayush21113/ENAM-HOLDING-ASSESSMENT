@@ -1,0 +1,15 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100" height="100" rx="22" fill="#00D09C" />
+  <rect x="2" y="2" width="96" height="96" rx="20" stroke="white" stroke-opacity="0.25" stroke-width="2" />
+  
+  <!-- Stylized Monogram 'F' -->
+  <path d="M26 26C26 23.7909 27.7909 22 30 22H66C68.2091 22 70 23.7909 70 26C70 28.2091 68.2091 30 66 30H36V43H58C60.2091 43 62 44.7909 62 47C62 49.2091 60.2091 51 58 51H36V74C36 76.2091 34.2091 78 32 78C29.7909 78 28 76.2091 28 74V26H26Z" fill="white" />
+  
+  <!-- Financial Growth Chart Bars -->
+  <rect x="42" y="58" width="8" height="18" rx="4" fill="#005A3C" />
+  <rect x="54" y="48" width="8" height="28" rx="4" fill="#E8F8F3" />
+  <rect x="66" y="38" width="8" height="38" rx="4" fill="white" />
+  
+  <!-- Upward Compounding Arrow -->
+  <path d="M70 20L77 28H63L70 20Z" fill="white" />
+</svg>
