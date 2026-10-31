@@ -19,9 +19,9 @@ Please find my submission for the **ENAM AI Engineer Build Challenge — FINN: F
 1. **Live Mobile Prototype (Figma Runnable Layer)**:  
    👉 **[Launch Interactive Mobile Prototype on Figma](https://www.figma.com/design/jygIJOszMFKW9UZqHhDHrk?node-id=3-3&autoplay-code-preview=3-3)**  
    *(Runs the full interactive web application directly inside Figma in a mobile viewport with zero setup required — testable immediately on desktop or mobile).*
-2. **Live Web Tunnel Deployment**:  
-   👉 **https://weak-things-slide.loca.lt**  
-   *(Direct public URL to the running FastAPI + React application).*
+2. **Live Public Web App (Phone Accessible)**:  
+   👉 **https://10cc298db0f8b0.lhr.life**  
+   *(Direct public HTTPS URL to the running FastAPI + React application, testable on any mobile phone or incognito browser).*
 3. **GitHub Repository**:  
    👉 `https://github.com/ayush-enam/FINN-investment-agent` *(or attach local repo bundle)*
 4. **AI Build History & Raw Transcripts**:  

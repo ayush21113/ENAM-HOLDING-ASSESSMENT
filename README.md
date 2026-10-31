@@ -22,8 +22,8 @@
 👉 **[Launch Interactive Mobile Prototype on Figma](https://www.figma.com/design/jygIJOszMFKW9UZqHhDHrk?node-id=3-3&autoplay-code-preview=3-3)**  
 *Runs the full interactive web application directly inside Figma in a mobile viewport — testable immediately on desktop or mobile phone with zero command-line setup.*
 
-### Option 2: Live Web Tunnel
-👉 **https://weak-things-slide.loca.lt** *(Direct public tunnel to running FastAPI + Vite full-stack service)*
+### Option 2: Live Public Web App (Phone Accessible)
+👉 **https://10cc298db0f8b0.lhr.life** *(Direct public HTTPS tunnel to running FastAPI + Vite full-stack service)*
 
 ### Option 3: Local One-Command Launch
 ```powershell
