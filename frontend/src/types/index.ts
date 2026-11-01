@@ -135,6 +135,49 @@ export interface ResearchPullResponse {
   };
   concall_qa?: ConcallQAItem[];
   credibility_scorecard?: GuidanceCredibilityScorecard;
+  disclosure_diff?: DisclosureDiffItem[];
+  forensic_radar?: ForensicAccountingRadar;
+}
+
+export interface DisclosureDiffItem {
+  category: string;
+  prior_quarter: string;
+  prior_quote: string;
+  current_quarter: string;
+  current_quote: string;
+  semantic_shift: string;
+  severity: 'neutral' | 'attention' | 'positive';
+  institutional_insight: string;
+}
+
+export interface ForensicMetric {
+  metric_code: string;
+  metric_name: string;
+  value: number;
+  benchmark: string;
+  verdict: 'SAFE' | 'WATCHLIST' | 'FLAG';
+  detail: string;
+}
+
+export interface ForensicAccountingRadar {
+  beneish_m_score: number;
+  manipulation_risk: 'LOW' | 'MODERATE' | 'HIGH';
+  composite_health_score: number;
+  metrics: ForensicMetric[];
+  auditor_opinion: string;
+  rpt_note34_verdict: string;
+}
+
+export interface ICMemoResponse {
+  generated_at: string;
+  portfolio_symbol_count: number;
+  market_stance: string;
+  executive_summary: string;
+  catalyst_breakdown: any[];
+  volume_anomalies: any[];
+  forensic_audit_flags: any[];
+  analyst_action_items: string[];
+  markdown_memo: string;
 }
 
 export interface ConcallQAItem {

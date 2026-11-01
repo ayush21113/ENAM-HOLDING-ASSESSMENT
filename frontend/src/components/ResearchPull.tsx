@@ -3,6 +3,8 @@ import { ResearchPullResponse } from '../types';
 import { api } from '../services/api';
 import { ForensicAuditModule } from './ForensicAuditModule';
 import { ConcallStressTestModule } from './ConcallStressTestModule';
+import { DisclosureDiffModule } from './DisclosureDiffModule';
+import { ForensicRadarModule } from './ForensicRadarModule';
 import { Search, FileCheck, ArrowUpRight, BookOpen, AlertCircle, Sparkles, ShieldCheck, Target, Award, MessageSquare } from 'lucide-react';
 
 interface ResearchPullProps {
@@ -48,8 +50,9 @@ export const ResearchPull: React.FC<ResearchPullProps> = ({
 
   const modules = [
     { id: 'narrative', label: 'Narrative vs Numbers', highlight: true },
+    { id: 'disclosure_diff', label: 'Semantic Diff (QoQ)', highlight: true },
     { id: 'concall_qa', label: 'Concall Hot Seat (Q&A)', highlight: true },
-    { id: 'forensic', label: 'Forensic & Red Flags', highlight: true },
+    { id: 'forensic', label: 'Forensic Radar & Beneish', highlight: true },
     { id: 'business', label: 'Business' },
     { id: 'financials', label: 'Financials' },
     { id: 'trajectory', label: 'Trajectory' },
@@ -275,6 +278,13 @@ export const ResearchPull: React.FC<ResearchPullProps> = ({
             </div>
           )}
 
+          {/* EXTENSION: SEMANTIC CONCALL & DISCLOSURE DIFF ("WHAT CHANGED?") */}
+          {activeModule === 'disclosure_diff' && (
+            <div className="bg-white border border-[#ebecef] rounded-2xl p-4 shadow-xs space-y-3">
+              <DisclosureDiffModule diffs={data.disclosure_diff} companyName={data.company_name} />
+            </div>
+          )}
+
           {/* EXTENSION: CONCALL Q&A STRESS-TEST ("THE HOT SEAT") */}
           {activeModule === 'concall_qa' && (
             <div className="bg-white border border-[#ebecef] rounded-2xl p-4 shadow-xs space-y-3">
@@ -282,10 +292,13 @@ export const ResearchPull: React.FC<ResearchPullProps> = ({
             </div>
           )}
 
-          {/* MODULE: FORENSIC & RED FLAGS AUDIT */}
+          {/* MODULE: FORENSIC & RED FLAGS AUDIT + BENEISH M-SCORE RADAR */}
           {activeModule === 'forensic' && (
-            <div className="bg-white border border-[#ebecef] rounded-2xl p-4 shadow-xs space-y-3">
-              <ForensicAuditModule symbol={activeTicker} />
+            <div className="bg-white border border-[#ebecef] rounded-2xl p-4 shadow-xs space-y-4">
+              <ForensicRadarModule radar={data.forensic_radar} companyName={data.company_name} />
+              <div className="pt-2 border-t border-[#F5F6F8]">
+                <ForensicAuditModule symbol={activeTicker} />
+              </div>
             </div>
           )}
 

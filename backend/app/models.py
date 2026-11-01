@@ -101,6 +101,43 @@ class GuidanceCredibilityScorecard(BaseModel):
     meets: int
     misses: int
 
+class DisclosureDiffItem(BaseModel):
+    category: str  # "Guidance Language", "Margin Policy", "Capex Milestone", "Risk Disclosure"
+    prior_quarter: str
+    prior_quote: str
+    current_quarter: str
+    current_quote: str
+    semantic_shift: str  # "Softened", "Strengthened", "Omitted", "Reframed"
+    severity: str  # "neutral", "attention", "positive"
+    institutional_insight: str
+
+class ForensicMetric(BaseModel):
+    metric_code: str  # e.g., "DSRI", "AQI", "DEPI", "TATA", "RPT"
+    metric_name: str
+    value: float
+    benchmark: str
+    verdict: str  # "SAFE", "WATCHLIST", "FLAG"
+    detail: str
+
+class ForensicAccountingRadar(BaseModel):
+    beneish_m_score: float
+    manipulation_risk: str  # "LOW", "MODERATE", "HIGH"
+    composite_health_score: int  # 0 to 100
+    metrics: List[ForensicMetric]
+    auditor_opinion: str
+    rpt_note34_verdict: str
+
+class ICMemoResponse(BaseModel):
+    generated_at: str
+    portfolio_symbol_count: int
+    market_stance: str
+    executive_summary: str
+    catalyst_breakdown: List[Dict[str, Any]]
+    volume_anomalies: List[Dict[str, Any]]
+    forensic_audit_flags: List[Dict[str, Any]]
+    analyst_action_items: List[str]
+    markdown_memo: str
+
 class ResearchPullResponse(BaseModel):
     symbol: str
     company_name: str
@@ -120,6 +157,8 @@ class ResearchPullResponse(BaseModel):
     # Advanced Global Research Extensions (AlphaSense & Quartr benchmarks)
     concall_qa: Optional[List[ConcallQAItem]] = None
     credibility_scorecard: Optional[GuidanceCredibilityScorecard] = None
+    disclosure_diff: Optional[List[DisclosureDiffItem]] = None
+    forensic_radar: Optional[ForensicAccountingRadar] = None
 
 class SettingsUpdate(BaseModel):
     price_threshold_pct: float = 3.0

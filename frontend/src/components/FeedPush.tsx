@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Announcement } from '../types';
+import { Announcement, ICMemoResponse } from '../types';
+import { api } from '../services/api';
 import { MorningBriefingCard } from './MorningBriefingCard';
 import { CatalystCalendarWidget } from './CatalystCalendarWidget';
+import { ICMemoModal } from './ICMemoModal';
 import { 
   TrendingUp, ArrowUpRight, UserCheck, FileText, 
   ExternalLink, Sparkles, ChevronDown, ChevronUp,
@@ -32,6 +34,24 @@ export const FeedPush: React.FC<FeedPushProps> = ({
   onSelectTickerForResearch,
 }) => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [isICMemoOpen, setIsICMemoOpen] = useState(false);
+  const [memoData, setMemoData] = useState<ICMemoResponse | null>(null);
+  const [memoLoading, setMemoLoading] = useState(false);
+
+  const loadICMemo = async () => {
+    setIsICMemoOpen(true);
+    if (!memoData) {
+      setMemoLoading(true);
+      try {
+        const resp = await api.getICMemo();
+        setMemoData(resp);
+      } catch (e) {
+        console.error('Failed to load IC Memo', e);
+      } finally {
+        setMemoLoading(false);
+      }
+    }
+  };
 
   const toggleExpand = (id: string) => {
     setExpandedId(expandedId === id ? null : id);
@@ -69,7 +89,7 @@ export const FeedPush: React.FC<FeedPushProps> = ({
   return (
     <div className="space-y-3 pb-24">
       {/* 0. 60-SECOND AI MORNING BRIEFING PLAYER */}
-      <MorningBriefingCard />
+      <MorningBriefingCard onOpenICMemo={loadICMemo} />
 
       {/* 1. GROWW-STYLE SUMMARY BAR */}
       <div className="bg-white rounded-2xl p-4 border border-[#ebecef] shadow-xs space-y-3">
@@ -344,6 +364,25 @@ export const FeedPush: React.FC<FeedPushProps> = ({
           })}
         </div>
       )}
+
+      {/* INVESTMENT COMMITTEE (IC) MORNING MEMO MODAL */}
+      <ICMemoModal
+        isOpen={isICMemoOpen}
+        onClose={() => setIsICMemoOpen(false)}
+        memo={memoData}
+        loading={memoLoading}
+        onRegenerate={async () => {
+          setMemoLoading(true);
+          try {
+            const resp = await api.getICMemo();
+            setMemoData(resp);
+          } catch (e) {
+            console.error('Failed to regenerate memo', e);
+          } finally {
+            setMemoLoading(false);
+          }
+        }}
+      />
     </div>
   );
 };

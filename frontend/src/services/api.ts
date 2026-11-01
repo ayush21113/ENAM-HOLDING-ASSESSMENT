@@ -7,7 +7,8 @@ import {
   BriefingResponse,
   ForensicReport,
   CopilotResponse,
-  CatalystCalendarEvent 
+  CatalystCalendarEvent,
+  ICMemoResponse 
 } from '../types';
 
 const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000/api';
@@ -104,6 +105,12 @@ export const api = {
   async getCalendar(): Promise<{ count: number; events: CatalystCalendarEvent[] }> {
     const res = await fetch(`${API_BASE}/catalysts/calendar`);
     if (!res.ok) throw new Error('Failed to fetch catalyst calendar');
+    return res.json();
+  },
+
+  async getICMemo(): Promise<ICMemoResponse> {
+    const res = await fetch(`${API_BASE}/ai/ic-memo`);
+    if (!res.ok) throw new Error('Failed to generate IC Morning Memo');
     return res.json();
   }
 };

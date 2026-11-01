@@ -17,10 +17,10 @@ Please find my submission for the **ENAM AI Engineer Build Challenge — FINN: F
 
 ### Key Review Links:
 1. **Live Mobile Prototype (Figma Runnable Layer)**:  
-   👉 **[Launch Interactive Mobile Prototype on Figma](https://www.figma.com/design/jygIJOszMFKW9UZqHhDHrk?node-id=12-3&autoplay-code-preview=12-3)**  
+   👉 **[Launch Interactive Mobile Prototype on Figma](https://www.figma.com/design/jygIJOszMFKW9UZqHhDHrk?node-id=15-3&autoplay-code-preview=15-3)**  
    *(Runs the full interactive web application directly inside Figma in a mobile viewport with zero setup required — testable immediately on desktop or mobile).*
 2. **Live Public Web App (Phone Accessible)**:  
-   👉 **https://ffc8efd34165e8.lhr.life**  
+   👉 **https://e98175785e8938.lhr.life**  
    *(Direct public HTTPS URL to the running FastAPI + React application, testable on any mobile phone or incognito browser).*
 3. **GitHub Repository**:  
    👉 `https://github.com/ayush-enam/FINN-investment-agent` *(or attach local repo bundle)*
@@ -58,6 +58,9 @@ Please find my submission for the **ENAM AI Engineer Build Challenge — FINN: F
     * **Universal Any-Ticker Generalization**: Dynamically analyzes any user-entered NSE/BSE ticker beyond the mock portfolio.
 
 * **Autonomous AI Intelligence & Interaction Design**:
+  * **Pre-Market Investment Committee (IC) Morning Memo Generator**: Synthesizes an executive institutional 1-page IC brief from today's filings, volume anomalies, and accounting flags in clean Markdown with 1-click clipboard copy and `.md` export.
+  * **Semantic Concall & Disclosure Diff ("What Changed?")**: Tracks sequential linguistic shifts between quarters, highlighting softened promises, de-risked commitments, and omitted risks.
+  * **Beneish M-Score & Forensic Earnings Quality Radar**: Computes DSRI, AQI, DEPI, and TATA accruals to establish an institutional manipulation risk rating (< -2.22 safe threshold).
   * **60-Second AI Morning Audio Briefing**: Executive pre-market audio briefing player using the browser's native Web Speech API and dynamic waveform visualization.
   * **FINN Interactive Primary Copilot**: Interactive dialogue interface dedicated to concalls and filings with 1-click forensic query pills (Guidance Audit, Note 34 Footnote scan, Cash Conversion CFO/PAT check, Capex timelines).
   * **Cost-Conscious Model Routing**: Multi-tiered routing supporting Google Gemini 2.0 Flash (`google-genai`), Groq Llama 3.3 70B, and OpenAI, paired with a deterministic heuristic fallback to ensure the evaluation prototype remains functional without an API key.

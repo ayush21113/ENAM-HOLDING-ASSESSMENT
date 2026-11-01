@@ -198,6 +198,23 @@ def get_morning_briefing():
     briefing = llm_router.generate_morning_briefing(ann_dicts)
     return briefing
 
+@app.get("/api/ai/ic-memo")
+def get_investment_committee_memo():
+    """
+    Synthesizes an executive institutional Pre-Market Investment Committee (IC) Morning Memo.
+    """
+    stocks, alerts = fetch_portfolio_market_data(
+        price_thresh=runtime_settings["price_threshold_pct"],
+        vol_thresh=runtime_settings["volume_multiplier"]
+    )
+    announcements = get_announcements_digest(window_hours=48)
+    stock_dicts = [s.model_dump() for s in stocks]
+    ann_dicts = [a.model_dump() for a in announcements]
+    alert_dicts = [a.model_dump() for a in alerts]
+    
+    memo = llm_router.generate_ic_memo(stock_dicts, ann_dicts, alert_dicts)
+    return memo
+
 @app.get("/api/ai/redflags/{symbol}")
 def get_forensic_red_flags(symbol: str):
     """

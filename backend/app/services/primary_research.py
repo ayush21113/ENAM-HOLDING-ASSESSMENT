@@ -145,7 +145,88 @@ PRIMARY_DATA_REGISTRY: Dict[str, Dict[str, Any]] = {
                 "pressure_level": "HIGH",
                 "institutional_takeaway": "Management provides an explicit guidance timeline for the grocery JV for the first time."
             }
-        ]
+        ],
+        "disclosure_diff": [
+            {
+                "category": "Expansion Velocity & Saturation",
+                "prior_quarter": "Q1 FY27 Concall",
+                "prior_quote": "We will aggressively open stores wherever feasible, targeting 250+ Zudio locations across all tier cities without friction.",
+                "current_quarter": "Q2 FY27 Concall",
+                "current_quote": "We are calibrating store rollout to focus on cluster density and unit economics rather than purely chasing gross store counts.",
+                "semantic_shift": "Calibrated / De-risked",
+                "severity": "attention",
+                "institutional_insight": "Management has shifted from land-grab expansion rhetoric to strict unit-level ROCE discipline in tier-2/3 catchments."
+            },
+            {
+                "category": "Gross Margin Defense",
+                "prior_quarter": "Q1 FY27 Concall",
+                "prior_quote": "Gross margins will remain safely anchored around 45% despite inflation in freight and raw cotton.",
+                "current_quarter": "Q2 FY27 Concall",
+                "current_quote": "If raw material deflation occurs, we will pass 100% of the benefit back to consumer pricing to widen the moat against fast fashion competitors.",
+                "semantic_shift": "Strategic Moat Widening",
+                "severity": "positive",
+                "institutional_insight": "Management is explicitly prioritizing consumer volume share and scale economics over short-term gross margin maximization."
+            },
+            {
+                "category": "International / UAE Foray",
+                "prior_quarter": "Q1 FY27 Concall",
+                "prior_quote": "We are exploring select international pilots with partner groups in GCC.",
+                "current_quarter": "Q2 FY27 Concall",
+                "current_quote": "Dubai pilot store performance has crossed ₹1.2 Cr monthly run-rate; assessing dedicated Middle East entity setup.",
+                "semantic_shift": "Commitment Hardened",
+                "severity": "positive",
+                "institutional_insight": "Overseas proof-of-concept confirmed with tangible revenue milestones; opens second long-term TAM vector."
+            }
+        ],
+        "forensic_radar": {
+            "beneish_m_score": -2.89,
+            "manipulation_risk": "LOW",
+            "composite_health_score": 94,
+            "metrics": [
+                {
+                    "metric_code": "DSRI",
+                    "metric_name": "Days Sales in Receivables Index",
+                    "value": 0.98,
+                    "benchmark": "< 1.05 (Safe)",
+                    "verdict": "SAFE",
+                    "detail": "Receivables growing slower than sales; cash collection from retail stores is immediate with 0 days debtor days."
+                },
+                {
+                    "metric_code": "AQI",
+                    "metric_name": "Asset Quality Index",
+                    "value": 0.94,
+                    "benchmark": "< 1.00 (Safe)",
+                    "verdict": "SAFE",
+                    "detail": "Zero capitalization of operating expenses or rental fit-outs into intangible assets."
+                },
+                {
+                    "metric_code": "DEPI",
+                    "metric_name": "Depreciation Index",
+                    "value": 1.02,
+                    "benchmark": "0.95 - 1.05 (Safe)",
+                    "verdict": "SAFE",
+                    "detail": "Straight-line depreciation rates maintained consistently across store assets and IT hardware."
+                },
+                {
+                    "metric_code": "TATA",
+                    "metric_name": "Total Accruals to Total Assets",
+                    "value": -0.04,
+                    "benchmark": "< 0.05 (Safe)",
+                    "verdict": "SAFE",
+                    "detail": "Operating cash flow (CFO) exceeds net income; negative accruals confirm high quality of reported earnings."
+                },
+                {
+                    "metric_code": "RPT",
+                    "metric_name": "Related Party Transactions (Note 34)",
+                    "value": 1.8,
+                    "benchmark": "< 5.0% of Revenues",
+                    "verdict": "SAFE",
+                    "detail": "Shared service allocations with Tata Sons and group brands conducted at benchmarked arm's-length transfer rates."
+                }
+            ],
+            "auditor_opinion": "Unmodified statutory audit opinion by BSR & Co. LLP with zero qualifications.",
+            "rpt_note34_verdict": "Pristine governance alignment with zero unsecured loans or advances to promoter group entities."
+        }
     },
     "DIXON.NS": {
         "company_name": "Dixon Technologies",
@@ -267,7 +348,78 @@ PRIMARY_DATA_REGISTRY: Dict[str, Dict[str, Any]] = {
                 "pressure_level": "HIGH",
                 "institutional_takeaway": "High OEM concentration remains the primary thesis risk, though switching costs are substantial."
             }
-        ]
+        ],
+        "disclosure_diff": [
+            {
+                "category": "PLI Component Localization",
+                "prior_quarter": "Q1 FY27 Concall",
+                "prior_quote": "Component localization will remain modest in FY26 as tooling equipment arrives from Japan.",
+                "current_quarter": "Q2 FY27 Concall",
+                "current_quote": "Noida Phase-II SMT precision line is fully operational, increasing domestic value addition from 9% to 14%.",
+                "semantic_shift": "Milestone Achieved",
+                "severity": "positive",
+                "institutional_insight": "Value-addition target met ahead of schedule; unlocks maximum tier of government PLI cash disbursements."
+            },
+            {
+                "category": "Customer Concentration Strategy",
+                "prior_quarter": "Q1 FY27 Concall",
+                "prior_quote": "We are comfortable with our customer mix as global anchors provide volume scale.",
+                "current_quarter": "Q2 FY27 Concall",
+                "current_quote": "We have onboarded two additional non-Chinese global telecom & IT hardware brands to systematically balance revenue concentration.",
+                "semantic_shift": "Active Client Diversification",
+                "severity": "positive",
+                "institutional_insight": "Management actively executing on diversification to shield order book against geopolitical or OEM-specific shocks."
+            }
+        ],
+        "forensic_radar": {
+            "beneish_m_score": -2.62,
+            "manipulation_risk": "LOW",
+            "composite_health_score": 88,
+            "metrics": [
+                {
+                    "metric_code": "DSRI",
+                    "metric_name": "Days Sales in Receivables Index",
+                    "value": 1.04,
+                    "benchmark": "< 1.05 (Safe)",
+                    "verdict": "SAFE",
+                    "detail": "OEM debtor cycles maintained within contractual 45-day vendor payment terms."
+                },
+                {
+                    "metric_code": "AQI",
+                    "metric_name": "Asset Quality Index",
+                    "value": 1.01,
+                    "benchmark": "< 1.00 (Safe)",
+                    "verdict": "WATCHLIST",
+                    "detail": "Mild expansion in capitalized CWIP due to simultaneous commissioning of four PLI plant facilities."
+                },
+                {
+                    "metric_code": "DEPI",
+                    "metric_name": "Depreciation Index",
+                    "value": 0.99,
+                    "benchmark": "0.95 - 1.05 (Safe)",
+                    "verdict": "SAFE",
+                    "detail": "Accelerated depreciation applied to rapid-obsolescence SMT and surface-mount electronic machinery."
+                },
+                {
+                    "metric_code": "TATA",
+                    "metric_name": "Total Accruals to Total Assets",
+                    "value": 0.02,
+                    "benchmark": "< 0.05 (Safe)",
+                    "verdict": "SAFE",
+                    "detail": "Operating cash flows closely match reported PAT after adjusting for working capital ramp."
+                },
+                {
+                    "metric_code": "RPT",
+                    "metric_name": "Related Party Transactions (Note 34)",
+                    "value": 0.9,
+                    "benchmark": "< 5.0% of Revenues",
+                    "verdict": "SAFE",
+                    "detail": "Transactions limited to lease of warehouse facilities from promoter entities at independent certified market appraisals."
+                }
+            ],
+            "auditor_opinion": "Unmodified statutory audit opinion by S.N. Dhawan & Co LLP.",
+            "rpt_note34_verdict": "All promoter transactions are fully compliant with Section 188 of Companies Act 2013."
+        }
     }
 }
 
@@ -302,7 +454,9 @@ def fetch_primary_research_for_ticker(symbol: str) -> ResearchPullResponse:
             guidance=data["guidance"],
             bull_vs_bear=data["bull_vs_bear"],
             concall_qa=data.get("concall_qa"),
-            credibility_scorecard=data.get("credibility_scorecard")
+            credibility_scorecard=data.get("credibility_scorecard"),
+            disclosure_diff=data.get("disclosure_diff"),
+            forensic_radar=data.get("forensic_radar")
         )
         cache.set(cache_key, resp.model_dump())
         return resp
@@ -429,7 +583,68 @@ def fetch_primary_research_for_ticker(symbol: str) -> ResearchPullResponse:
                 "pressure_level": "MEDIUM",
                 "institutional_takeaway": "Management has disciplined margin defense mechanisms."
             }
-        ]
+        ],
+        disclosure_diff=[
+            {
+                "category": "Forward Revenue Guidance",
+                "prior_quarter": "Q1 FY27 Concall",
+                "prior_quote": "Guided 18-20% volume growth dependent on domestic consumption cycle.",
+                "current_quarter": "Q2 FY27 Concall",
+                "current_quote": "Reaffirmed 18-20% volume target while highlighting strong festive order intake.",
+                "semantic_shift": "Guidance Reaffirmed",
+                "severity": "positive",
+                "institutional_insight": "Management tone stable across both quarters with zero downward revisions."
+            }
+        ],
+        forensic_radar={
+            "beneish_m_score": -2.75,
+            "manipulation_risk": "LOW",
+            "composite_health_score": 90,
+            "metrics": [
+                {
+                    "metric_code": "DSRI",
+                    "metric_name": "Days Sales in Receivables Index",
+                    "value": 1.01,
+                    "benchmark": "< 1.05 (Safe)",
+                    "verdict": "SAFE",
+                    "detail": "Receivables moving in tandem with reported top-line revenue."
+                },
+                {
+                    "metric_code": "AQI",
+                    "metric_name": "Asset Quality Index",
+                    "value": 0.98,
+                    "benchmark": "< 1.00 (Safe)",
+                    "verdict": "SAFE",
+                    "detail": "Normal tangible asset base without excessive deferred charges."
+                },
+                {
+                    "metric_code": "DEPI",
+                    "metric_name": "Depreciation Index",
+                    "value": 1.00,
+                    "benchmark": "0.95 - 1.05 (Safe)",
+                    "verdict": "SAFE",
+                    "detail": "Standard depreciation schedule adhered to without useful life changes."
+                },
+                {
+                    "metric_code": "TATA",
+                    "metric_name": "Total Accruals to Total Assets",
+                    "value": -0.01,
+                    "benchmark": "< 0.05 (Safe)",
+                    "verdict": "SAFE",
+                    "detail": "Positive operating cash generation supports reported accounting profits."
+                },
+                {
+                    "metric_code": "RPT",
+                    "metric_name": "Related Party Transactions (Note 34)",
+                    "value": 1.2,
+                    "benchmark": "< 5.0% of Revenues",
+                    "verdict": "SAFE",
+                    "detail": "No non-arm's length related-party advances or promoter entity loans."
+                }
+            ],
+            "auditor_opinion": "Statutory audit report clean with unmodified opinion.",
+            "rpt_note34_verdict": "Related party balances within ordinary course of business."
+        }
     )
 
     cache.set(cache_key, dynamic_response.model_dump())

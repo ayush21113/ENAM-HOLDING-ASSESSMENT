@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { api } from '../services/api';
 import { BriefingResponse } from '../types';
-import { Play, Pause, RotateCcw, Volume2, Sparkles, ChevronDown, ChevronUp, Radio } from 'lucide-react';
+import { Play, Pause, RotateCcw, Volume2, Sparkles, ChevronDown, ChevronUp, Radio, FileText } from 'lucide-react';
 
-export const MorningBriefingCard: React.FC = () => {
+interface MorningBriefingCardProps {
+  onOpenICMemo?: () => void;
+}
+
+export const MorningBriefingCard: React.FC<MorningBriefingCardProps> = ({
+  onOpenICMemo
+}) => {
   const [briefing, setBriefing] = useState<BriefingResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -82,6 +88,17 @@ export const MorningBriefingCard: React.FC = () => {
 
         {/* Audio Action Button */}
         <div className="flex items-center space-x-1.5">
+          {onOpenICMemo && (
+            <button
+              onClick={onOpenICMemo}
+              className="flex items-center space-x-1 px-2.5 py-1.5 rounded-full text-xs font-semibold bg-white hover:bg-neutral-50 text-[#1F2937] border border-[#00D09C]/30 shadow-2xs transition"
+              title="Pre-Market IC Morning Memo"
+            >
+              <FileText className="w-3.5 h-3.5 text-[#00875A]" />
+              <span className="hidden sm:inline">IC Memo</span>
+            </button>
+          )}
+
           {isPlaying && (
             <button
               onClick={handleRestart}
