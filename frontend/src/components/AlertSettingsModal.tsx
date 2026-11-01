@@ -213,25 +213,33 @@ export const AlertSettingsModal: React.FC<AlertSettingsModalProps> = ({
                   <p>Zero triggered alerts currently.</p>
                 </div>
               ) : (
-                alerts.map((al) => (
-                  <div
-                    key={al.id}
-                    onClick={() => {
-                      onSelectTicker(al.symbol);
-                      onClose();
-                    }}
-                    className="bg-[#f5f6f8] border border-[#ebecef] hover:border-[#00D09C] p-3 rounded-xl cursor-pointer transition space-y-1"
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="font-bold text-xs text-[#1e222b] font-mono">{al.symbol}</span>
-                      <span className="text-[10px] text-[#EB5B3C] bg-[#fdf1ee] px-2 py-0.5 rounded font-bold uppercase">
-                        {al.alert_type.replace('_', ' ')}
-                      </span>
+                alerts.map((al) => {
+                  const isPriceSurge = al.alert_type === 'PRICE_SURGE';
+                  const isVolume = al.alert_type === 'VOLUME_SPIKE';
+                  const alertColor = isPriceSurge ? 'text-[#00875A]' : isVolume ? 'text-amber-600' : 'text-[#EB5B3C]';
+                  const dotColor = isPriceSurge ? 'bg-[#00875A]' : isVolume ? 'bg-amber-500' : 'bg-[#EB5B3C]';
+
+                  return (
+                    <div
+                      key={al.id}
+                      onClick={() => {
+                        onSelectTicker(al.symbol);
+                        onClose();
+                      }}
+                      className="bg-white border border-[#ebecef] hover:border-[#00D09C] p-3 rounded-xl cursor-pointer transition space-y-1"
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-xs text-[#1e222b]">{al.symbol.replace('.NS', '')}</span>
+                        <span className={`text-[11px] font-bold flex items-center space-x-1 ${alertColor}`}>
+                          <span className={`w-1.5 h-1.5 rounded-full ${dotColor}`}></span>
+                          <span>{al.alert_type.replace('_', ' ')}</span>
+                        </span>
+                      </div>
+                      <div className="text-xs font-semibold text-[#1e222b]">{al.title}</div>
+                      <p className="text-xs text-[#44475b] leading-snug">{al.description}</p>
                     </div>
-                    <div className="text-xs font-semibold text-[#1e222b]">{al.title}</div>
-                    <p className="text-xs text-[#44475b] leading-snug">{al.description}</p>
-                  </div>
-                ))
+                  );
+                })
               )}
             </div>
           )}

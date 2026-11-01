@@ -202,15 +202,15 @@ export function App() {
               <div className="bg-white border border-[#ebecef] rounded-2xl p-4 flex items-center justify-between shadow-xs">
                 <div>
                   <h2 className="text-base font-bold text-[#1e222b] tracking-tight">Active Threshold Alerts</h2>
-                  <p className="text-xs text-[#7c7e8c]">
-                    Trigger: Price &gt; ±{settings.price_threshold_pct}% • Volume &gt; {settings.volume_multiplier}x
+                  <p className="text-xs text-[#7c7e8c] mt-0.5">
+                    Price &gt; ±{settings.price_threshold_pct}% • Volume &gt; {settings.volume_multiplier}x 20-DMA
                   </p>
                 </div>
                 <button
                   onClick={() => setIsSettingsOpen(true)}
-                  className="px-3 py-1 bg-[#f5f6f8] hover:bg-[#ebecef] text-[#1e222b] rounded-lg text-xs font-semibold transition"
+                  className="text-xs font-bold text-[#00875A] hover:underline transition"
                 >
-                  Adjust
+                  Adjust Triggers
                 </button>
               </div>
 
@@ -224,37 +224,48 @@ export function App() {
                 </div>
               ) : (
                 <div className="bg-white rounded-2xl border border-[#ebecef] shadow-xs overflow-hidden divide-y divide-[#f5f6f8]">
-                  {alerts.map((al) => (
-                    <div
-                      key={al.id}
-                      onClick={() => handleSelectTickerForResearch(al.symbol)}
-                      className="p-4 cursor-pointer hover:bg-[#fcfdfd] transition space-y-1.5"
-                    >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2">
-                          <span className="font-bold text-xs text-[#1e222b] font-mono bg-[#f5f6f8] px-2 py-0.5 rounded">
-                            {al.symbol}
-                          </span>
-                          <span className="text-xs font-semibold text-[#1e222b]">
-                            {al.company_name}
+                  {alerts.map((al) => {
+                    const isPriceSurge = al.alert_type === 'PRICE_SURGE';
+                    const isVolume = al.alert_type === 'VOLUME_SPIKE';
+                    const alertColor = isPriceSurge ? 'text-[#00875A]' : isVolume ? 'text-amber-600' : 'text-[#EB5B3C]';
+                    const dotColor = isPriceSurge ? 'bg-[#00875A]' : isVolume ? 'bg-amber-500' : 'bg-[#EB5B3C]';
+
+                    return (
+                      <div
+                        key={al.id}
+                        onClick={() => handleSelectTickerForResearch(al.symbol)}
+                        className="p-4 cursor-pointer hover:bg-[#fafbfd] transition space-y-1.5"
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-2">
+                            <span className="font-bold text-xs text-[#1e222b] tracking-tight">
+                              {al.symbol.replace('.NS', '').replace('.BO', '')}
+                            </span>
+                            <span className="text-xs text-[#7c7e8c]">•</span>
+                            <span className="text-xs text-[#7c7e8c] font-medium">
+                              {al.company_name}
+                            </span>
+                          </div>
+                          
+                          {/* Clean unboxed alert badge with subtle indicator dot (NO bulky background boxes!) */}
+                          <span className={`text-xs font-bold flex items-center space-x-1.5 ${alertColor}`}>
+                            <span className={`w-1.5 h-1.5 rounded-full ${dotColor}`}></span>
+                            <span>{al.alert_type.replace('_', ' ')}</span>
                           </span>
                         </div>
-                        <span className="text-[11px] text-[#EB5B3C] bg-[#fdf1ee] px-2 py-0.5 rounded font-bold">
-                          {al.alert_type.replace('_', ' ')}
-                        </span>
-                      </div>
 
-                      <h4 className="text-xs font-semibold text-[#1e222b]">{al.title}</h4>
-                      <p className="text-xs text-[#7c7e8c] leading-relaxed">{al.description}</p>
+                        <h4 className="text-xs font-semibold text-[#1e222b]">{al.title}</h4>
+                        <p className="text-xs text-[#7c7e8c] leading-relaxed">{al.description}</p>
 
-                      <div className="pt-1 flex items-center justify-between text-[11px]">
-                        <span className="text-[#7c7e8c]">{al.timestamp}</span>
-                        <span className="text-[#00875A] font-bold flex items-center gap-0.5">
-                          Deep Research <ArrowUpRight className="w-3 h-3" />
-                        </span>
+                        <div className="pt-1 flex items-center justify-between text-[11px]">
+                          <span className="text-[#7c7e8c]">{al.timestamp}</span>
+                          <span className="text-[#00875A] font-semibold flex items-center gap-0.5 hover:underline">
+                            Deep Research <ArrowUpRight className="w-3 h-3" />
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
             </div>

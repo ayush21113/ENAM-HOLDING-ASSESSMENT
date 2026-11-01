@@ -50,22 +50,22 @@ export const ForensicAuditModule: React.FC<ForensicAuditModuleProps> = ({ symbol
     switch (health) {
       case 'PRISTINE':
         return (
-          <span className="flex items-center space-x-1 text-xs font-bold text-[#00875A] bg-[#e8f8f3] px-2.5 py-1 rounded-full">
-            <ShieldCheck className="w-3.5 h-3.5" />
+          <span className="flex items-center space-x-1.5 text-xs font-semibold text-[#00875A]">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00875A]"></span>
             <span>Pristine Governance</span>
           </span>
         );
       case 'MONITOR':
         return (
-          <span className="flex items-center space-x-1 text-xs font-bold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full">
-            <AlertTriangle className="w-3.5 h-3.5" />
+          <span className="flex items-center space-x-1.5 text-xs font-semibold text-amber-600">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
             <span>Monitor Items</span>
           </span>
         );
       default:
         return (
-          <span className="flex items-center space-x-1 text-xs font-bold text-[#EB5B3C] bg-[#fdf1ee] px-2.5 py-1 rounded-full">
-            <ShieldAlert className="w-3.5 h-3.5" />
+          <span className="flex items-center space-x-1.5 text-xs font-semibold text-[#EB5B3C]">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#EB5B3C]"></span>
             <span>Elevated Risk</span>
           </span>
         );
@@ -104,14 +104,17 @@ export const ForensicAuditModule: React.FC<ForensicAuditModuleProps> = ({ symbol
             <div className="flex-1 min-w-0">
               <div className="flex items-center justify-between">
                 <h5 className="text-xs font-bold text-[#1e222b]">{flag.title}</h5>
-                <span className={`text-[10px] font-semibold px-2 py-0.5 rounded uppercase tracking-wider ${
+                <span className={`text-xs font-semibold flex items-center space-x-1 uppercase tracking-wider ${
                   flag.severity === 'clean' 
-                    ? 'text-[#00875A] bg-[#e8f8f3]' 
+                    ? 'text-[#00875A]' 
                     : flag.severity === 'monitor'
-                    ? 'text-amber-700 bg-amber-50'
-                    : 'text-[#EB5B3C] bg-[#fdf1ee]'
+                    ? 'text-amber-600'
+                    : 'text-[#EB5B3C]'
                 }`}>
-                  {flag.severity}
+                  <span className={`w-1.5 h-1.5 rounded-full ${
+                    flag.severity === 'clean' ? 'bg-[#00875A]' : flag.severity === 'monitor' ? 'bg-amber-500' : 'bg-[#EB5B3C]'
+                  }`}></span>
+                  <span>{flag.severity}</span>
                 </span>
               </div>
               <p className="text-xs text-[#44475b] leading-relaxed mt-1">

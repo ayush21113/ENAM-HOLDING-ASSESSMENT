@@ -220,11 +220,11 @@ export const FeedPush: React.FC<FeedPushProps> = ({
                   {/* Right: Groww-style Green/Neutral Delta Badge & Chevron */}
                   <div className="text-right shrink-0 flex flex-col items-end space-y-1">
                     {ann.result_data ? (
-                      <span className="text-xs font-bold text-[#00875A] bg-[#e8f8f3] px-2 py-0.5 rounded font-mono">
+                      <span className="text-xs font-bold text-[#00875A] font-mono">
                         +{ann.result_data.revenue_yoy_pct}% YoY
                       </span>
                     ) : ann.category === 'management_change' ? (
-                      <span className="text-[11px] font-semibold text-purple-700 bg-purple-50 px-2 py-0.5 rounded">
+                      <span className="text-xs font-semibold text-purple-700">
                         New C-Suite
                       </span>
                     ) : null}

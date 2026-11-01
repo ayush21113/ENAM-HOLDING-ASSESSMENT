@@ -135,8 +135,9 @@ export const PortfolioView: React.FC<PortfolioViewProps> = ({
                       {isPositive ? '+' : ''}{stock.change_pct}%
                     </span>
                     {isVolumeSpike && (
-                      <span className="text-[10px] font-bold text-amber-800 bg-amber-50 px-1.5 py-0.2 rounded font-mono">
-                        {stock.volume_multiple}x vol
+                      <span className="text-[11px] font-bold text-amber-600 flex items-center gap-1">
+                        <span className="w-1 h-1 rounded-full bg-amber-500"></span>
+                        <span>{stock.volume_multiple}x vol</span>
                       </span>
                     )}
                   </div>

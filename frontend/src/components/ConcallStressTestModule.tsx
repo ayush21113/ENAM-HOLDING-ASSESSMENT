@@ -24,22 +24,22 @@ export const ConcallStressTestModule: React.FC<ConcallStressTestProps> = ({ symb
     switch (tone) {
       case 'DIRECT':
         return (
-          <span className="flex items-center space-x-1 text-[10px] font-bold text-[#00875A] bg-[#e8f8f3] px-2 py-0.5 rounded uppercase">
-            <CheckCircle2 className="w-3 h-3" />
+          <span className="flex items-center space-x-1.5 text-xs font-semibold text-[#00875A]">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00875A]"></span>
             <span>Direct & Assertive</span>
           </span>
         );
       case 'CAUTIOUS':
         return (
-          <span className="flex items-center space-x-1 text-[10px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded uppercase">
-            <AlertCircle className="w-3 h-3" />
+          <span className="flex items-center space-x-1.5 text-xs font-semibold text-amber-600">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
             <span>Cautious / Hedged</span>
           </span>
         );
       default:
         return (
-          <span className="flex items-center space-x-1 text-[10px] font-bold text-[#EB5B3C] bg-[#fdf1ee] px-2 py-0.5 rounded uppercase">
-            <ShieldAlert className="w-3 h-3" />
+          <span className="flex items-center space-x-1.5 text-xs font-semibold text-[#EB5B3C]">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#EB5B3C]"></span>
             <span>Evasive / Deflective</span>
           </span>
         );

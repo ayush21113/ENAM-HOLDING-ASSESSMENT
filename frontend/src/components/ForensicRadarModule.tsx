@@ -34,20 +34,23 @@ export const ForensicRadarModule: React.FC<ForensicRadarModuleProps> = ({
     switch (verdict) {
       case 'SAFE':
         return (
-          <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200">
-            SAFE
+          <span className="text-xs font-bold text-[#00875A] flex items-center space-x-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00875A]"></span>
+            <span>SAFE</span>
           </span>
         );
       case 'WATCHLIST':
         return (
-          <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 border border-amber-200">
-            WATCHLIST
+          <span className="text-xs font-bold text-amber-600 flex items-center space-x-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+            <span>WATCHLIST</span>
           </span>
         );
       default:
         return (
-          <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-rose-50 text-rose-700 border border-rose-200">
-            FLAG
+          <span className="text-xs font-bold text-[#EB5B3C] flex items-center space-x-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#EB5B3C]"></span>
+            <span>FLAG</span>
           </span>
         );
     }
@@ -56,7 +59,7 @@ export const ForensicRadarModule: React.FC<ForensicRadarModuleProps> = ({
   return (
     <div className="space-y-4">
       {/* Top Composite Gauge Banner */}
-      <div className="p-4 rounded-xl bg-gradient-to-r from-emerald-50/60 to-white border border-[#EBECEF] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="p-4 rounded-xl bg-white border border-[#EBECEF] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-center space-x-3">
           <div className="w-10 h-10 rounded-xl bg-[#00D09C]/15 flex items-center justify-center text-[#00875A] shrink-0">
             <Award className="w-5 h-5" />
@@ -64,8 +67,13 @@ export const ForensicRadarModule: React.FC<ForensicRadarModuleProps> = ({
           <div>
             <div className="flex items-center space-x-2">
               <h4 className="text-sm font-bold text-[#1F2937]">Beneish M-Score & Forensic Radar</h4>
-              <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md border ${getRiskColor(radar.manipulation_risk)}`}>
-                {radar.manipulation_risk} Manipulation Risk
+              <span className={`text-xs font-bold uppercase tracking-wider flex items-center space-x-1 ${
+                radar.manipulation_risk === 'LOW' ? 'text-[#00875A]' : radar.manipulation_risk === 'MODERATE' ? 'text-amber-600' : 'text-[#EB5B3C]'
+              }`}>
+                <span className={`w-1.5 h-1.5 rounded-full ${
+                  radar.manipulation_risk === 'LOW' ? 'bg-[#00875A]' : radar.manipulation_risk === 'MODERATE' ? 'bg-amber-500' : 'bg-[#EB5B3C]'
+                }`}></span>
+                <span>{radar.manipulation_risk} Risk</span>
               </span>
             </div>
             <p className="text-xs text-[#7C7E8C] mt-0.5">

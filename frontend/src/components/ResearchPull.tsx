@@ -65,15 +65,40 @@ export const ResearchPull: React.FC<ResearchPullProps> = ({
   const getVerdictBadge = (verdict: string) => {
     switch (verdict) {
       case 'BEAT':
-        return 'bg-[#e8f8f3] text-[#00875A] font-bold';
+        return (
+          <span className="flex items-center space-x-1.5 text-xs font-bold text-[#00875A]">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00875A]"></span>
+            <span>BEAT</span>
+          </span>
+        );
       case 'MET':
-        return 'bg-blue-50 text-blue-800 font-semibold';
+        return (
+          <span className="flex items-center space-x-1.5 text-xs font-semibold text-[#00875A]">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00875A]"></span>
+            <span>MET</span>
+          </span>
+        );
       case 'MISSED':
-        return 'bg-[#fdf1ee] text-[#EB5B3C] font-bold';
+        return (
+          <span className="flex items-center space-x-1.5 text-xs font-bold text-[#EB5B3C]">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#EB5B3C]"></span>
+            <span>MISSED</span>
+          </span>
+        );
       case 'DIVERGED':
-        return 'bg-amber-50 text-amber-800 font-semibold';
+        return (
+          <span className="flex items-center space-x-1.5 text-xs font-semibold text-amber-600">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+            <span>DIVERGED</span>
+          </span>
+        );
       default:
-        return 'bg-gray-100 text-gray-800 font-medium';
+        return (
+          <span className="flex items-center space-x-1.5 text-xs font-medium text-neutral-600">
+            <span className="w-1.5 h-1.5 rounded-full bg-neutral-400"></span>
+            <span>{verdict}</span>
+          </span>
+        );
     }
   };
 
@@ -241,9 +266,7 @@ export const ResearchPull: React.FC<ResearchPullProps> = ({
                   >
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-bold text-[#1e222b] font-mono">{q.quarter}</span>
-                      <span className={`text-xs px-2 py-0.5 rounded ${getVerdictBadge(q.verdict)}`}>
-                        {q.verdict}
-                      </span>
+                      {getVerdictBadge(q.verdict)}
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
@@ -485,16 +508,22 @@ export const ResearchPull: React.FC<ResearchPullProps> = ({
             <div className="bg-white border border-[#ebecef] rounded-2xl p-4 shadow-xs space-y-3">
               <h3 className="text-sm font-bold text-[#1e222b]">Bull vs. Bear Thesis</h3>
               <div className="space-y-2.5 text-xs">
-                <div className="bg-[#e8f8f3] p-3.5 rounded-xl space-y-1">
-                  <div className="font-bold text-[#00875A]">The Bull Case</div>
-                  <p className="text-[#00875A] leading-relaxed pt-0.5">
+                <div className="p-3.5 rounded-xl bg-white border border-[#ebecef] space-y-1">
+                  <div className="font-bold text-[#00875A] flex items-center space-x-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#00875A]"></span>
+                    <span>The Bull Case</span>
+                  </div>
+                  <p className="text-[#44475b] leading-relaxed pt-0.5">
                     {data.bull_vs_bear.bull_case}
                   </p>
                 </div>
 
-                <div className="bg-[#fdf1ee] p-3.5 rounded-xl space-y-1">
-                  <div className="font-bold text-[#EB5B3C]">The Bear Case</div>
-                  <p className="text-[#EB5B3C] leading-relaxed pt-0.5">
+                <div className="p-3.5 rounded-xl bg-white border border-[#ebecef] space-y-1">
+                  <div className="font-bold text-[#EB5B3C] flex items-center space-x-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#EB5B3C]"></span>
+                    <span>The Bear Case</span>
+                  </div>
+                  <p className="text-[#44475b] leading-relaxed pt-0.5">
                     {data.bull_vs_bear.bear_case}
                   </p>
                 </div>

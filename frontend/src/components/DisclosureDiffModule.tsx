@@ -23,20 +23,23 @@ export const DisclosureDiffModule: React.FC<DisclosureDiffModuleProps> = ({
     switch (severity) {
       case 'positive':
         return (
-          <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200">
-            {shift}
+          <span className="text-xs font-semibold text-[#00875A] flex items-center space-x-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00875A]"></span>
+            <span>{shift}</span>
           </span>
         );
       case 'attention':
         return (
-          <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 border border-amber-200">
-            {shift}
+          <span className="text-xs font-semibold text-amber-600 flex items-center space-x-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+            <span>{shift}</span>
           </span>
         );
       default:
         return (
-          <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-neutral-100 text-neutral-600 border border-neutral-200">
-            {shift}
+          <span className="text-xs font-semibold text-neutral-600 flex items-center space-x-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-neutral-400"></span>
+            <span>{shift}</span>
           </span>
         );
     }
