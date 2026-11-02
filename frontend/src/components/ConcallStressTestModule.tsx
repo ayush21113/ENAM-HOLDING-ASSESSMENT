@@ -58,8 +58,9 @@ export const ConcallStressTestModule: React.FC<ConcallStressTestProps> = ({ symb
             Analyst Q&A Stress-Test ("The Hot Seat")
           </div>
         </div>
-        <span className="text-xs font-bold text-[#00875A] bg-[#e8f8f3] px-2.5 py-1 rounded-full border border-[#00D09C]/30">
-          AlphaSense Benchmark
+        <span className="text-xs font-semibold text-[#00875A] flex items-center space-x-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#00875A]"></span>
+          <span>AlphaSense Benchmark</span>
         </span>
       </div>
 
@@ -84,9 +85,9 @@ export const ConcallStressTestModule: React.FC<ConcallStressTestProps> = ({ symb
               {getToneBadge(qa.tone_verdict)}
             </div>
 
-            {/* Topic pill */}
-            <div className="inline-block bg-[#f5f6f8] text-[#1e222b] text-[10px] font-semibold px-2 py-0.5 rounded font-mono">
-              Topic: {qa.topic}
+            {/* Topic indicator */}
+            <div className="text-[11px] font-mono text-[#7c7e8c]">
+              Topic: <span className="font-semibold text-[#1e222b]">{qa.topic}</span>
             </div>
 
             {/* Analyst Question */}

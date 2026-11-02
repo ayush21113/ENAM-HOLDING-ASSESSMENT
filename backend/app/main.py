@@ -10,9 +10,9 @@ from typing import Optional, List, Dict, Any
 from app.config import PORTFOLIO_TICKERS, DEFAULT_ALERT_THRESHOLDS, CATEGORY_TIERS
 from app.models import (
     StockEOD, Announcement, TriggeredAlert, 
-    ResearchPullResponse, SettingsUpdate
+    ResearchPullResponse, SettingsUpdate, LiveStockQuote
 )
-from app.services.market_data import fetch_portfolio_market_data, fetch_single_ticker_eod
+from app.services.market_data import fetch_portfolio_market_data, fetch_single_ticker_eod, fetch_live_quote
 from app.services.announcements import get_announcements_digest, classify_announcement_text, get_catalysts_calendar
 from app.services.primary_research import fetch_primary_research_for_ticker
 from app.services.llm_router import llm_router
@@ -66,6 +66,14 @@ def get_portfolio() -> Dict[str, Any]:
         "stocks": stocks,
         "active_alerts_count": len(alerts)
     }
+
+@app.get("/api/market/live/{symbol}")
+def get_live_market_quote(symbol: str) -> LiveStockQuote:
+    """
+    High-speed free live market data quote via direct Yahoo Chart API.
+    Returns real-time price, day high/low, 52W high/low, and 20-day volume multiple.
+    """
+    return fetch_live_quote(symbol)
 
 @app.get("/api/feed")
 def get_feed(

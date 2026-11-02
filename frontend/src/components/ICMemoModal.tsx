@@ -91,8 +91,9 @@ export const ICMemoModal: React.FC<ICMemoModalProps> = ({
                 </div>
                 <div className="flex items-center space-x-1.5">
                   <span className="text-[#7C7E8C]">IC Stance: </span>
-                  <span className="font-bold text-[#00875A] bg-[#00D09C]/15 px-2 py-0.5 rounded-md">
-                    {memo.market_stance}
+                  <span className="font-bold text-[#00875A] flex items-center space-x-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#00875A]"></span>
+                    <span>{memo.market_stance}</span>
                   </span>
                 </div>
               </div>
@@ -116,8 +117,9 @@ export const ICMemoModal: React.FC<ICMemoModalProps> = ({
                     <div key={idx} className="p-3 rounded-xl bg-white border border-[#F5F6F8] hover:border-[#00D09C]/30 transition-colors">
                       <div className="flex items-center justify-between mb-1">
                         <span className="text-xs font-bold text-[#1F2937]">{cat.symbol?.replace('.NS', '')}</span>
-                        <span className="text-[10px] font-semibold uppercase px-1.5 py-0.5 rounded-sm bg-neutral-100 text-neutral-600">
-                          {cat.category}
+                        <span className="text-[11px] font-semibold text-[#00875A] flex items-center space-x-1">
+                          <span className="w-1 h-1 rounded-full bg-[#00875A]"></span>
+                          <span>{cat.category?.replace('_', ' ')}</span>
                         </span>
                       </div>
                       <p className="text-xs text-[#44475B] line-clamp-2">{cat.title}</p>
@@ -137,7 +139,7 @@ export const ICMemoModal: React.FC<ICMemoModalProps> = ({
                         <p className="text-[11px] text-[#7C7E8C]">₹{vol.price?.toLocaleString('en-IN')}</p>
                       </div>
                       <div className="text-right">
-                        <span className="text-xs font-bold text-[#00875A] bg-[#00D09C]/10 px-2 py-0.5 rounded-md">
+                        <span className="text-xs font-bold text-amber-600 font-mono">
                           {vol.volume_multiple}x 20-DMA
                         </span>
                         <p className="text-[10px] text-neutral-500 mt-0.5">{vol.change_pct > 0 ? `+${vol.change_pct}%` : `${vol.change_pct}%`}</p>

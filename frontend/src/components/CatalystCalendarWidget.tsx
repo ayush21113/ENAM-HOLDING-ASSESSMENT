@@ -80,8 +80,9 @@ export const CatalystCalendarWidget: React.FC<CatalystCalendarProps> = ({ onSele
             </div>
           </div>
         </div>
-        <span className="shrink-0 text-[10px] font-bold text-[#00875A] bg-[#e8f8f3] px-2 py-0.5 rounded uppercase">
-          {events[0].status}
+        <span className="shrink-0 text-xs font-semibold text-[#00875A] flex items-center space-x-1">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#00875A]"></span>
+          <span>{events[0].status}</span>
         </span>
       </div>
 

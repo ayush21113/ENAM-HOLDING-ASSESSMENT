@@ -8,7 +8,8 @@ import {
   ForensicReport,
   CopilotResponse,
   CatalystCalendarEvent,
-  ICMemoResponse 
+  ICMemoResponse,
+  LiveStockQuote 
 } from '../types';
 
 const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000/api';
@@ -45,6 +46,12 @@ export const api = {
   async getAlerts(): Promise<{ count: number; alerts: TriggeredAlert[] }> {
     const res = await fetch(`${API_BASE}/alerts`);
     if (!res.ok) throw new Error('Failed to fetch alerts');
+    return res.json();
+  },
+
+  async getLiveQuote(symbol: string): Promise<LiveStockQuote> {
+    const res = await fetch(`${API_BASE}/market/live/${encodeURIComponent(symbol)}`);
+    if (!res.ok) throw new Error(`Failed to fetch live quote for ${symbol}`);
     return res.json();
   },
 

@@ -71,6 +71,26 @@ export interface StockEOD {
   market_cap_cr?: number;
   has_active_alert: boolean;
   alert_summary?: string;
+  source?: string;
+}
+
+export interface LiveStockQuote {
+  symbol: string;
+  name: string;
+  price: number;
+  change_pct: number;
+  change_abs: number;
+  previous_close: number;
+  day_high: number;
+  day_low: number;
+  fifty_two_week_high?: number;
+  fifty_two_week_low?: number;
+  volume: number;
+  avg_volume_20d: number;
+  volume_multiple: number;
+  timestamp: string;
+  is_live: boolean;
+  source: string;
 }
 
 export interface NarrativeQuarter {

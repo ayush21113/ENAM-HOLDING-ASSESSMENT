@@ -42,8 +42,9 @@ export const PortfolioView: React.FC<PortfolioViewProps> = ({
               </span>
             </div>
           </div>
-          <span className="px-2.5 py-1 bg-[#f5f6f8] text-[#1e222b] text-xs font-semibold rounded-lg">
-            High Conviction
+          <span className="text-xs font-semibold text-[#00875A] flex items-center space-x-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00875A] animate-pulse"></span>
+            <span>Free Live Market API</span>
           </span>
         </div>
 
@@ -124,7 +125,7 @@ export const PortfolioView: React.FC<PortfolioViewProps> = ({
                 {/* Right: Price, Change, Volume Multiple */}
                 <div className="text-right shrink-0 space-y-0.5">
                   <div className="text-sm font-bold text-[#1e222b] font-mono">
-                    ₹{stock.price.toLocaleString()}
+                    ₹{stock.price.toLocaleString('en-IN')}
                   </div>
                   <div className="flex items-center justify-end space-x-1.5">
                     <span
@@ -140,6 +141,9 @@ export const PortfolioView: React.FC<PortfolioViewProps> = ({
                         <span>{stock.volume_multiple}x vol</span>
                       </span>
                     )}
+                  </div>
+                  <div className="text-[10px] text-[#7c7e8c] font-mono">
+                    H: ₹{stock.day_high.toLocaleString('en-IN')} • L: ₹{stock.day_low.toLocaleString('en-IN')}
                   </div>
                 </div>
               </div>

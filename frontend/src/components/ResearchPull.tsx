@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { ResearchPullResponse } from '../types';
+import { ResearchPullResponse, LiveStockQuote } from '../types';
 import { api } from '../services/api';
 import { ForensicAuditModule } from './ForensicAuditModule';
 import { ConcallStressTestModule } from './ConcallStressTestModule';
 import { DisclosureDiffModule } from './DisclosureDiffModule';
 import { ForensicRadarModule } from './ForensicRadarModule';
-import { Search, FileCheck, ArrowUpRight, BookOpen, AlertCircle, Sparkles, ShieldCheck, Target, Award, MessageSquare } from 'lucide-react';
+import { Search, FileCheck, ArrowUpRight, BookOpen, AlertCircle, Sparkles, ShieldCheck, Target, Award, MessageSquare, TrendingUp, TrendingDown, RefreshCw } from 'lucide-react';
 
 interface ResearchPullProps {
   initialSymbol?: string;
@@ -18,6 +18,7 @@ export const ResearchPull: React.FC<ResearchPullProps> = ({
   const [tickerInput, setTickerInput] = useState(initialSymbol);
   const [activeTicker, setActiveTicker] = useState(initialSymbol);
   const [data, setData] = useState<ResearchPullResponse | null>(null);
+  const [liveQuote, setLiveQuote] = useState<LiveStockQuote | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [activeModule, setActiveModule] = useState<string>('narrative');
@@ -29,9 +30,12 @@ export const ResearchPull: React.FC<ResearchPullProps> = ({
   const loadResearch = async (symbol: string) => {
     setLoading(true);
     setError(null);
+    setLiveQuote(null);
     try {
       const resp = await api.getResearchPull(symbol);
       setData(resp);
+      // Fetch live free market data asynchronously
+      api.getLiveQuote(symbol).then(q => setLiveQuote(q)).catch(() => {});
     } catch (err: any) {
       setError(err.message || 'Failed to load primary research');
     } finally {
@@ -164,18 +168,44 @@ export const ResearchPull: React.FC<ResearchPullProps> = ({
               <div>
                 <div className="flex items-center space-x-2">
                   <h2 className="text-xl font-bold text-[#1e222b] tracking-tight">{data.company_name}</h2>
-                  <span className="text-xs font-mono font-bold px-2 py-0.5 bg-[#f5f6f8] text-[#1e222b] rounded">
+                  <span className="text-xs font-mono font-bold text-[#7c7e8c]">
                     {data.symbol}
                   </span>
                 </div>
                 <p className="text-xs text-[#7c7e8c] mt-0.5">{data.sector}</p>
               </div>
 
-              <span className="text-xs text-[#00875A] font-semibold bg-[#e8f8f3] px-2.5 py-1 rounded-full inline-flex items-center gap-1">
+              <span className="text-xs text-[#00875A] font-semibold flex items-center gap-1.5">
                 <FileCheck className="w-3.5 h-3.5" />
-                Primary Data
+                Primary Grounded
               </span>
             </div>
+
+            {/* High-Speed Free Live Stock Data Bar */}
+            {liveQuote && (
+              <div className="pt-2.5 pb-1 border-t border-[#f5f6f8] flex items-center justify-between flex-wrap gap-2 text-xs">
+                <div className="flex items-baseline space-x-2">
+                  <span className="text-lg font-bold font-mono text-[#1e222b]">
+                    ₹{liveQuote.price.toLocaleString('en-IN')}
+                  </span>
+                  <span className={`font-semibold font-mono flex items-center text-xs ${liveQuote.change_pct >= 0 ? 'text-[#00875A]' : 'text-[#EB5B3C]'}`}>
+                    {liveQuote.change_pct >= 0 ? '+' : ''}{liveQuote.change_pct}%
+                    <span className="text-[10px] font-normal text-[#7c7e8c] ml-1">
+                      ({liveQuote.change_pct >= 0 ? '+' : ''}₹{liveQuote.change_abs})
+                    </span>
+                  </span>
+                </div>
+                <div className="flex items-center space-x-3 text-[11px] text-[#7c7e8c] font-mono">
+                  <span>H: <strong className="text-[#1e222b]">₹{liveQuote.day_high}</strong></span>
+                  <span>L: <strong className="text-[#1e222b]">₹{liveQuote.day_low}</strong></span>
+                  <span>Vol: <strong className="text-[#1e222b]">{liveQuote.volume_multiple}x</strong> 20D</span>
+                  <span className="flex items-center text-[#00875A] font-sans font-medium text-[10px] gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#00875A] animate-pulse"></span>
+                    Live Market
+                  </span>
+                </div>
+              </div>
+            )}
 
             {/* Primary Source Disclosure Links */}
             <div className="pt-2 border-t border-[#f5f6f8] flex flex-wrap items-center gap-1.5 text-xs text-[#7c7e8c]">

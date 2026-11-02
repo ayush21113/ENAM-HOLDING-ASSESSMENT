@@ -73,6 +73,25 @@ class StockEOD(BaseModel):
     market_cap_cr: Optional[float] = None
     has_active_alert: bool = False
     alert_summary: Optional[str] = None
+    source: str = "Live Yahoo Chart v8"
+
+class LiveStockQuote(BaseModel):
+    symbol: str
+    name: str
+    price: float
+    change_pct: float
+    change_abs: float
+    previous_close: float
+    day_high: float
+    day_low: float
+    fifty_two_week_high: Optional[float] = None
+    fifty_two_week_low: Optional[float] = None
+    volume: int
+    avg_volume_20d: int
+    volume_multiple: float
+    timestamp: str
+    is_live: bool = True
+    source: str = "Free Direct Yahoo Chart v8"
 
 class NarrativeQuarter(BaseModel):
     quarter: str
