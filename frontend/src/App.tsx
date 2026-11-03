@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { api } from './services/api';
 import { Announcement, StockEOD, TriggeredAlert, UserSettings, ICMemoResponse } from './types';
+import { INITIAL_STOCKS, INITIAL_ANNOUNCEMENTS, INITIAL_ALERTS } from './services/seedData';
 import { Header } from './components/Header';
 import { Navigation, TabType } from './components/Navigation';
 import { TodayView } from './components/TodayView';
@@ -30,12 +31,12 @@ export function App() {
   const [memoData, setMemoData] = useState<ICMemoResponse | null>(null);
   const [memoLoading, setMemoLoading] = useState(false);
 
-  // Core Data
-  const [announcements, setAnnouncements] = useState<Announcement[]>([]);
-  const [stocks, setStocks] = useState<StockEOD[]>([]);
-  const [alerts, setAlerts] = useState<TriggeredAlert[]>([]);
-  const [loadingFeed, setLoadingFeed] = useState(true);
-  const [loadingPortfolio, setLoadingPortfolio] = useState(true);
+  // Core Data - Stale-While-Revalidate: Instant paint on 0ms with background live sync
+  const [announcements, setAnnouncements] = useState<Announcement[]>(INITIAL_ANNOUNCEMENTS);
+  const [stocks, setStocks] = useState<StockEOD[]>(INITIAL_STOCKS);
+  const [alerts, setAlerts] = useState<TriggeredAlert[]>(INITIAL_ALERTS);
+  const [loadingFeed, setLoadingFeed] = useState(false);
+  const [loadingPortfolio, setLoadingPortfolio] = useState(false);
 
   // Selected Ticker for Research drilldown
   const [selectedTickerForResearch, setSelectedTickerForResearch] = useState('TRENT.NS');
@@ -48,26 +49,27 @@ export function App() {
   const [llmMode, setLlmMode] = useState('Heuristic Mode');
 
   useEffect(() => {
-    loadInitialData();
+    // Parallel background synchronization
+    loadPortfolio();
+    loadAlerts();
+    loadFeed();
+    loadHealthAndSettings();
   }, []);
 
-  const loadInitialData = async () => {
+  const loadHealthAndSettings = async () => {
     try {
-      const health = await api.getHealth().catch(() => null);
+      const [health, settingsRes] = await Promise.all([
+        api.getHealth().catch(() => null),
+        api.getSettings().catch(() => null),
+      ]);
       if (health?.llm_status?.active_mode) {
         setLlmMode(health.llm_status.active_mode);
       }
-
-      const settingsRes = await api.getSettings().catch(() => null);
       if (settingsRes?.thresholds) {
         setSettings(settingsRes.thresholds);
       }
-
-      loadPortfolio();
-      loadAlerts();
-      loadFeed();
-    } catch (err) {
-      console.error('Error loading initial data', err);
+    } catch (e) {
+      console.warn('Metadata sync fallback active', e);
     }
   };
 
