@@ -9,8 +9,10 @@ __pycache__/
 # Node / Frontend
 frontend/node_modules/
 frontend/.tmp/
+frontend/dist/
 .DS_Store
 
 # Logs & temp
 *.log
+*.zip
 .env
