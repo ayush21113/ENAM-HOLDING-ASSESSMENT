@@ -11,7 +11,139 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Instant 0ms Inline Splash Screen & Loading Progress -->
+      <style>
+        #splash-loader {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #0b0e14;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+          z-index: 99999;
+          padding: 24px;
+          user-select: none;
+        }
+        .splash-brand {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 28px;
+        }
+        .splash-logo {
+          width: 44px;
+          height: 44px;
+          border-radius: 12px;
+          background: linear-gradient(135deg, #00D09C 0%, #00875A 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-weight: 900;
+          font-size: 20px;
+          box-shadow: 0 8px 24px rgba(0, 208, 156, 0.25);
+        }
+        .splash-title {
+          font-size: 22px;
+          font-weight: 800;
+          letter-spacing: -0.5px;
+          color: #ffffff;
+        }
+        .splash-sub {
+          font-size: 11px;
+          color: #8c909e;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+        }
+        .progress-container {
+          width: 100%;
+          max-width: 240px;
+          height: 4px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 999px;
+          overflow: hidden;
+          margin-bottom: 12px;
+          position: relative;
+        }
+        .progress-bar {
+          height: 100%;
+          width: 0%;
+          background: linear-gradient(90deg, #00D09C, #00ffbc);
+          border-radius: 999px;
+          transition: width 0.2s ease;
+        }
+        .progress-row {
+          width: 100%;
+          max-width: 240px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-size: 11px;
+        }
+        .progress-status {
+          color: #8c909e;
+          font-size: 11px;
+        }
+        .progress-pct {
+          color: #00D09C;
+          font-family: monospace;
+          font-weight: 700;
+        }
+      </style>
+      <div id="splash-loader">
+        <div class="splash-brand">
+          <div class="splash-logo">F</div>
+          <div>
+            <div class="splash-title">FINN</div>
+            <div class="splash-sub">ENAM Intelligence</div>
+          </div>
+        </div>
+
+        <div class="progress-container">
+          <div id="loading-bar" class="progress-bar"></div>
+        </div>
+
+        <div class="progress-row">
+          <span id="loading-status" class="progress-status">Connecting to live feed...</span>
+          <span id="loading-pct" class="progress-pct">0%</span>
+        </div>
+      </div>
+      <script>
+        (function() {
+          var p = 0;
+          var bar = document.getElementById('loading-bar');
+          var pct = document.getElementById('loading-pct');
+          var st = document.getElementById('loading-status');
+          var steps = [
+            { threshold: 25, text: "Connecting to market feed..." },
+            { threshold: 55, text: "Auditing primary filings & concalls..." },
+            { threshold: 82, text: "Calibrating guidance scorecards..." },
+            { threshold: 96, text: "Rendering mobile workspace..." }
+          ];
+          var interval = setInterval(function() {
+            if (p < 95) {
+              p += Math.floor(Math.random() * 8) + 3;
+              if (p > 95) p = 95;
+              if (bar) bar.style.width = p + '%';
+              if (pct) pct.innerText = p + '%';
+              for (var i = 0; i < steps.length; i++) {
+                if (p <= steps[i].threshold) {
+                  if (st) st.innerText = steps[i].text;
+                  break;
+                }
+              }
+            }
+          }, 120);
+        })();
+      </script>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
