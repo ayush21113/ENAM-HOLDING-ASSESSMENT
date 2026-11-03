@@ -11,10 +11,12 @@ import { AlertsView } from './components/AlertsView';
 import { AskFinnSheet } from './components/AskFinnSheet';
 import { AlertSettingsModal } from './components/AlertSettingsModal';
 import { ICMemoModal } from './components/ICMemoModal';
+import { UserGuideModal } from './components/UserGuideModal';
 
 export function App() {
   const [activeTab, setActiveTab] = useState<TabType>('today');
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isGuideOpen, setIsGuideOpen] = useState(false);
 
   // Contextual Ask FINN Sheet
   const [askFinnState, setAskFinnState] = useState<{
@@ -49,12 +51,33 @@ export function App() {
   const [llmMode, setLlmMode] = useState('Heuristic Mode');
 
   useEffect(() => {
-    // Parallel background synchronization
+    // 1. First-time user tour detection via localStorage
+    try {
+      const hasSeen = localStorage.getItem('finn_user_guide_seen');
+      if (!hasSeen) {
+        setIsGuideOpen(true);
+      }
+    } catch (e) {
+      console.warn('LocalStorage unavailable', e);
+    }
+
+    // 2. Parallel background synchronization
     loadPortfolio();
     loadAlerts();
     loadFeed();
     loadHealthAndSettings();
   }, []);
+
+  const handleCloseGuide = () => {
+    setIsGuideOpen(false);
+    try {
+      localStorage.setItem('finn_user_guide_seen', 'true');
+    } catch {}
+  };
+
+  const handleOpenGuide = () => {
+    setIsGuideOpen(true);
+  };
 
   const loadHealthAndSettings = async () => {
     try {
@@ -160,6 +183,7 @@ export function App() {
         <Header
           openSettings={() => setIsSettingsOpen(true)}
           onSearchClick={() => setActiveTab('watchlist')}
+          onOpenGuide={handleOpenGuide}
         />
 
         {/* Destination Content */}
@@ -234,6 +258,12 @@ export function App() {
           memo={memoData}
           loading={memoLoading}
           onRegenerate={handleOpenICMemo}
+        />
+
+        {/* First-Time User Guide & Product Tour Modal */}
+        <UserGuideModal
+          isOpen={isGuideOpen}
+          onClose={handleCloseGuide}
         />
       </div>
     </div>

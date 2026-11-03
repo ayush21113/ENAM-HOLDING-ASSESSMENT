@@ -1,16 +1,18 @@
 import React from 'react';
-import { Sliders, Search } from 'lucide-react';
+import { Sliders, Search, HelpCircle } from 'lucide-react';
 import { FinnLogo } from './FinnLogo';
 
 interface HeaderProps {
   openSettings: () => void;
   onSearchClick: () => void;
+  onOpenGuide: () => void;
   activeTabTitle?: string;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   openSettings,
   onSearchClick,
+  onOpenGuide,
 }) => {
   return (
     <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-sm border-b border-[#ebecef] px-4 py-2.5">
@@ -37,6 +39,15 @@ export const Header: React.FC<HeaderProps> = ({
             title="Search Companies"
           >
             <Search className="w-4 h-4" />
+          </button>
+
+          <button
+            onClick={onOpenGuide}
+            className="p-2 rounded-full hover:bg-[#f5f6f8] text-[#7c7e8c] hover:text-[#00875A] transition"
+            aria-label="User Guide"
+            title="Product Tour & Guide"
+          >
+            <HelpCircle className="w-4 h-4" />
           </button>
 
           <button
