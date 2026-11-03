@@ -40,55 +40,70 @@ INSTRUCTIONS:
 
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 6500); // 6.5s timeout
+    const timeoutId = setTimeout(() => controller.abort(), 4500); // 4.5s max timeout for fast response
 
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey.trim()}`;
+    // Priority 1: Gemini 2.0 Flash-Lite (Fastest sub-second TTFT model)
+    // Priority 2: Gemini 1.5 Flash-8B / Flash
+    const candidateModels = [
+      'gemini-2.0-flash-lite',
+      'gemini-2.0-flash-lite-preview-02-05',
+      'gemini-1.5-flash-8b',
+      'gemini-1.5-flash'
+    ];
 
-    const res = await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      signal: controller.signal,
-      body: JSON.stringify({
-        contents: [
-          {
-            role: 'user',
-            parts: [
-              { text: `${systemContext}\n\nUSER QUESTION:\n${query}` }
-            ]
+    let generatedText = '';
+    let usedModel = 'Google Gemini 2.0 Flash-Lite';
+
+    for (const modelName of candidateModels) {
+      try {
+        const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey.trim()}`;
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          signal: controller.signal,
+          body: JSON.stringify({
+            contents: [
+              {
+                role: 'user',
+                parts: [{ text: `${systemContext}\n\nUSER QUESTION:\n${query}` }]
+              }
+            ],
+            generationConfig: {
+              temperature: 0.15,
+              maxOutputTokens: 350,
+              topP: 0.8
+            }
+          })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (text && text.trim()) {
+            generatedText = text.trim();
+            usedModel = `Google ${modelName} (Sub-second Edge)`;
+            break;
           }
-        ],
-        generationConfig: {
-          temperature: 0.2,
-          maxOutputTokens: 450,
-          topP: 0.8
         }
-      })
-    });
+      } catch (e) {
+        // Try next fast model candidate
+      }
+    }
 
     clearTimeout(timeoutId);
 
-    if (!res.ok) {
-      console.warn('Gemini API call failed with status', res.status);
-      return generateStandaloneCopilotResponse(symbol, query);
-    }
-
-    const data = await res.json();
-    const generatedText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-
-    if (!generatedText || !generatedText.trim()) {
+    if (!generatedText) {
       return generateStandaloneCopilotResponse(symbol, query);
     }
 
     return {
-      answer: generatedText.trim(),
-      model: "Google Gemini 1.5 Flash (Grounded in Primary BSE/NSE Filings)",
+      answer: generatedText,
+      model: usedModel,
       grounded: true,
       sources: research.primary_sources
     };
   } catch (err) {
-    console.warn('Gemini API fetch error or timeout, falling back to deterministic engine:', err);
+    console.warn('Gemini Flash-Lite API fetch error or timeout, falling back to deterministic engine:', err);
     return generateStandaloneCopilotResponse(symbol, query);
   }
 }
