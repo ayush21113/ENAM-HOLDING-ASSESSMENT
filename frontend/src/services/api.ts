@@ -22,8 +22,19 @@ import {
 
 const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000/api';
 
+// When deployed on cloud (e.g. Vercel) without a custom VITE_API_BASE,
+// don't attempt mixed-content calls to localhost:8000. Immediately use standalone engine.
+const isCloudWithoutBackend = 
+  typeof window !== 'undefined' && 
+  window.location.hostname !== 'localhost' && 
+  window.location.hostname !== '127.0.0.1' && 
+  !import.meta.env.VITE_API_BASE;
+
 // Helper for resilient fetch with timeout
 async function safeFetch(url: string, options?: RequestInit, timeoutMs = 1200): Promise<Response> {
+  if (isCloudWithoutBackend) {
+    throw new Error('Running in cloud standalone mode');
+  }
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), timeoutMs);
   try {
