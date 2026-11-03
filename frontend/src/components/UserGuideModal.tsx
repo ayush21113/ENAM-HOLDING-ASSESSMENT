@@ -16,28 +16,28 @@ export const UserGuideModal: React.FC<UserGuideModalProps> = ({ isOpen, onClose 
 
   const steps = [
     {
-      badge: "Step 1 of 4 · Push Signals",
+      badge: "01 · DAILY FEED",
       icon: <Radio className="w-5 h-5 text-[#00D09C]" />,
-      title: "Today Command Center",
-      desc: "Filters out 80% routine compliance noise to surface critical breakouts and Tier-1 earnings deltas."
+      title: "Catch what matters today",
+      desc: "Skip the filing spam. See big market moves, key announcements, and a 60-second audio brief each morning."
     },
     {
-      badge: "Step 2 of 4 · Portfolio & Alerts",
+      badge: "02 · WATCHLIST",
       icon: <TrendingUp className="w-5 h-5 text-[#00D09C]" />,
-      title: "Clean Watchlist",
-      desc: "Tracks 18 Indian holdings with live prices, alerting instantly on ±3% swings or >2x volume spikes."
+      title: "Your holdings, zero clutter",
+      desc: "Track prices live without messy spreadsheets. Get instant heads-up whenever a stock surges or volumes spike."
     },
     {
-      badge: "Step 3 of 4 · Core USP",
+      badge: "03 · REALITY CHECK",
       icon: <Sparkles className="w-5 h-5 text-[#00D09C]" />,
-      title: "Narrative vs Reality Audit",
-      desc: "Matches management promises from 4 quarters ago against actual reported numbers with Batting Average."
+      title: "Did management keep their word?",
+      desc: "We check past concall promises against actual reported numbers, so you know who delivers and who doesn't."
     },
     {
-      badge: "Step 4 of 4 · Forensics & Copilot",
+      badge: "04 · AI COPILOT",
       icon: <ShieldAlert className="w-5 h-5 text-[#00D09C]" />,
-      title: "Hot Seat & AI Copilot",
-      desc: "Highlights unscripted concall analyst grilling with tone detection, backed by primary-source AI Q&A."
+      title: "Cut through the concall fluff",
+      desc: "Jump straight to tough analyst questions, or ask FINN anything and get answers backed by official filings."
     }
   ];
 
