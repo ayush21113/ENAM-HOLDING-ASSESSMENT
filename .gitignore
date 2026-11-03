@@ -15,4 +15,5 @@ frontend/dist/
 # Logs & temp
 *.log
 *.zip
+github_upload_clean/
 .env
