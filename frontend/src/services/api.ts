@@ -20,6 +20,8 @@ import {
   generateStandaloneCopilotResponse
 } from './standaloneEngine';
 
+import { queryGeminiCopilot } from './geminiService';
+
 const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000/api';
 
 // When deployed on cloud (e.g. Vercel) without a custom VITE_API_BASE,
@@ -256,7 +258,7 @@ export const api = {
       });
       if (res.ok) return await res.json();
     } catch {}
-    return generateStandaloneCopilotResponse(symbol, query);
+    return queryGeminiCopilot(symbol, query);
   },
 
   async getForensicRedFlags(symbol: string): Promise<ForensicReport> {

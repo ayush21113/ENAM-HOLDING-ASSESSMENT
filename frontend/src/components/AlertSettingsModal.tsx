@@ -26,12 +26,19 @@ export const AlertSettingsModal: React.FC<AlertSettingsModalProps> = ({
   const [activeTab, setActiveTab] = useState<'thresholds' | 'llm' | 'active_alerts'>('thresholds');
   const [priceThresh, setPriceThresh] = useState(settings.price_threshold_pct || 3.0);
   const [volThresh, setVolThresh] = useState(settings.volume_multiplier || 2.0);
-  const [geminiKey, setGeminiKey] = useState(settings.gemini_api_key || '');
+  const [geminiKey, setGeminiKey] = useState(settings.gemini_api_key || (typeof window !== 'undefined' ? localStorage.getItem('pulse_gemini_api_key') || '' : ''));
   const [groqKey, setGroqKey] = useState(settings.groq_api_key || '');
   const [openaiKey, setOpenaiKey] = useState(settings.openai_api_key || '');
   const [savedSuccess, setSavedSuccess] = useState(false);
 
   const handleSave = async () => {
+    if (typeof window !== 'undefined') {
+      if (geminiKey.trim()) {
+        localStorage.setItem('pulse_gemini_api_key', geminiKey.trim());
+      } else {
+        localStorage.removeItem('pulse_gemini_api_key');
+      }
+    }
     await onSaveSettings({
       price_threshold_pct: priceThresh,
       volume_multiplier: volThresh,
