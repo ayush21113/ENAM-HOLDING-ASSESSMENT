@@ -111,18 +111,18 @@ export const ResearchView: React.FC<ResearchViewProps> = ({
     <div className="space-y-4 pb-28 max-w-md mx-auto">
       {/* 1. COMPACT TICKER SEARCH */}
       <div className="space-y-2 pt-1">
-        <form onSubmit={handleSearch} className="relative">
-          <Search className="w-3.5 h-3.5 absolute left-3 top-3 text-[#7c7e8c]" />
+        <form onSubmit={handleSearch} className="relative flex items-center">
+          <Search className="w-4 h-4 absolute left-3 text-[#7c7e8c] pointer-events-none" />
           <input
             type="text"
             value={tickerInput}
             onChange={(e) => setTickerInput(e.target.value)}
             placeholder="Search company (e.g. TATAMOTORS, TRENT, DIXON)..."
-            className="w-full bg-white border border-[#ebecef] rounded-xl pl-8.5 pr-20 py-2 text-xs text-[#1e222b] placeholder-[#7c7e8c] focus:outline-none focus:border-[#00875A] transition"
+            className="w-full bg-white border border-[#ebecef] rounded-xl pl-9 pr-20 py-2 text-xs text-[#1e222b] placeholder-[#7c7e8c] focus:outline-none focus:border-[#00875A] transition"
           />
           <button
             type="submit"
-            className="absolute right-1.5 top-1.5 px-2.5 py-1 text-xs font-semibold bg-[#1e222b] text-white rounded-lg hover:bg-black transition"
+            className="absolute right-1.5 px-2.5 py-1 text-xs font-semibold bg-[#1e222b] text-white rounded-lg hover:bg-black transition"
           >
             Audit
           </button>

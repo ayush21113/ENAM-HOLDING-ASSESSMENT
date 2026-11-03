@@ -32,14 +32,14 @@ export const WatchlistView: React.FC<WatchlistViewProps> = ({
         </div>
 
         {/* Minimal Contextual Search */}
-        <div className="relative">
-          <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-[#7c7e8c]" />
+        <div className="relative flex items-center">
+          <Search className="w-4 h-4 absolute left-3 text-[#7c7e8c] pointer-events-none" />
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search company or ticker..."
-            className="w-full bg-white border border-[#ebecef] rounded-xl pl-8.5 pr-3 py-2 text-xs text-[#1e222b] placeholder-[#7c7e8c] focus:outline-none focus:border-[#00875A] transition"
+            className="w-full bg-white border border-[#ebecef] rounded-xl pl-9 pr-3 py-2 text-xs text-[#1e222b] placeholder-[#7c7e8c] focus:outline-none focus:border-[#00875A] transition"
           />
         </div>
       </div>
