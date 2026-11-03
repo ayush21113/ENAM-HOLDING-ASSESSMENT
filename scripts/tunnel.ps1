@@ -1,42 +1,72 @@
 # Persistent Tunnel Manager for FINN
 $port = 8000
-$logFile = "$PSScriptRoot\tunnel.log"
+$docPath = "$PSScriptRoot\..\docs\active_tunnel.txt"
 
 while ($true) {
-    Write-Host "[Tunnel] Connecting to localhost.run..."
-    $proc = Start-Process -FilePath "ssh" -ArgumentList "-o StrictHostKeyChecking=no -o ServerAliveInterval=10 -o ServerAliveCountMax=3 -R 80:127.0.0.1:$port nokey@localhost.run" -RedirectStandardOutput $logFile -RedirectStandardError "$PSScriptRoot\tunnel_err.log" -PassThru -NoNewWindow
+    Write-Host "[Tunnel] Starting ssh tunnel to localhost.run..."
+    
+    # Run ssh process directly and redirect stream
+    $pinfo = New-Object System.Diagnostics.ProcessStartInfo
+    $pinfo.FileName = "ssh"
+    $pinfo.Arguments = "-o StrictHostKeyChecking=no -o ServerAliveInterval=10 -o ServerAliveCountMax=3 -R 80:127.0.0.1:$port nokey@localhost.run"
+    $pinfo.RedirectStandardOutput = $true
+    $pinfo.RedirectStandardError = $true
+    $pinfo.UseShellExecute = $false
+    $pinfo.CreateNoWindow = $true
 
-    # Monitor output for URL
-    $foundUrl = $null
-    for ($i = 0; $i -lt 15; $i++) {
-        Start-Sleep -Seconds 1
-        if (Test-Path $logFile) {
-            $lines = Get-Content $logFile -Tail 20
-            foreach ($line in $lines) {
-                if ($line -match "https://([a-zA-Z0-9]+\.lhr\.life)") {
-                    $foundUrl = $matches[0]
-                    break
-                }
+    $proc = New-Object System.Diagnostics.Process
+    $proc.StartInfo = $pinfo
+    $proc.Start() | Out-Null
+
+    $url = $null
+    $startTime = Get-Date
+
+    # Read output asynchronously until URL is discovered
+    while (-not $proc.HasExited -and (-not $url) -and ((Get-Date) - $startTime).TotalSeconds -lt 25) {
+        $line = $proc.StandardOutput.ReadLine()
+        if ($line) {
+            Write-Host "[SSH Out] $line"
+            if ($line -match "https://([a-zA-Z0-9]+\.lhr\.life)") {
+                $url = $matches[0]
+                break
             }
         }
-        if ($foundUrl) { break }
     }
 
-    if ($foundUrl) {
-        Write-Host "[Tunnel] Active at: $foundUrl"
-        Set-Content -Path "$PSScriptRoot\..\docs\active_tunnel.txt" -Value $foundUrl
-        
-        # Keepalive loop: ping every 25 seconds to prevent activity timeout
+    if ($url) {
+        Write-Host "========================================"
+        Write-Host ">>> ACTIVE PUBLIC TUNNEL: $url <<<"
+        Write-Host "========================================"
+        Set-Content -Path $docPath -Value $url
+
+        # Active Keepalive Loop: Send an HTTP ping every 15s so localhost.run never times out
+        $failCount = 0
         while (-not $proc.HasExited) {
-            Start-Sleep -Seconds 25
+            Start-Sleep -Seconds 15
             try {
-                $null = Invoke-RestMethod -Uri "$foundUrl/api/health" -TimeoutSec 5 -ErrorAction SilentlyContinue
-            } catch {}
+                $resp = Invoke-RestMethod -Uri "$url/api/health" -TimeoutSec 5 -ErrorAction Stop
+                if ($resp.status -eq "healthy") {
+                    Write-Host "[Tunnel Ping] OK: $url"
+                    $failCount = 0
+                } else {
+                    $failCount++
+                }
+            } catch {
+                $failCount++
+                Write-Host "[Tunnel Ping] Retrying ($failCount/3)..."
+            }
+
+            if ($failCount -ge 3) {
+                Write-Host "[Tunnel] 3 consecutive ping failures or tunnel dropped. Killing ssh to recycle..."
+                if (-not $proc.HasExited) { $proc.Kill() }
+                break
+            }
         }
     } else {
-        Start-Sleep -Seconds 5
+        Write-Host "[Tunnel] URL not found or process exited prematurely. Cleaning up..."
+        if (-not $proc.HasExited) { $proc.Kill() }
     }
 
-    Write-Host "[Tunnel] Disconnected. Reconnecting in 3 seconds..."
+    Write-Host "[Tunnel] Connection lost. Re-establishing in 3 seconds..."
     Start-Sleep -Seconds 3
 }
