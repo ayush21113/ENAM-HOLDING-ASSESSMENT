@@ -1263,10 +1263,36 @@ export function generateStandaloneICMemo(): ICMemoResponse {
   };
 }
 
-// 6. CLIENT-SIDE ASK FINN COPILOT
+// 6. CLIENT-SIDE ASK PULSE COPILOT
 export function generateStandaloneCopilotResponse(symbol: string, query: string): CopilotResponse {
   const cleanSym = symbol.replace('.NS', '');
   const research = generateStandaloneResearch(symbol);
+
+  // Strict domain guardrails: Reject irrelevant queries (DSA, coding, poems, etc.)
+  const qLower = query.toLowerCase();
+  const isIrrelevant = 
+    qLower.includes("dsa") || 
+    qLower.includes("binary search") || 
+    qLower.includes("leetcode") || 
+    qLower.includes("write code") || 
+    qLower.includes("write a script") || 
+    qLower.includes("python") || 
+    qLower.includes("c++") || 
+    qLower.includes("java ") || 
+    qLower.includes("algorithm") || 
+    qLower.includes("joke") || 
+    qLower.includes("poem") || 
+    qLower.includes("story") || 
+    qLower.includes("essay");
+
+  if (isIrrelevant) {
+    return {
+      answer: `I am PULSE, specialized exclusively in institutional equity research for ENAM Holdings. I cannot assist with coding, DSA, or non-financial topics. Please ask me about ${research.company_name}'s earnings, guidance history, concall grilling, or financial forensics.`,
+      model: "PULSE Institutional Guardrails Engine",
+      grounded: true,
+      sources: research.primary_sources
+    };
+  }
 
   let answer = "";
   if (query.toLowerCase().includes("guidance") || query.toLowerCase().includes("miss") || query.toLowerCase().includes("reality")) {
