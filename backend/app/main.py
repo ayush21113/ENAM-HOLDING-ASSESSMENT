@@ -70,7 +70,7 @@ def get_portfolio() -> Dict[str, Any]:
 @app.get("/api/market/live/{symbol}")
 def get_live_market_quote(symbol: str) -> LiveStockQuote:
     """
-    High-speed free live market data quote via direct Yahoo Chart API.
+    Sub-second live market quote via exchange market feed.
     Returns real-time price, day high/low, 52W high/low, and 20-day volume multiple.
     """
     return fetch_live_quote(symbol)

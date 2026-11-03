@@ -154,10 +154,10 @@ export const AlertSettingsModal: React.FC<AlertSettingsModalProps> = ({
               <div className="bg-[#e8f8f3] border border-[#00D09C]/30 p-3.5 rounded-xl">
                 <div className="flex items-center space-x-1.5 font-bold text-[#00875A] text-xs">
                   <Zap className="w-3.5 h-3.5 text-[#00875A]" />
-                  <span>Cost-Conscious Model Routing</span>
+                  <span>LLM Synthesis Engine</span>
                 </div>
                 <p className="text-xs text-[#44475b] mt-1 leading-relaxed">
-                  Routine extraction tasks are routed to lightweight or free-tier models (Gemini 2.0 Flash / Groq Llama 3.3), reserving reasoning models solely for deep narrative synthesis.
+                  Deterministic heuristics extract structured corporate disclosures with sub-second latency, routing concall transcripts and commentary audits to high-precision reasoning models.
                 </p>
                 <div className="mt-2 text-xs text-[#7c7e8c]">
                   Active mode: <strong className="text-[#1e222b] font-semibold">{llmMode}</strong>
@@ -179,7 +179,7 @@ export const AlertSettingsModal: React.FC<AlertSettingsModalProps> = ({
 
               <div className="space-y-1.5">
                 <label className="text-xs font-semibold text-[#1e222b]">
-                  Groq API Key (Free tier Llama 3.3)
+                  Groq API Key (Llama 3.3)
                 </label>
                 <input
                   type="password"

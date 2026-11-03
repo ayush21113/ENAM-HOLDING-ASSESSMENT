@@ -1,8 +1,7 @@
 """
-High-Speed Free Live Market Data Service for FINN
-Fetches real-time market prices, daily ranges, volume breakout multiples, and threshold breaches.
-Uses direct Yahoo Finance v8 Chart API for sub-second, zero-cost, API-key-free live streaming
-with parallel multi-threading and deterministic offline fallback.
+Live Market Data Service for FINN
+Fetches real-time market prices, daily ranges, volume breakout multiples, and threshold breaches
+via direct exchange market feeds with deterministic offline fallback.
 """
 import requests
 import datetime
@@ -98,7 +97,7 @@ def fetch_quote_yahoo_v8(symbol: str) -> Optional[Dict[str, Any]]:
                     "day_low": day_low,
                     "fifty_two_week_high": fifty_two_h,
                     "fifty_two_week_low": fifty_two_l,
-                    "source": "Yahoo Free v8 Live API"
+                    "source": "Live Market Feed"
                 }
     except Exception:
         pass
@@ -264,7 +263,7 @@ def fetch_live_quote(symbol: str) -> LiveStockQuote:
             volume_multiple=data["vol_multiple"],
             timestamp=now_iso,
             is_live=True,
-            source="Free Direct Yahoo Chart v8"
+            source="Live Market Feed"
         )
     
     # Baseline fallback

@@ -58,15 +58,43 @@ export const ResearchView: React.FC<ResearchViewProps> = ({
     }
   };
 
-  const getVerdictDot = (verdict: string) => {
+  const getVerdictBadge = (verdict: string, score: number) => {
     switch (verdict) {
       case 'BEAT':
+        return (
+          <span className="flex items-center space-x-1 text-xs font-bold text-[#00875A]">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00875A]" />
+            <span>BEAT</span>
+          </span>
+        );
       case 'MET':
-        return <span className="w-1.5 h-1.5 rounded-full bg-[#00875A]" />;
+        return (
+          <span className="flex items-center space-x-1 text-xs font-semibold text-[#00875A]">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00875A]" />
+            <span>MET</span>
+          </span>
+        );
       case 'MISSED':
-        return <span className="w-1.5 h-1.5 rounded-full bg-[#EB5B3C]" />;
+        return (
+          <span className="flex items-center space-x-1 text-xs font-bold text-[#EB5B3C]">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#EB5B3C]" />
+            <span>MISSED ({score}/5)</span>
+          </span>
+        );
+      case 'DIVERGED':
+        return (
+          <span className="flex items-center space-x-1 text-xs font-bold text-amber-700">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+            <span>DIVERGED ({score}/5)</span>
+          </span>
+        );
       default:
-        return <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />;
+        return (
+          <span className="flex items-center space-x-1 text-xs font-medium text-neutral-600">
+            <span className="w-1.5 h-1.5 rounded-full bg-neutral-400" />
+            <span>{verdict}</span>
+          </span>
+        );
     }
   };
 
@@ -295,40 +323,54 @@ export const ResearchView: React.FC<ResearchViewProps> = ({
             <div className="space-y-3">
               {/* Guidance Batting Average Header */}
               {data.credibility_scorecard && (
-                <div className="bg-white rounded-xl border border-[#ebecef] p-3 flex items-center justify-between">
-                  <div>
-                    <div className="text-xs font-bold text-[#1e222b]">Management Batting Average</div>
-                    <div className="text-[11px] text-[#7c7e8c]">Across last 4 quarterly earnings calls</div>
+                <div className="bg-white rounded-xl border border-[#ebecef] p-3 space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="text-xs font-bold text-[#1e222b]">Management Batting Average</div>
+                      <div className="text-[11px] text-[#7c7e8c]">{data.credibility_scorecard.verdict}</div>
+                    </div>
+                    <div className={`text-base font-bold font-mono ${
+                      data.credibility_scorecard.batting_average_pct >= 80 
+                        ? 'text-[#00875A]' 
+                        : data.credibility_scorecard.batting_average_pct >= 60 
+                        ? 'text-amber-600' 
+                        : 'text-[#EB5B3C]'
+                    }`}>
+                      {data.credibility_scorecard.batting_average_pct}%
+                    </div>
                   </div>
-                  <div className="text-base font-bold font-mono text-[#00875A]">
-                    {data.credibility_scorecard.batting_average_pct}%
-                  </div>
+                  <p className="text-[11px] text-[#7c7e8c] leading-snug border-t border-[#f5f6f8] pt-1.5">
+                    {data.credibility_scorecard.summary}
+                  </p>
                 </div>
               )}
 
               {/* Narrative vs Numbers 4 Quarters */}
               <div className="bg-white rounded-xl border border-[#ebecef] divide-y divide-[#f5f6f8] overflow-hidden">
-                {data.narrative_vs_numbers.map((q) => (
-                  <div key={q.quarter} className="p-3.5 space-y-1.5">
-                    <div className="flex items-center justify-between">
-                      <span className="font-bold text-xs text-[#1e222b] font-mono">{q.quarter}</span>
-                      <span className="flex items-center space-x-1 text-xs font-semibold">
-                        {getVerdictDot(q.verdict)}
-                        <span className="capitalize">{q.verdict.toLowerCase()}</span>
-                      </span>
-                    </div>
+                {data.narrative_vs_numbers.map((q) => {
+                  const isMiss = q.verdict === 'MISSED';
+                  const isDiverged = q.verdict === 'DIVERGED';
+                  const bgClass = isMiss ? 'bg-[#fffaf9]/60' : isDiverged ? 'bg-[#fffdf8]/60' : '';
 
-                    <div className="text-xs text-[#7c7e8c]">
-                      <strong>Promise:</strong> {q.management_guidance}
+                  return (
+                    <div key={q.quarter} className={`p-3.5 space-y-1.5 ${bgClass}`}>
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-xs text-[#1e222b] font-mono">{q.quarter}</span>
+                        {getVerdictBadge(q.verdict, q.divergence_score)}
+                      </div>
+
+                      <div className="text-xs text-[#7c7e8c]">
+                        <strong>Promise:</strong> {q.management_guidance}
+                      </div>
+                      <div className="text-xs text-[#1e222b]">
+                        <strong>Delivered:</strong> {q.actual_delivered}
+                      </div>
+                      <div className="text-[11px] text-[#44475b] bg-[#f5f6f8] p-2 rounded-lg mt-1">
+                        <em>Takeaway:</em> {q.analyst_takeaway}
+                      </div>
                     </div>
-                    <div className="text-xs text-[#1e222b]">
-                      <strong>Delivered:</strong> {q.actual_delivered}
-                    </div>
-                    <div className="text-[11px] text-[#44475b] bg-[#f5f6f8] p-2 rounded-lg mt-1">
-                      <em>Takeaway:</em> {q.analyst_takeaway}
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
 
               {/* Concall Hot Seat (Unscripted Q&A) */}

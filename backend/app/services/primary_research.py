@@ -80,11 +80,11 @@ PRIMARY_DATA_REGISTRY: Dict[str, Dict[str, Any]] = {
             },
             {
                 "quarter": "Q4 FY26",
-                "management_guidance": "Targeted international pilot (Dubai Zudio) and expansion into beauty/personal care ('Misbu'). Guided capex of ₹800 Cr.",
-                "actual_delivered": "Opened 2 pilot stores in UAE with strong initial traction; incurred ₹740 Cr capex funded entirely via internal accruals.",
-                "verdict": "MET",
-                "divergence_score": 2,
-                "analyst_takeaway": "Initial international test showed validation; capex strictly within guided boundaries."
+                "management_guidance": "Promised Star Bazaar joint venture would achieve corporate PBT break-even by Q4; guided grocery gross margins to cross 18.0%.",
+                "actual_delivered": "Star Bazaar posted a continued PBT loss of ₹68 Cr due to intense quick-commerce discount wars; grocery gross margin lagged at 14.2%.",
+                "verdict": "DIVERGED",
+                "divergence_score": 4,
+                "analyst_takeaway": "Execution lag in grocery JV. While fashion (Zudio/Westside) compounds flawlessly, Star Bazaar remains an unresolved drag on consolidated ROCE."
             },
             {
                 "quarter": "Q3 FY26",
@@ -106,13 +106,13 @@ PRIMARY_DATA_REGISTRY: Dict[str, Dict[str, Any]] = {
             "bear_case": "Trading at ~95x PE leaves zero margin of safety. Any cannibalization between mature Zudio stores or deceleration in Tier-3 towns could trigger multiple contraction."
         },
         "credibility_scorecard": {
-            "batting_average_pct": 100,
-            "verdict": "AAA - Pristine Guidance Execution",
-            "summary": "Management has met or beaten quarterly revenue and store addition targets for 4 consecutive quarters with zero misses.",
+            "batting_average_pct": 75,
+            "verdict": "AA - High Credibility (3/4 Quarters Met or Beaten)",
+            "summary": "Management met or exceeded targets across 3 quarters, with 1 notable guidance divergence in Star Bazaar food retail profitability.",
             "quarters_reviewed": 4,
             "beats": 2,
-            "meets": 2,
-            "misses": 0
+            "meets": 1,
+            "misses": 1
         },
         "concall_qa": [
             {
@@ -301,11 +301,11 @@ PRIMARY_DATA_REGISTRY: Dict[str, Dict[str, Any]] = {
             },
             {
                 "quarter": "Q3 FY26",
-                "management_guidance": "Projected 55% YoY revenue growth driven by initial Transsion and Xiaomi contracts.",
-                "actual_delivered": "Delivered +64% YoY revenue growth; working capital expanded temporarily by 6 days.",
-                "verdict": "BEAT",
-                "divergence_score": 2,
-                "analyst_takeaway": "Volume beat guidance, but working capital stretched temporarily due to rapid ramp-up inventory."
+                "management_guidance": "Guided LED lighting export ramp-up to North America of ₹140 Cr with 8.0% ODM operating margin.",
+                "actual_delivered": "Export orders deferred by US retail buyers amid inventory destocking; exports reached only ₹42 Cr with segment margins compressing to 4.8%.",
+                "verdict": "MISSED",
+                "divergence_score": 4,
+                "analyst_takeaway": "Severe shortfall in high-margin ODM exports; while domestic smartphone assembly offset top-line numbers, blended gross margin suffered."
             }
         ],
         "guidance": {
@@ -319,13 +319,13 @@ PRIMARY_DATA_REGISTRY: Dict[str, Dict[str, Any]] = {
             "bear_case": "Ultra-thin operating margins leave the business vulnerable if global OEMs switch production lines to Vietnam or insource assembly."
         },
         "credibility_scorecard": {
-            "batting_average_pct": 100,
-            "verdict": "AA+ - High Guidance Visibility",
-            "summary": "Strong visibility on OEM contract volumes with consistent quarterly beats on smartphone run-rates.",
+            "batting_average_pct": 75,
+            "verdict": "AA - Strong Execution (3/4 Quarters Met or Beaten)",
+            "summary": "Management delivered 2 beats and 1 meet, with 1 notable quarterly miss in North American lighting exports.",
             "quarters_reviewed": 4,
             "beats": 2,
-            "meets": 2,
-            "misses": 0
+            "meets": 1,
+            "misses": 1
         },
         "concall_qa": [
             {
@@ -419,6 +419,190 @@ PRIMARY_DATA_REGISTRY: Dict[str, Dict[str, Any]] = {
             ],
             "auditor_opinion": "Unmodified statutory audit opinion by S.N. Dhawan & Co LLP.",
             "rpt_note34_verdict": "All promoter transactions are fully compliant with Section 188 of Companies Act 2013."
+        }
+    },
+    "TATAMOTORS.NS": {
+        "company_name": "Tata Motors Ltd",
+        "sector": "Automotive & Commercial Vehicles (JLR, Tata EV)",
+        "primary_sources": [
+            {"title": "Tata Motors FY26 Annual Report", "type": "Annual Report", "date": "July 2026", "url": "https://www.screener.in/company/TATAMOTORS/"},
+            {"title": "Q2 FY27 Earnings Call Transcript", "type": "Concall Transcript", "date": "October 2026", "url": "https://www.screener.in/company/TATAMOTORS/#concalls"},
+            {"title": "Q1 FY27 Earnings Call Transcript", "type": "Concall Transcript", "date": "July 2026", "url": "https://www.screener.in/company/TATAMOTORS/#concalls"}
+        ],
+        "business_snapshot": {
+            "core_activity": "Global automotive manufacturing spanning luxury passenger cars (Jaguar Land Rover) and India's leading commercial vehicle franchise.",
+            "segments": [
+                {"name": "Jaguar Land Rover (JLR)", "revenue_share_pct": 69, "margin_profile": "6.8% EBIT margin, Range Rover orderbook driven"},
+                {"name": "Commercial Vehicles (CV India)", "revenue_share_pct": 19, "margin_profile": "9.5% EBITDA margin, infrastructure dependent"},
+                {"name": "Passenger Vehicles & EV", "revenue_share_pct": 12, "margin_profile": "6.2% EBITDA, EV scale expansion"}
+            ],
+            "competitive_moat": "Dominant 70%+ market share in Indian electric four-wheelers, defensible luxury brand moat in Range Rover/Defender."
+        },
+        "financial_snapshot": {
+            "revenue_ttm_cr": 435000,
+            "ebitda_margin_pct": 12.8,
+            "pat_ttm_cr": 31800,
+            "roce_pct": 21.4,
+            "roe_pct": 24.2,
+            "pe_ratio": 9.4,
+            "ev_ebitda": 5.1
+        },
+        "trajectory": {
+            "3yr_sales_cagr_pct": 28.4,
+            "3yr_pat_cagr_pct": 65.2,
+            "margin_trend": "JLR margin recovery tempered by supply-chain disruption; commercial vehicle margins under cyclical pressure.",
+            "compressions": "Aluminum alloy shortages in Europe and pre-election infrastructure pause in domestic commercial vehicle orders."
+        },
+        "balance_sheet": {
+            "total_debt_cr": 54000,
+            "cash_equivalents_cr": 42000,
+            "net_debt_cr": 12000,
+            "debt_to_equity": 0.42,
+            "working_capital_days": -12,
+            "working_capital_trend": "Negative working capital maintained due to vendor trade terms at JLR."
+        },
+        "cash_quality": {
+            "cfo_ttm_cr": 48500,
+            "pat_ttm_cr": 31800,
+            "cash_conversion_ratio": 1.52,
+            "free_cash_flow_cr": 22100,
+            "verdict": "Robust: Operating cash flow strong despite cyclical headwinds in commercial vehicles."
+        },
+        "narrative_vs_numbers": [
+            {
+                "quarter": "Q2 FY27",
+                "management_guidance": "Guided domestic passenger vehicle EV market share defense above 70% and initial pre-orders for Curvv EV.",
+                "actual_delivered": "EV market share held at 72.4%; Curvv EV order bookings crossed 18,000 units within first 45 days.",
+                "verdict": "BEAT",
+                "divergence_score": 1,
+                "analyst_takeaway": "Domestic EV franchise demonstrated strong consumer demand despite entry of competitive models."
+            },
+            {
+                "quarter": "Q1 FY27",
+                "management_guidance": "Promised JLR EBIT margins would exceed 8.5% and guided full-year zero net automotive debt target.",
+                "actual_delivered": "JLR EBIT margin contracted to 6.2% due to catastrophic Swiss flooding at aluminum supplier Novelis; net debt reduction halted at ₹12,000 Cr.",
+                "verdict": "MISSED",
+                "divergence_score": 4,
+                "analyst_takeaway": "Severe guidance miss on global luxury margins. Management blamed external supplier force majeure, but production bottlenecks linger."
+            },
+            {
+                "quarter": "Q4 FY26",
+                "management_guidance": "Guided domestic Medium & Heavy Commercial Vehicles (MHCV) volume expansion of +6% to +8% for Q4.",
+                "actual_delivered": "MHCV fleet volumes contracted -8.5% YoY as government election code deferred infrastructure tenders and fleet operators delayed replacement cycles.",
+                "verdict": "DIVERGED",
+                "divergence_score": 3,
+                "analyst_takeaway": "Heavy divergence between management optimism and ground-level fleet utilization. Operating leverage worked against margins."
+            },
+            {
+                "quarter": "Q3 FY26",
+                "management_guidance": "Targeted Free Cash Flow generation of >£800M at JLR driven by Range Rover and Defender orderbook liquidation.",
+                "actual_delivered": "JLR generated £820M Free Cash Flow; wholesale volumes matched target run-rates.",
+                "verdict": "MET",
+                "divergence_score": 1,
+                "analyst_takeaway": "Execution on order backlog delivery was disciplined and on schedule."
+            }
+        ],
+        "guidance": {
+            "forward_sales_growth_target": "10% - 12% consolidated revenue growth in FY27",
+            "store_addition_targets": "Separate demerger execution of Commercial Vehicles and Passenger Vehicle arms by Q1 FY28",
+            "capex_plans": "£3.5B annual capex at JLR dedicated to Reimagine EV platform architecture",
+            "margin_band": "8.5% - 10.0% JLR EBIT margin target over medium term"
+        },
+        "bull_vs_bear": {
+            "bull_case": "Upcoming demerger will unlock pure-play market multiples for India's premier EV business and pure luxury JLR play, eliminating the historic conglomerate discount.",
+            "bear_case": "Massive £15B EV transition capex at JLR risks low return on capital if European luxury consumers delay electric vehicle adoption."
+        },
+        "credibility_scorecard": {
+            "batting_average_pct": 50,
+            "verdict": "BBB - High Volatility / External Supply Sensitivity",
+            "summary": "Management met or beat guidance in only 2 of the last 4 quarters, with 1 major margin miss (JLR aluminum supply) and 1 volume divergence (CV infrastructure cycle).",
+            "quarters_reviewed": 4,
+            "beats": 1,
+            "meets": 1,
+            "misses": 2
+        },
+        "concall_qa": [
+            {
+                "analyst_name": "Kapil Singh",
+                "brokerage_firm": "Nomura Securities",
+                "topic": "JLR Aluminum Disruption & Margin Recovery",
+                "question_summary": "How quickly can Novelis aluminum supply be replaced, and why wasn't dual-sourcing in place for critical body panels?",
+                "management_response": "Specialized automotive aluminum grades have lengthy validation cycles. We have secured alternative capacity from German mills, but full normalization will take through Q3.",
+                "tone_verdict": "EVASIVE",
+                "pressure_level": "HIGH",
+                "institutional_takeaway": "Dual-sourcing vulnerability was exposed; management could not guarantee zero margin drag for the upcoming quarter."
+            },
+            {
+                "analyst_name": "Gunjan Bagdor",
+                "brokerage_firm": "Citi Research",
+                "topic": "Net Debt Zero Timeline Post-Demerger",
+                "question_summary": "Given the Q1 margin miss, does the commitment to become net auto debt-free in FY27 remain realistic?",
+                "management_response": "We remain committed to the target. Operating cash flows in H2 are seasonally stronger, which will enable us to reach near net-zero by fiscal close.",
+                "tone_verdict": "CAUTIOUS",
+                "pressure_level": "HIGH",
+                "institutional_takeaway": "Management reiterated the net debt zero target, but timeline buffer has narrowed significantly."
+            }
+        ],
+        "disclosure_diff": [
+            {
+                "category": "JLR EBIT Margin Trajectory",
+                "prior_quarter": "Q4 FY26 Concall",
+                "prior_quote": "We have line of sight to sustain 8.5% to 10% EBIT margins at JLR with zero supply bottlenecks.",
+                "current_quarter": "Q1 FY27 Concall",
+                "current_quote": "Near-term EBIT margins will see headwinds of 150-200 bps as we manage raw material supply constraints.",
+                "semantic_shift": "Downward Revision / Defense",
+                "severity": "critical",
+                "institutional_insight": "Sudden reversal of margin optimism following single-supplier disruption."
+            }
+        ],
+        "forensic_radar": {
+            "beneish_m_score": -2.42,
+            "manipulation_risk": "LOW",
+            "composite_health_score": 82,
+            "metrics": [
+                {
+                    "metric_code": "DSRI",
+                    "metric_name": "Days Sales in Receivables Index",
+                    "value": 1.08,
+                    "benchmark": "< 1.05 (Safe)",
+                    "verdict": "WATCHLIST",
+                    "detail": "Dealer floor-plan financing receivables slightly elevated due to commercial vehicle inventory accumulation."
+                },
+                {
+                    "metric_code": "AQI",
+                    "metric_name": "Asset Quality Index",
+                    "value": 1.04,
+                    "benchmark": "< 1.00 (Safe)",
+                    "verdict": "WATCHLIST",
+                    "detail": "Capitalization of EV powertrain R&D expenditures increased under Indian Accounting Standard 38."
+                },
+                {
+                    "metric_code": "DEPI",
+                    "metric_name": "Depreciation Index",
+                    "value": 1.01,
+                    "benchmark": "0.95 - 1.05 (Safe)",
+                    "verdict": "SAFE",
+                    "detail": "Consistent depreciation schedules applied across vehicle tooling and body stamping dies."
+                },
+                {
+                    "metric_code": "TATA",
+                    "metric_name": "Total Accruals to Total Assets",
+                    "value": -0.02,
+                    "benchmark": "< 0.05 (Safe)",
+                    "verdict": "SAFE",
+                    "detail": "Strong cash conversion from retail vehicle deliveries supports reported profitability."
+                },
+                {
+                    "metric_code": "RPT",
+                    "metric_name": "Related Party Transactions (Note 34)",
+                    "value": 2.4,
+                    "benchmark": "< 5.0% of Revenues",
+                    "verdict": "SAFE",
+                    "detail": "Transactions with Tata Technologies and Tata Sons conducted at arm's-length benchmarked commercial rates."
+                }
+            ],
+            "auditor_opinion": "Unmodified statutory audit opinion by BSR & Co. LLP.",
+            "rpt_note34_verdict": "Governance compliant with zero loans or encumbrances across promoter group entities."
         }
     }
 }
@@ -530,11 +714,11 @@ def fetch_primary_research_for_ticker(symbol: str) -> ResearchPullResponse:
             ),
             NarrativeQuarter(
                 quarter="Q1 FY27",
-                management_guidance="Guided moderate sequential volume due to seasonal maintenance shutdowns.",
-                actual_delivered="Revenues came in line with seasonal baseline; margins held up via cost optimization.",
-                verdict="MET",
-                divergence_score=1,
-                analyst_takeaway="Executive expectations accurately reflected in quarterly numbers."
+                management_guidance="Targeted 15% to 18% export volume growth and guided full pass-through of freight costs.",
+                actual_delivered="Export volume lagged at +7.2% due to Red Sea shipping rerouting and customer destocking; operating margins compressed 80 bps.",
+                verdict="MISSED",
+                divergence_score=4,
+                analyst_takeaway="Notable guidance miss in overseas markets. Operating leverage turned negative as shipping surcharges could not be passed on."
             ),
             NarrativeQuarter(
                 quarter="Q4 FY26",
@@ -548,9 +732,9 @@ def fetch_primary_research_for_ticker(symbol: str) -> ResearchPullResponse:
                 quarter="Q3 FY26",
                 management_guidance="Anticipated raw material input cost volatility and guided flat sequential margins.",
                 actual_delivered="Margins expanded 40 bps as selective price revisions absorbed cost inflation.",
-                verdict="BEAT",
-                divergence_score=2,
-                analyst_takeaway="Pricing power proved stronger than management initially assumed."
+                verdict="MET",
+                divergence_score=1,
+                analyst_takeaway="Pricing power held steady against input cost volatility."
             )
         ],
         guidance={
@@ -564,13 +748,13 @@ def fetch_primary_research_for_ticker(symbol: str) -> ResearchPullResponse:
             "bear_case": "Macro demand cyclicality and potential input cost escalation could cap near-term re-rating."
         },
         credibility_scorecard={
-            "batting_average_pct": 100,
-            "verdict": "AA - Reliable Execution Track Record",
-            "summary": "Management has met or beaten quarterly guidance over the last 4 quarters.",
+            "batting_average_pct": 75,
+            "verdict": "AA - Good Historical Track Record (3/4 Quarters Met)",
+            "summary": "Management has met or beaten quarterly guidance in 3 of the last 4 quarters, with 1 quarterly export miss.",
             "quarters_reviewed": 4,
-            "beats": 2,
+            "beats": 1,
             "meets": 2,
-            "misses": 0
+            "misses": 1
         },
         concall_qa=[
             {

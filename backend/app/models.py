@@ -91,7 +91,7 @@ class LiveStockQuote(BaseModel):
     volume_multiple: float
     timestamp: str
     is_live: bool = True
-    source: str = "Free Direct Yahoo Chart v8"
+    source: str = "Live Market Feed"
 
 class NarrativeQuarter(BaseModel):
     quarter: str
