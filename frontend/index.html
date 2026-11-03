@@ -81,11 +81,12 @@
         }
         .progress-row {
           width: 100%;
-          max-width: 240px;
+          max-width: 280px;
           display: flex;
           align-items: center;
           justify-content: space-between;
           font-size: 11px;
+          margin-bottom: 24px;
         }
         .progress-status {
           color: #8c909e;
@@ -95,6 +96,43 @@
           color: #00D09C;
           font-family: monospace;
           font-weight: 700;
+        }
+        .usp-card {
+          width: 100%;
+          max-width: 290px;
+          background: rgba(255, 255, 255, 0.04);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 16px;
+          padding: 14px 16px;
+          text-align: left;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+          animation: fadeIn 0.4s ease-out;
+        }
+        .usp-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          font-size: 10px;
+          font-weight: 700;
+          color: #00D09C;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          margin-bottom: 6px;
+        }
+        .usp-title {
+          color: #ffffff;
+          font-size: 13px;
+          font-weight: 700;
+          margin-bottom: 4px;
+        }
+        .usp-desc {
+          color: #9da1b0;
+          font-size: 11px;
+          line-height: 1.4;
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(6px); }
+          to { opacity: 1; transform: translateY(0); }
         }
       </style>
       <div id="splash-loader">
@@ -114,6 +152,15 @@
           <span id="loading-status" class="progress-status">Connecting to live feed...</span>
           <span id="loading-pct" class="progress-pct">0%</span>
         </div>
+
+        <!-- Animated USP Showcase Card -->
+        <div id="usp-container" class="usp-card">
+          <div class="usp-badge">
+            <span>✨</span> <span id="usp-tag">Institutional USP</span>
+          </div>
+          <div id="usp-title" class="usp-title">Management Reality Audit</div>
+          <div id="usp-desc" class="usp-desc">Audits 4 quarters of forward guidance promises against actual financial results delivered.</div>
+        </div>
       </div>
       <script>
         (function() {
@@ -121,26 +168,58 @@
           var bar = document.getElementById('loading-bar');
           var pct = document.getElementById('loading-pct');
           var st = document.getElementById('loading-status');
-          var steps = [
-            { threshold: 25, text: "Connecting to market feed..." },
-            { threshold: 55, text: "Auditing primary filings & concalls..." },
-            { threshold: 82, text: "Calibrating guidance scorecards..." },
-            { threshold: 96, text: "Rendering mobile workspace..." }
+          var uTitle = document.getElementById('usp-title');
+          var uDesc = document.getElementById('usp-desc');
+          var uTag = document.getElementById('usp-tag');
+          var uCard = document.getElementById('usp-container');
+
+          var usps = [
+            {
+              tag: "USP 1 · Reality Audit",
+              title: "Narrative vs. Numbers",
+              desc: "Matches management forward guidance from past 4 quarters against actual BSE/NSE results with divergence scoring."
+            },
+            {
+              tag: "USP 2 · Tone Forensics",
+              title: "Concall Hot Seat",
+              desc: "Strips scripted IR speeches to isolate unscripted analyst Q&A pressure points, tagging evasive responses."
+            },
+            {
+              tag: "USP 3 · Regulatory Triage",
+              title: "Zero-Noise Push Pipeline",
+              desc: "Collapses 80% routine compliance filings; elevates high-conviction catalysts with instant QoQ/YoY extractions."
+            },
+            {
+              tag: "USP 4 · Forensic Radar",
+              title: "Primary Governance Scanner",
+              desc: "Deep audit of Note 34 Related Party deals, Beneish M-score anomalies, and statutory auditor opinions."
+            }
           ];
+
+          var currentUspIdx = 0;
+          setInterval(function() {
+            currentUspIdx = (currentUspIdx + 1) % usps.length;
+            if (uCard) {
+              uCard.style.animation = 'none';
+              uCard.offsetHeight; // trigger reflow
+              uCard.style.animation = 'fadeIn 0.4s ease-out';
+            }
+            if (uTag) uTag.innerText = usps[currentUspIdx].tag;
+            if (uTitle) uTitle.innerText = usps[currentUspIdx].title;
+            if (uDesc) uDesc.innerText = usps[currentUspIdx].desc;
+          }, 1800);
+
           var interval = setInterval(function() {
             if (p < 95) {
               p += Math.floor(Math.random() * 8) + 3;
               if (p > 95) p = 95;
               if (bar) bar.style.width = p + '%';
               if (pct) pct.innerText = p + '%';
-              for (var i = 0; i < steps.length; i++) {
-                if (p <= steps[i].threshold) {
-                  if (st) st.innerText = steps[i].text;
-                  break;
-                }
-              }
+              if (p > 25 && p <= 55 && st) st.innerText = "Auditing primary filings & concalls...";
+              if (p > 55 && p <= 80 && st) st.innerText = "Calibrating guidance scorecards...";
+              if (p > 80 && st) st.innerText = "Rendering mobile workspace...";
             }
-          }, 120);
+          }, 140);
         })();
       </script>
     </div>

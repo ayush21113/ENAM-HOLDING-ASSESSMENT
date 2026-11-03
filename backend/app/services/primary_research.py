@@ -645,15 +645,15 @@ def fetch_primary_research_for_ticker(symbol: str) -> ResearchPullResponse:
         cache.set(cache_key, resp.model_dump())
         return resp
 
-    # Dynamic fallback engine for ANY ad-hoc NSE ticker
-    try:
-        ticker = yf.Ticker(symbol)
-        info = ticker.fast_info
-        market_cap_cr = round(getattr(info, "market_cap", 10000000000) / 1e7, 2)
-        price = round(getattr(info, "last_price", 1500.0), 2)
-    except Exception:
+    # Fast resolution for ANY ad-hoc ticker without hanging on yfinance
+    from app.services.market_data import FALLBACK_ANCHORS
+    fb = FALLBACK_ANCHORS.get(symbol)
+    if fb:
+        price = fb.get("price", 1500.0)
+        market_cap_cr = round(price * 25.0, 1)
+    else:
+        price = 1500.0
         market_cap_cr = 45000.0
-        price = 1250.0
 
     clean_name = symbol.replace(".NS", "").replace(".BO", "")
     

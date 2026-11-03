@@ -30,6 +30,14 @@ export const ResearchView: React.FC<ResearchViewProps> = ({
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<ResearchTab>('overview');
 
+  // Sync when user taps a stock in Watchlist or Today
+  useEffect(() => {
+    if (initialSymbol && initialSymbol !== activeTicker) {
+      setActiveTicker(initialSymbol);
+      setTickerInput(initialSymbol.replace('.NS', '').replace('.BO', ''));
+    }
+  }, [initialSymbol]);
+
   useEffect(() => {
     loadResearch(activeTicker);
   }, [activeTicker]);
@@ -43,7 +51,8 @@ export const ResearchView: React.FC<ResearchViewProps> = ({
       setData(resp);
       api.getLiveQuote(symbol).then((q) => setLiveQuote(q)).catch(() => {});
     } catch (err: any) {
-      setError(err.message || 'Failed to load research data');
+      console.error('Research load error', err);
+      setError(err.message || 'Failed to load primary research');
     } finally {
       setLoading(false);
     }
@@ -101,22 +110,53 @@ export const ResearchView: React.FC<ResearchViewProps> = ({
   return (
     <div className="space-y-4 pb-28 max-w-md mx-auto">
       {/* 1. COMPACT TICKER SEARCH */}
-      <form onSubmit={handleSearch} className="relative pt-1">
-        <Search className="w-3.5 h-3.5 absolute left-3 top-3 text-[#7c7e8c]" />
-        <input
-          type="text"
-          value={tickerInput}
-          onChange={(e) => setTickerInput(e.target.value)}
-          placeholder="Research any stock (e.g. TRENT, DIXON, RELIANCE)..."
-          className="w-full bg-white border border-[#ebecef] rounded-xl pl-8.5 pr-20 py-2 text-xs text-[#1e222b] placeholder-[#7c7e8c] focus:outline-none focus:border-[#00875A] transition"
-        />
-        <button
-          type="submit"
-          className="absolute right-1.5 top-2 px-2.5 py-1 text-xs font-semibold bg-[#1e222b] text-white rounded-lg hover:bg-black transition"
-        >
-          Research
-        </button>
-      </form>
+      <div className="space-y-2 pt-1">
+        <form onSubmit={handleSearch} className="relative">
+          <Search className="w-3.5 h-3.5 absolute left-3 top-3 text-[#7c7e8c]" />
+          <input
+            type="text"
+            value={tickerInput}
+            onChange={(e) => setTickerInput(e.target.value)}
+            placeholder="Search company (e.g. TATAMOTORS, TRENT, DIXON)..."
+            className="w-full bg-white border border-[#ebecef] rounded-xl pl-8.5 pr-20 py-2 text-xs text-[#1e222b] placeholder-[#7c7e8c] focus:outline-none focus:border-[#00875A] transition"
+          />
+          <button
+            type="submit"
+            className="absolute right-1.5 top-1.5 px-2.5 py-1 text-xs font-semibold bg-[#1e222b] text-white rounded-lg hover:bg-black transition"
+          >
+            Audit
+          </button>
+        </form>
+
+        {/* Quick-Audit Flagship Pills */}
+        <div className="flex items-center space-x-1.5 overflow-x-auto pb-1 scrollbar-none text-[11px]">
+          <span className="text-[#7c7e8c] font-medium text-[10px] uppercase tracking-wider shrink-0">
+            Quick Audit:
+          </span>
+          {[
+            { sym: 'TATAMOTORS.NS', label: 'TATAMOTORS (50% Met · Red Alert)' },
+            { sym: 'TRENT.NS', label: 'TRENT (75% Met)' },
+            { sym: 'DIXON.NS', label: 'DIXON (75% Met)' },
+            { sym: 'RELIANCE.NS', label: 'RELIANCE' },
+          ].map((item) => (
+            <button
+              key={item.sym}
+              type="button"
+              onClick={() => {
+                setActiveTicker(item.sym);
+                setTickerInput(item.sym.replace('.NS', ''));
+              }}
+              className={`px-2.5 py-1 rounded-full text-xs font-mono transition shrink-0 ${
+                activeTicker === item.sym
+                  ? 'bg-[#1e222b] text-white font-bold shadow-xs'
+                  : 'bg-white border border-[#ebecef] text-[#44475b] hover:bg-[#f5f6f8]'
+              }`}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+      </div>
 
       {loading ? (
         <div className="py-20 text-center text-xs text-[#7c7e8c] space-y-2">
@@ -124,10 +164,18 @@ export const ResearchView: React.FC<ResearchViewProps> = ({
           <p>Auditing primary filings & concall transcripts...</p>
         </div>
       ) : error ? (
-        <div className="bg-white rounded-xl border border-[#ebecef] p-8 text-center text-xs text-[#7c7e8c] space-y-2">
+        <div className="bg-white rounded-xl border border-[#ebecef] p-8 text-center text-xs text-[#7c7e8c] space-y-3">
           <AlertCircle className="w-6 h-6 text-[#EB5B3C] mx-auto" />
-          <p className="font-semibold text-[#1e222b]">Unable to fetch primary data</p>
-          <p>{error}</p>
+          <div>
+            <p className="font-semibold text-[#1e222b] text-sm">Unable to fetch primary data</p>
+            <p className="mt-1 text-xs text-[#7c7e8c]">{error}</p>
+          </div>
+          <button
+            onClick={() => loadResearch(activeTicker)}
+            className="px-4 py-1.5 bg-[#1e222b] text-white rounded-lg font-bold text-xs hover:bg-black transition"
+          >
+            Retry Audit
+          </button>
         </div>
       ) : data ? (
         <div className="space-y-3.5">
