@@ -90,7 +90,7 @@ export const AskFinnSheet: React.FC<AskFinnSheetProps> = ({
             <div className="w-10 h-1 bg-[#ebecef] rounded-full mx-auto mb-2" />
             <div className="flex items-center space-x-1.5">
               <span className="text-xs font-bold text-[#1e222b]">
-                Ask FINN
+                Ask Pulse
               </span>
               <span className="text-xs text-[#7c7e8c]">•</span>
               <span className="text-xs font-semibold text-[#00875A] font-mono">

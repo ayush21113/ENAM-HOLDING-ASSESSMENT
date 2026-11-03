@@ -65,7 +65,7 @@ export const ConcallStressTestModule: React.FC<ConcallStressTestProps> = ({ symb
       </div>
 
       <p className="text-xs text-[#7c7e8c] leading-relaxed">
-        Prepared management remarks are public relations; alpha lives in unscripted analyst grilling. FINN isolates the most contentious Q&A exchanges from the latest concall:
+        Prepared management remarks are public relations; alpha lives in unscripted analyst grilling. Pulse isolates the most contentious Q&A exchanges from the latest concall:
       </p>
 
       {/* List of Q&A Items (Groww list style) */}

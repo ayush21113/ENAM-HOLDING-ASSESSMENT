@@ -239,7 +239,7 @@ export const TodayView: React.FC<TodayViewProps> = ({
                             className="text-xs font-semibold text-[#00875A] flex items-center gap-1 hover:underline"
                           >
                             <Sparkles className="w-3 h-3" />
-                            Analyze impact with FINN
+                            Analyze impact with Pulse
                           </button>
                         )}
                       </div>

@@ -446,7 +446,7 @@ export const ResearchView: React.FC<ResearchViewProps> = ({
               className="w-full py-2.5 px-4 rounded-xl bg-[#1e222b] hover:bg-black text-white text-xs font-semibold flex items-center justify-center space-x-2 transition shadow-xs"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#00D09C]" />
-              <span>Ask FINN about {data.company_name}</span>
+              <span>Ask Pulse about {data.company_name}</span>
             </button>
           </div>
         </div>

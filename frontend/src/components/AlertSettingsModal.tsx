@@ -143,7 +143,7 @@ export const AlertSettingsModal: React.FC<AlertSettingsModalProps> = ({
                   Material catalysts watchlist
                 </div>
                 <p className="text-xs text-[#44475b] leading-relaxed">
-                  FINN automatically monitors Tier 1 catalysts: Quarterly Results, C-suite changes, M&A/Demergers, and Rating Actions.
+                  Pulse automatically monitors Tier 1 catalysts: Quarterly Results, C-suite changes, M&A/Demergers, and Rating Actions.
                 </p>
               </div>
             </div>

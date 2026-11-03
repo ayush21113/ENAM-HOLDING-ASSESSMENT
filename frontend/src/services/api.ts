@@ -55,7 +55,7 @@ export const api = {
     } catch {}
     return {
       status: "healthy",
-      agent: "FINN Financial Investment Agent",
+      agent: "PULSE · ENAM Intelligence Agent",
       version: "1.0.0",
       llm_status: { active_mode: "Deterministic Heuristics Engine (Offline/Edge Ready)" }
     };

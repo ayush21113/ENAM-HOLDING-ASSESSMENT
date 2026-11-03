@@ -17,12 +17,12 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-sm border-b border-[#ebecef] px-4 py-2.5">
       <div className="flex items-center justify-between">
-        {/* Left: Minimal FINN Brand */}
+        {/* Left: Minimal Pulse Brand */}
         <div className="flex items-center space-x-2">
           <FinnLogo size={28} />
           <div className="flex items-center space-x-1.5">
             <span className="font-extrabold text-sm tracking-tight text-[#1e222b]">
-              FINN
+              PULSE
             </span>
             <span className="text-[10px] text-[#7c7e8c] font-medium">
               · ENAM

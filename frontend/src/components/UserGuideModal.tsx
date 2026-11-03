@@ -37,7 +37,7 @@ export const UserGuideModal: React.FC<UserGuideModalProps> = ({ isOpen, onClose 
       badge: "04 · AI COPILOT",
       icon: <ShieldAlert className="w-5 h-5 text-[#00D09C]" />,
       title: "Cut through the concall fluff",
-      desc: "Jump straight to tough analyst questions, or ask FINN anything and get answers backed by official filings."
+      desc: "Jump straight to tough analyst questions, or ask Pulse anything and get answers backed by official filings."
     }
   ];
 
