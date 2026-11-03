@@ -39,7 +39,7 @@ export const WatchlistView: React.FC<WatchlistViewProps> = ({
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search company or ticker..."
-            className="w-full bg-white border border-[#ebecef] rounded-xl pl-9 pr-3 py-2 text-xs text-[#1e222b] placeholder-[#7c7e8c] focus:outline-none focus:border-[#00875A] transition"
+            className="w-full bg-white border border-[#ebecef] rounded-xl pl-10 pr-3 py-2 text-xs text-[#1e222b] placeholder-[#7c7e8c] focus:outline-none focus:border-[#00875A] transition"
           />
         </div>
       </div>
