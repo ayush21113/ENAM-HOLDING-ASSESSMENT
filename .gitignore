@@ -15,5 +15,7 @@ frontend/dist/
 # Logs & temp
 *.log
 *.zip
+*.jsonl
+docs/transcripts/
 github_upload_clean/
 .env

@@ -51,6 +51,23 @@ Please find my submission for the **ENAM AI Engineer Build Challenge — PULSE: 
   * **Ask Pulse Copilot**: Direct integration with **Google Gemini 2.0 Flash-Lite** with strict institutional guardrails (rejects off-topic coding/DSA) and zero-downtime deterministic fallback.
   * **Mobile-First UX**: Clean, Groww/Linear-inspired minimal interface designed for one-handed mobile navigation without horizontal tables or cluttered cards.
 
+---
+
+### What Was Deliberately Left Out (Thin-but-working Principle):
+1. **Intraday Tick-by-Tick Orderbook Streaming**: Institutional fundamental investors prioritize high-conviction structural shifts over microsecond noise. Focused strictly on EOD closing prices and 20-DMA volume breakouts.
+2. **FinTwit / Social Media Sentiment Scrapers**: Retail Twitter and Reddit sentiment frequently inject herd bias and manipulation noise. Grounded 100% in audited statutory disclosures.
+3. **Secondary Broker Consensus Target Notes**: Excluded sell-side target prices in favor of direct primary guidance vs. delivered reality audits.
+
+---
+
+### Where I Would Take It Next (Production Roadmap):
+1. **Quartr-Style Concall Audio Sync**: Synchronized word-for-word transcript scrubbing with direct time-stamped jumps to heated analyst Q&A exchanges.
+2. **Direct BSE/NSE XBRL XML Ingestion**: Ingesting machine-readable structured XBRL exchange feeds for sub-100ms automated tabular extraction.
+3. **Multi-Year Executive Linguistic Fingerprinting**: Tracking promoter tone vectors across 5+ years of calls to detect subtle evasive shifts before financial deterioration appears.
+4. **Instant Webhook Push Notifications (Telegram / WhatsApp)**: Pushing immediate alerts when an investor's custom ±X% price or >2x volume threshold is breached post-market.
+
+---
+
 Looking forward to discussing the architecture and investment philosophy further.
 
 Warm regards,  
